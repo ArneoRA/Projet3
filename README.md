@@ -1,4 +1,4 @@
-# ================== Projet3 ==================
+# ============== Projet3 ===============
 ## Repository sur le Projet 3 -Formation OpenClassrooms
 _________________________________________________________
 
@@ -12,4 +12,14 @@ Dans ce commit, j'ai réalisé les actions suivantes :
 - Création du répertoire WEB qui contiendra les fichiers accessibles aux clients web.
 - Création du fichier .gitignore qui permettra d'ignorer certains répertoires et/ou fichiers lors des commit (versionning)
 
+_________________________________________________________
 
+## 2eme Commit : Creation fichier composer et installation des éléments vendors
+
+Ce commit comprends les actions suivantes :
+- Création du fichier composer.json permettant de récupérer un certains nombres d'éléments pour automatiser notre application :
+* MiniFramework Silex
+* Module Doctrine/DBAL
+* Module Twig
+* Twig-bridge et asset pour simplfier la partie mise en forme (CSS, JS, etc...)
+- Création des répertoires : bootstrap, jquery et js
