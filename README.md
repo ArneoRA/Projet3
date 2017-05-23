@@ -18,8 +18,17 @@ _________________________________________________________
 
 Ce commit comprends les actions suivantes :
 - Création du fichier composer.json permettant de récupérer un certains nombres d'éléments pour automatiser notre application :
-* MiniFramework Silex
-* Module Doctrine/DBAL
-* Module Twig
-* Twig-bridge et asset pour simplfier la partie mise en forme (CSS, JS, etc...)
+-- MiniFramework Silex
+-- Module Doctrine/DBAL
+-- Module Twig
+-- Twig-bridge et asset pour simplfier la partie mise en forme (CSS, JS, etc...)
 - Création des répertoires : bootstrap, jquery et js
+
+___________________________________________________________
+
+## 3eme Commit : Création des fichiers UML de base V1
+
+Ce commit contient :
+- Création du répertoire UML qui contiendra les fichiers créés avec DIA schématisant les futures classes du projet.
+- Création du Diagramme UML (Version 1)
+- Copie des fichiers DB : Structure.sql et Contents.sql pour un jeu d'essai
