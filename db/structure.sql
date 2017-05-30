@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 23 Mai 2017 à 07:58
+-- Généré le :  Mar 30 Mai 2017 à 13:31
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `blogjf`
+-- Base de données :  `db684093681`
 --
 
 -- --------------------------------------------------------
@@ -31,6 +31,7 @@ CREATE TABLE `commentaires` (
   `pseudo` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Pseudo de la personne qui saisie le commentaire',
   `message` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Commentaire laissé',
   `dateCreat` date NOT NULL COMMENT 'Date de création du commentaire',
+  `parent_id` int(11) NOT NULL DEFAULT '0',
   `epID` int(11) NOT NULL COMMENT 'Identifiant de l''episode'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -46,7 +47,7 @@ CREATE TABLE `episodes` (
   `contenu` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Contenu de l''episode',
   `dateCrea` date NOT NULL COMMENT 'Date de création de l''episode',
   `dateModif` date DEFAULT NULL COMMENT 'Date de modification de l''episode',
-  `valided` int(1) NOT NULL COMMENT 'Si 1 validé, la modification et la suppression ne sont plus possible si 0 modif et suppr encore possible'
+  `valided` int(1) NOT NULL DEFAULT '0' COMMENT 'Si 1 validé, la modification et la suppression ne sont plus possible si 0 modif et suppr encore possible'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --

@@ -26,9 +26,21 @@ Ce commit comprends les actions suivantes :
 
 ___________________________________________________________
 
-## 3eme Commit : Création des fichiers UML de base V1
+## 3eme Commit : Création des fichiers UML V1 et un jeu d essai BDD
 
 Ce commit contient :
 - Création du répertoire UML qui contiendra les fichiers créés avec DIA schématisant les futures classes du projet.
 - Création du Diagramme UML (Version 1)
 - Copie des fichiers DB : Structure.sql et Contents.sql pour un jeu d'essai
+
+___________________________________________________________
+
+## 4eme Commit : Création de l'interface Frontend - 1ere partie
+
+Ce commit contient :
+- Création des 3 premiers fichiers MVC de base pour lister les episodes.
+-- Index.php : qui contient maintenant que le lien entre acces aux données(model.php) et présentation (View.php)
+-- Model.php : qui contient la fonction qui se connecte à la base et execute la requete d'affichage de tous les episodes
+-- View.php : qui contient le code HTML et PHP permettant l'affichage basic des episodes.
+- Mise en place des fichiers dans les répertoires MVC de base *(SRC=model.php)* , *(VIEWS=view.php)*, *(WEB=index.php)*.
+- Création du fichier routes.php dans le répertoire APP suite à l'installation de Silex dans le commit 2.
