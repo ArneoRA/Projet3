@@ -8,6 +8,6 @@
     },
 
     "autoload": {
-        "psr-4": {"BlogJF\\": "src"}
+        "psr-4": {"Projet3\\": "src"}
     }
 }

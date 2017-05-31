@@ -1,9 +1,8 @@
 <?php
 
   // Home page
-  $app->get('/', function () {
-      require '../src/model.php';
-      $articles = getEpisodes();
+  $app->get('/', function () use ($app) {
+      $episodes = $app['dao.episode']->findAll();
 
       ob_start();             // start buffering HTML output
       require '../views/view.php';

@@ -12,8 +12,8 @@
 
     <?php foreach ($episodes as $episode): ?>
             <article>
-                <h2><?php echo $episode['titre'] ?></h2>
-                <p><?php echo $episode['contenu'] ?></p>
+                <h2><?php echo $episode->getTitre() ?></h2>
+                <p><?php echo $episode->getContenu() ?></p>
             </article>
     <?php endforeach ?>
 

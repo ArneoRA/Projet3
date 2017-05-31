@@ -44,3 +44,16 @@ Ce commit contient :
 -- View.php : qui contient le code HTML et PHP permettant l'affichage basic des episodes.
 - Mise en place des fichiers dans les répertoires MVC de base *(SRC=model.php)* , *(VIEWS=view.php)*, *(WEB=index.php)*.
 - Création du fichier routes.php dans le répertoire APP suite à l'installation de Silex dans le commit 2.
+
+___________________________________________________________
+
+## 5eme Commit : Modélisation Oienté Objet des Données
+
+Ce commit contient :
+- Modélisation de la class *Episode.php* + création du dossier **SRC\Domain**
+- Remplacement de la technologie PDO (*connexion à la base*) par **DBAL** : EpisodeDAO.php
+- Création du répertoire **SRC\DAO**.
+- Création d'un fichier *app.php* se trouvant dans **app**.
+- Création des fichiers *prod.php* et *dev.php* dans le répertoire **app\Config**;
+- Modification du fichier *view.php* pour remplacer le tableau associatif des episodes par l'appel des methodes de la class Episode.
+
