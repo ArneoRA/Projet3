@@ -2,24 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="../css/projet3.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ asset('/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/projet3.css') }}" rel="stylesheet">
     <title>Projet 3 - Home</title>
 </head>
+
 <body>
-    <header>
-        <h1>Blog Jean Forteroche</h1>
-    </header>
-
-    {% for episode in episodes %}
-            <article>
-                <h2>{{ episode.titre }}</h2>
-                <p>{{ episode.contenu }}</p>
-            </article>
-    {% endfor %}
-
-
-    <footer class="footer">
-        <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
-    </footer>
+    <div class="container">
+        {# Cette partie gére le menu de navigation #}
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="">Blog de <em>Jean Forteroche</em> pour son roman : <strong>Billet simple pour l'Alaska</strong></a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-target">
+                </div>
+            </div>
+        </nav>
+        {# Cette partie gére le corps de la page #}
+        {% for episode in episodes %}
+            <div class="panel panel-default">
+                <h2 class="panel-heading">{{ episode.titre }}</h2>
+                <p class="contenu panel-body">{{ episode.contenu }}</p>
+            </div>
+        {% endfor %}
+        {# Cette partie gére le pied de page #}
+        <footer class="footer">
+            <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
+        </footer>
+    </div>
 </body>
 </html>

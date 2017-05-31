@@ -21,7 +21,7 @@ Ce commit comprends les actions suivantes :
 -- MiniFramework Silex
 -- Module Doctrine/DBAL
 -- Module Twig
--- Twig-bridge et asset pour simplfier la partie mise en forme (CSS, JS, etc...)
+-- Twig-bridge et asset pour simplifier la partie mise en forme (CSS, JS, etc...)
 - Création des répertoires : **bootstrap**, **jquery** et **js**
 
 ___________________________________________________________
@@ -67,3 +67,12 @@ Ce commit contient :
 - Modification du fichier *app.php* pour y ajouter l'enregistrement de Twig aupres de Silex.
 - Remplacons le fichier *view.php* par le fichier *index.html.twig*.
 - Modification du fichier *routes.php* pour qu'il génére la nouvelle vue.
+
+___________________________________________________________
+
+## 7eme Commit : Utilisation des composants BootStrap & JQuery pour améliorer les vues
+
+Ce commit contient :
+- Etant donné que les composants ont déjà été installé lors du commit N°2, nous allons simplement modifier le fichier *app.php* pour déclarer le service **AssetServiceProvider** qui permettra de simplifier la mise en forme de nos pages.
+- Modification de notre vue *index.html.twig* en y intégrant les éléments de BootStrap
+- Ajout de quelques éléments CSS dans notre fichier *projet3.css*.
