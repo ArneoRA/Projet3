@@ -61,7 +61,7 @@ class Episode
     return $this->contenu;
   }
 
-  public function getDateCre(){
+  public function getDateCrea(){
     return $this->dateCrea;
   }
 

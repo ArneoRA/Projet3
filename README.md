@@ -76,3 +76,17 @@ Ce commit contient :
 - Etant donné que les composants ont déjà été installé lors du commit N°2, nous allons simplement modifier le fichier *app.php* pour déclarer le service **AssetServiceProvider** qui permettra de simplifier la mise en forme de nos pages.
 - Modification de notre vue *index.html.twig* en y intégrant les éléments de BootStrap
 - Ajout de quelques éléments CSS dans notre fichier *projet3.css*.
+
+___________________________________________________________
+
+## 8eme Commit : Affichages des commentaires sur un Episode
+
+Ce commit contient :
+- Ajout de la table **Commentaires**, mais avec une gestion de l'auteur basic
+- Création de la classe **Comment.php** ainsi que de la classe **CommentDAO.php**.
+- Optimisation du code au niveau du DAO en créant un fichier *DAO.php*.
+- Ajout de la méthode **find()** dans la classe *EpisodeDAO.php* afin de pouvoir faire le lien entre les commentaires.
+- Optimisation de nos vues en créant un fichier *layout.html.twig*.
+- Note : *Plutôt que de définir directement le lien href au niveau du titre de la barre de navigation, on utilise une fonction nommée **path()** qui permet de générer une URL dans un template. Pour pouvoir utiliser cette fonction, il faudra que toutes les routes de l'application portent un nom.*.
+- Modification du fichier *app.php* pour ajouter le service d'acces aux commentaires.
+- Modification du fichier *routes.php* pour ajouter la nouvelle route vers l'episode et ses commentaires.

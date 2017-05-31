@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ episode.titre }}{% endblock %}
+
+{% block content %}
+    <p>
+        <div class="panel panel-default">
+            <h2 class="panel-heading">{{ episode.titre }}</h2>
+            <p class="contenu panel-body">{{ episode.contenu }}</p>
+        </div>
+
+        <div class="panel panel-info">
+            <h3 class="panel-heading">Commentaires</h3>
+            <p class="panel-body">
+                {% for comment in comments %}
+                    <strong>{{ comment.pseudo }} said :</strong> {{ comment.contenu }}<br>
+                {% else %}
+                        Pas encore de commentaire.
+                {% endfor %}
+            </p>
+
+        </div>
+
+    </p>
+{% endblock %}

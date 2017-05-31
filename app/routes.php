@@ -4,6 +4,13 @@
   $app->get('/', function () use ($app) {
       $episodes = $app['dao.episode']->findAll();
       return $app['twig']->render('index.html.twig', array('episodes' => $episodes));
-  });
+  })->bind('home');
+
+  // Episode details with comments
+  $app->get('/episode/{id}', function ($id) use ($app) {
+      $episode = $app['dao.episode']->find($id);
+      $comments = $app['dao.comment']->findAllByEpisode($id);
+      return $app['twig']->render('episode.html.twig', array('episode' => $episode, 'comments' => $comments));
+  })->bind('episode');
 
 ?>

@@ -23,3 +23,9 @@ $app->register(new Silex\Provider\AssetServiceProvider(), array(
 $app['dao.episode'] = function ($app) {
     return new Projet3\DAO\EpisodeDAO($app['db']);
 };
+
+$app['dao.comment'] = function ($app) {
+    $commentDAO = new Projet3\DAO\CommentDAO($app['db']);
+    $commentDAO->setEpisodeDAO($app['dao.episode']);
+    return $commentDAO;
+};
