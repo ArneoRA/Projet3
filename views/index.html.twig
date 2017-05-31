@@ -10,12 +10,12 @@
         <h1>Blog Jean Forteroche</h1>
     </header>
 
-    <?php foreach ($episodes as $episode): ?>
+    {% for episode in episodes %}
             <article>
-                <h2><?php echo $episode->getTitre() ?></h2>
-                <p><?php echo $episode->getContenu() ?></p>
+                <h2>{{ episode.titre }}</h2>
+                <p>{{ episode.contenu }}</p>
             </article>
-    <?php endforeach ?>
+    {% endfor %}
 
 
     <footer class="footer">
