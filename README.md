@@ -90,3 +90,20 @@ Ce commit contient :
 - Note : *Plutôt que de définir directement le lien href au niveau du titre de la barre de navigation, on utilise une fonction nommée **path()** qui permet de générer une URL dans un template. Pour pouvoir utiliser cette fonction, il faudra que toutes les routes de l'application portent un nom.*.
 - Modification du fichier *app.php* pour ajouter le service d'acces aux commentaires.
 - Modification du fichier *routes.php* pour ajouter la nouvelle route vers l'episode et ses commentaires.
+
+___________________________________________________________
+
+## 9eme Commit : Gestion de la sécurité et ajustement de l'affichage
+
+Ce commit contient :
+- Ajout d'une extension de twig Text : **twig/extensions** afin de pouvoir en autre utiliser les fonctions comme truncate.
+- Ajustement de la police pour le contenu des épisodes.
+- Gestion de la sécurité : Création d'une table **utilisateurs**, de la classe **User** et de la classe DAO **UserDAO**.
+- Modification de la classe **CommentDAO** afin d'intégrer la classe User.
+- Ajout dans *composer.json* la dépendance à *symfony/security*.
+- Modification du fichier **app.php** pour ajouter les fournisseurs de service pour la gestion de la sécurité
+- Modification du fichier **routes.app** pour créer la route vers la page **login**.
+- Création de la vue **login.html.twig** associée à la route d'authentification.
+- Modification de la vue **episode.html.twig** pour obtenir un affichage adapté à la présence d'un utilisateur connecté.
+- Modification de la vue **layout.html.twig** pour ajouter à la barre de navigation un menu déroulant associé à l'éventuel utilisateur authnetifié.
+

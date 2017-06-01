@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 30 Mai 2017 à 13:31
+-- Généré le :  Mer 31 Mai 2017 à 17:08
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `commentaires` (
   `idcom` int(11) NOT NULL COMMENT 'Identifiant du commentaire',
-  `pseudo` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Pseudo de la personne qui saisie le commentaire',
-  `message` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Commentaire laissé',
+  `pseudo` varchar(30) NOT NULL COMMENT 'Pseudo de la personne qui saisie le commentaire',
+  `message` text NOT NULL COMMENT 'Commentaire laissé',
   `dateCreat` date NOT NULL COMMENT 'Date de création du commentaire',
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `epID` int(11) NOT NULL COMMENT 'Identifiant de l''episode'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -43,12 +43,12 @@ CREATE TABLE `commentaires` (
 
 CREATE TABLE `episodes` (
   `id` int(11) NOT NULL COMMENT 'identifiant du chapitre',
-  `titre` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Titre du chapitre (episode)',
-  `contenu` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'Contenu de l''episode',
+  `titre` varchar(50) NOT NULL COMMENT 'Titre du chapitre (episode)',
+  `contenu` text NOT NULL COMMENT 'Contenu de l''episode',
   `dateCrea` date NOT NULL COMMENT 'Date de création de l''episode',
   `dateModif` date DEFAULT NULL COMMENT 'Date de modification de l''episode',
   `valided` int(1) NOT NULL DEFAULT '0' COMMENT 'Si 1 validé, la modification et la suppression ne sont plus possible si 0 modif et suppr encore possible'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Index pour les tables exportées

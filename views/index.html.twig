@@ -3,12 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    {# Cette partie gére le corps de la page #}
-    {% for episode in episodes %}
-        <div class="panel panel-default">
-            <h2 class="panel-heading">
-              <a href="{{ path('episode', {'id':episode.id }) }}">{{ episode.titre }}</a></h2>
-            <p class="contenu panel-body">{{ episode.contenu }}</p>
-        </div>
-    {% endfor %}
+    <div class="container">
+        {# Cette partie gére le corps de la page #}
+        {% for episode in episodes %}
+            <div class="panel panel-default">
+                <h2 class="panel-heading">
+                  {{ episode.titre }}
+                  <em class="dateCrea"> - Edité le : {{episode.DateCrea | date("d/m/Y")}}</em>
+                </h2>
+                <p class="contenu panel-body">
+                    {{ episode.contenu | truncate(600,true,'...') }}
+                    <hr>
+                    <a class="episodeTitle" href="{{ path('episode', {'id':episode.id }) }}">En lire plus...</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

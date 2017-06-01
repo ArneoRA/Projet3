@@ -14,6 +14,17 @@ class CommentDAO extends DAO
     public function setEpisodeDAO(EpisodeDAO $episodeDAO){
         $this->episodeDAO = $episodeDAO;
     }
+
+    /**
+     * @var \Projet3\DAO\UserDAO
+     */
+    private $userDAO;
+
+    public function setUserDAO(UserDAO $userDAO) {
+        $this->userDAO = $userDAO;
+    }
+
+
     /**
      * Return a list of all comments for an episode, sorted by date (most recent first).
      *
@@ -51,16 +62,31 @@ class CommentDAO extends DAO
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setIdcom($row['idcom']);
-        $comment->setPseudo($row['pseudo']);
+        // $comment->setPseudo($row['pseudo']);
         $comment->setContenu($row['message']);
         $comment->setDateCreat($row['dateCreat']);
         $comment->setParentid($row['parent_id']);
 
-        if (array_key_exists('ep_ID', $row)) {
+        try{
+          if (array_key_exists('ep_ID', $row)) {
             // Find and set the associated episode
             $episodeId = $row['art_id'];
             $episode = $this->episodeDAO->find($episodeId);
             $comment->setEpisode($episode);
+            }
+        } catch (exception $e){
+            die('Souci au niveau du lien avec Episode : ' . $e->getMessage());
+        }
+
+        try{
+          if (array_key_exists('user_id', $row)) {
+            // Find and set the associated author
+            $userId = $row['user_id'];
+            $user = $this->userDAO->find($userId);
+            $comment->setAuthor($user);
+            }
+        } catch (exception $e){
+            die('Souci au niveau du lien avec User: ' . $e->getMessage());
         }
 
         return $comment;

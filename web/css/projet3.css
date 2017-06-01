@@ -1,5 +1,6 @@
 body {
     padding-top: 70px;
+
 }
 
 
@@ -11,4 +12,21 @@ body {
 
 .contenu{
   text-align: justify;
+  font-family: Georgia, Tahoma, Verdana;
+  font-size: 1.5em;
+}
+
+/* Lien Sur les Titres des Episodes */
+.episodeTitle{
+    padding-left: 10px;
+    font-size: 1.2em;
+}
+
+.episodeTitle:hover, .episodeTitle:focus {
+    text-decoration: none;
+    color: #222222;
+}
+
+.dateCrea{
+  font-size: 0.8em;
 }

@@ -17,7 +17,7 @@ class Comment
    *
    * @var string
    */
-  private $pseudo;
+  // private $pseudo;
 
   /**
    * Comment message.
@@ -46,6 +46,12 @@ class Comment
    * @var \Projet3\Domain\Episode
    */
   private $episode;
+  /**
+   * Associated author.
+   *
+   * @var \Projet3\Domain\User
+   */
+  private $author;
 
 
 /** ============================ GETTERS ========================================= */
@@ -53,9 +59,9 @@ class Comment
     return $this->idcom;
   }
 
-  public function getPseudo(){
-    return $this->pseudo;
-  }
+  // public function getPseudo(){
+  //   return $this->pseudo;
+  // }
 
   public function getContenu(){
     return $this->contenu;
@@ -73,16 +79,20 @@ class Comment
     return $this->episode;
   }
 
+  public function getAuthor(){
+    return $this->author;
+  }
+
 /** ============================ SETTERS ========================================= */
   public function setIdcom($idcom){
     $this->idcom = $idcom;
     return $this;
   }
 
-  public function setPseudo($pseudo){
-    $this->pseudo = $pseudo;
-    return $this;
-  }
+  // public function setPseudo($pseudo){
+  //   $this->pseudo = $pseudo;
+  //   return $this;
+  // }
 
   public function setContenu($contenu){
     $this->contenu = $contenu;
@@ -104,6 +114,10 @@ class Comment
     return $this;
   }
 
+  public function setAuthor(User $author) {
+        $this->author = $author;
+        return $this;
+    }
 
 
 }

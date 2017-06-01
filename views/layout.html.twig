@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         {# Cette partie gére le menu de navigation #}
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
@@ -23,6 +23,25 @@
                     <a class="navbar-brand" href="{{ path('home') }}">Blog de <em>Jean Forteroche</em> pour son roman : <strong>Billet simple pour l'Alaska</strong></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('logout') }}">Log out</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span> Not connected <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('login') }}">Log in</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -32,10 +51,18 @@
 
             {% endblock %}
         </div>
-        {# Cette partie gére le pied de page #}
-        <footer class="footer">
-            <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
-        </footer>
     </div>
+
+    {# Cette partie gére le pied de page #}
+    <footer class="footer">
+        <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
+    <!-- JavaScript Boostrap plugin -->
+    <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+
 </body>
 </html>

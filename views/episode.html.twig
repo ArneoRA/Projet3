@@ -3,23 +3,32 @@
 {% block title %}{{ episode.titre }}{% endblock %}
 
 {% block content %}
-    <p>
+    <div class="col-sm-8">
         <div class="panel panel-default">
-            <h2 class="panel-heading">{{ episode.titre }}</h2>
-            <p class="contenu panel-body">{{ episode.contenu }}</p>
+            <h2 class="panel-heading">
+              <a class="episodeTitle" href="{{ path('home') }}">{{ episode.titre }}</a>
+            </h2>
+            <p class="contenu panel-body">{{ episode.contenu | nl2br }}</p>
         </div>
-
+    </div>
+    <div class="col-sm-4">
         <div class="panel panel-info">
             <h3 class="panel-heading">Commentaires</h3>
-            <p class="panel-body">
                 {% for comment in comments %}
-                    <strong>{{ comment.pseudo }} said :</strong> {{ comment.contenu }}<br>
+                    <p class="panel-body contenu">
+                        <strong>{{ comment.author.username }} said :</strong> {{ comment.contenu |nl2br }}
+                    </p>
                 {% else %}
                         Pas encore de commentaire.
                 {% endfor %}
-            </p>
-
+            <div class="panel-body">
+                <h3>Ajouter un commentaire</h3>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    Soon!
+                {% else %}
+                    <a href="{{ path('login') }} ">Log in</a> pour ajouter un commentaire.
+                {% endif %}
+            </div>
         </div>
-
-    </p>
+    </div>
 {% endblock %}
