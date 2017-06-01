@@ -107,3 +107,20 @@ Ce commit contient :
 - Modification de la vue **episode.html.twig** pour obtenir un affichage adapté à la présence d'un utilisateur connecté.
 - Modification de la vue **layout.html.twig** pour ajouter à la barre de navigation un menu déroulant associé à l'éventuel utilisateur authnetifié.
 
+
+__________________________________________________________
+
+## 10eme Commit : Ajout de commentaire  à un Episode
+
+Ce commit contient :
+- Modification du fichier **composer.json** pour ajouter les composants symfony **form** / **translation** / **config**.
+Le composant **form** regroupe les services de gestion des formulaires. Le composant **translation** offre des services de traduction nécessaires pour utiliser le composant **form**. Le composantconfig est également nécessaire au bon fonctionnement de **form**.
+- Modélisation du formulaire commentaire sous forme d'objet. (**SRC/FORM/TYPE**), nom du fichier **CommentType.php**.
+- Ajout de la méthode **save()** dans la classe **CommentDAP**.
+- Modification du controleur app.php pour ajouter les nouveaux fournisseurs de services
+-- FormServiceProvider
+-- LocaleServiceProvider
+-- TranslationServiceProvider
+- Modification du fichier **routes.php** pour créer le formulaire d'ajout d'un commentaire avant de générer la vue qui affiche le détail sur l'épisode.
+- Modification de la vue **episode.html.twig** pour afficher le formulaire créé.
+

@@ -38,6 +38,11 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         ),
     ),
 ));
+// Fournisseur de services pour le formulaire et d'autres services associés
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\LocaleServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
+
 
 // Register services Episode / User / Comment
 $app['dao.episode'] = function ($app) {

@@ -16,15 +16,32 @@
             <h3 class="panel-heading">Commentaires</h3>
                 {% for comment in comments %}
                     <p class="panel-body contenu">
-                        <strong>{{ comment.author.username }} said :</strong> {{ comment.contenu |nl2br }}
+                        <strong>{{ comment.author.username }} a écrit le {{comment.dateCreat | date("d/m/Y")}} :</strong>  {{ comment.contenu |nl2br }}
                     </p>
                 {% else %}
                         Pas encore de commentaire.
                 {% endfor %}
             <div class="panel-body">
                 <h3>Ajouter un commentaire</h3>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    Soon!
+                {% if commentForm %}
+                    {{ form_start(commentForm) }}
+                        <div class="form-group">
+                            {{ form_errors(commentForm.contenu) }}
+                            {{ form_widget(commentForm.contenu, { 'attr':  {
+                                'rows': '4',
+                                'class': 'form-control',
+                                'placeholder': 'Saisir votre commentaire'
+                            }}) }}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Envoyer" />
+                        </div>
+                    {{ form_end(commentForm) }}
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        <div class="alert alert-success">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
                 {% else %}
                     <a href="{{ path('login') }} ">Log in</a> pour ajouter un commentaire.
                 {% endif %}
