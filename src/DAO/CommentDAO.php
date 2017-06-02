@@ -24,6 +24,25 @@ class CommentDAO extends DAO
         $this->userDAO = $userDAO;
     }
 
+    /**
+     * Returns a list of all comments, sorted by date (most recent first).
+     *
+     * @return array A list of all comments.
+     */
+    public function findAll() {
+        $sql = "select * from commentaires order by idcom desc";
+        $result = $this->getDb()->fetchAll($sql);
+
+        // Convert query result to an array of domain objects
+        $entities = array();
+        foreach ($result as $row) {
+            $id = $row['idcom'];
+            $entities[$id] = $this->buildDomainObject($row);
+        }
+        return $entities;
+    }
+
+
 
     /**
      * Return a list of all comments for an episode, sorted by date (most recent first).
@@ -53,7 +72,28 @@ class CommentDAO extends DAO
         return $comments;
     }
 
+    /**
+     * Returns a comment matching the supplied id.
+     *
+     * @param integer $id The comment id
+     *
+     * @return \Projet3\Domain\Comment|throws an exception if no matching comment is found
+     */
+    public function find($id) {
+        $sql = "select * from commentaires where idcom=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
 
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No comment matching id " . $id);
+    }
+
+    /**
+     * Save a comment from the database.
+     *
+     * @param @param Comment
+     */
     public function save(Comment $comment){
         $commentData = array(
             'message' =>$comment->getContenu(),
@@ -73,6 +113,34 @@ class CommentDAO extends DAO
         }
     }
 
+    /**
+     * Removes all comments for an episode
+     *
+     * @param $episodeId The id of the episode
+     */
+    public function deleteAllByEpisode($episodeId) {
+        $this->getDb()->delete('commentaires', array('ep_ID' => $episodeId));
+    }
+
+
+    /**
+     * Removes a comment from the database.
+     *
+     * @param @param integer $id The comment id
+     */
+    public function delete($id) {
+        // Delete the comment
+        $this->getDb()->delete('commentaires', array('idcom' => $id));
+    }
+
+    /**
+     * Removes all comments for a user
+     *
+     * @param integer $userId The id of the user
+     */
+    public function deleteAllByUser($userId) {
+        $this->getDb()->delete('commentaires', array('user_id' => $userId));
+    }
 
     /**
      * Creates a Comment object based on a DB row.
@@ -89,9 +157,9 @@ class CommentDAO extends DAO
         $comment->setParentid($row['parent_id']);
 
         try{
-          if (array_key_exists('ep_ID', $row)) {
+          if (array_key_exists('epID', $row)) {
             // Find and set the associated episode
-            $episodeId = $row['art_id'];
+            $episodeId = $row['epID'];
             $episode = $this->episodeDAO->find($episodeId);
             $comment->setEpisode($episode);
             }

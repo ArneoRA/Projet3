@@ -37,12 +37,23 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             },
         ),
     ),
+    // Nous modifions la configuration du pare-feu pour définir une hiérarchie entre ROLE_ADMIN et ROLE_USER...
+    'security.role_hierarchy' => array(
+        'ROLE_ADMIN' => array('ROLE_USER'),
+        // Puis pour protéger spécifiquement la zone/admin.
+    ),
+    'security.access_rules' => array(
+            array('^/admin', 'ROLE_ADMIN'),
+    ),
+  // Ce service fournit un moyen de gérer les utilisateurs en terme de connexion sécurisée
 ));
 // Fournisseur de services pour le formulaire et d'autres services associés
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\LocaleServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
 
+// Fournisseur de services pour tester et valider les champs de nos formulaires
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 
 // Register services Episode / User / Comment
 $app['dao.episode'] = function ($app) {

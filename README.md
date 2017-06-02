@@ -110,7 +110,7 @@ Ce commit contient :
 
 __________________________________________________________
 
-## 10eme Commit : Ajout de commentaire  à un Episode
+## 10eme Commit : Ajout de commentaire à un Episode
 
 Ce commit contient :
 - Modification du fichier **composer.json** pour ajouter les composants symfony **form** / **translation** / **config**.
@@ -123,4 +123,29 @@ Le composant **form** regroupe les services de gestion des formulaires. Le compo
 -- TranslationServiceProvider
 - Modification du fichier **routes.php** pour créer le formulaire d'ajout d'un commentaire avant de générer la vue qui affiche le détail sur l'épisode.
 - Modification de la vue **episode.html.twig** pour afficher le formulaire créé.
+
+
+__________________________________________________________
+
+## 11eme Commit : Création du BackOffice - 1ere version
+
+Ce commit contient :
+- Modification du fichier **app.php** pour soummettre l'accés au backOffice pour les users possédant le role **ROLE_ADMIN**.
+- Modification de la vue **layout.html.twig** pour signaler visuellement à l'administrateur qu'il peut accéder au BackOffice.
+- Création de la page d'accueil du BackOffice - modifiation du fichier **routes.php**
+- Ajout de la méthode **findAll()** dans la classe **CommentDAO**.
+- Ajout du composant symfony/validator dans le fichier composer.json et modification du fichier **app.php**.
+- Création de la vue **admin.html.twig**.
+- Gestion des episodes (objet formulaire) **EpisodeType**. + Création de la vue **episode_form.html.twig**.
+-- Ajout des méthodes **save()** et **delete()** *(A voir si ca sera utile si on désactive le bouton suppression une fois que l'épisode est validé)*.
+- Modification du fichier **routes.php** pour créer les routes de création, modification et suppression d'un episode.
+- Gestion des commentaires : Création de la vue **comment_form.html.twig**.
+- Modification de la vue **admin.html.twig** pour y ajouter le code permettant d'afficher les commentaires et les actions associées.
+- Modification de la classe **CommentDAO** pour y ajouter la méthode de recherche d'un commentaire ainsique sa suppression.
+- Modification des controleurs fichier **routes.php** pour ajouter les routes de modification et de suppression des commentaires.
+- Gestion des utilisateurs : Création de l'objet formulaire **UserType.php** dans le répertoire *SRC\Form\Type*
+- Création de la vue associé à ce formulaire : **user_form.html.twig**.
+- Modifcation de la vue admin pour ajouter le code lié à la gestion des utilisateurs.
+- Ajout des methodes save et delete de la classe UserDAO
+- Modification du fichier routes.php pour la gestion des utilisateurs
 

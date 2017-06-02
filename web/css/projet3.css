@@ -30,3 +30,8 @@ body {
 .dateCrea{
   font-size: 0.8em;
 }
+
+.adminTable {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

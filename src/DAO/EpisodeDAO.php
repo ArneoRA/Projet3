@@ -41,12 +41,45 @@ class EpisodeDAO extends DAO
             throw new \Exception("No episode matching id " . $id);
     }
 
+    /**
+     * Saves an episode into the database.
+     *
+     * @param \Projet3\Domain\Episode $episode The episode to save
+     */
+    public function save(Episode $episode) {
+        $episodeData = array(
+            'titre' => $episode->getTitre(),
+            'contenu' => $episode->getContenu(),
+            );
+
+        if ($episode->getId()) {
+            // The episode has already been saved : update it
+            $this->getDb()->update('episodes', $episodeData, array('id' => $episode->getId()));
+        } else {
+            // The episode has never been saved : insert it
+            $this->getDb()->insert('episodes', $episodeData);
+            // Get the id of the newly created episode and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $episode->setId($id);
+        }
+    }
 
     /**
-     * Creates an Article object based on a DB row.
+     * Removes an episode from the database.
      *
-     * @param array $row The DB row containing Article data.
-     * @return \MicroCMS\Domain\Article
+     * @param integer $id The episode id.
+     */
+    public function delete($id) {
+        // Delete the episode
+        $this->getDb()->delete('episodes', array('idcom' => $id));
+    }
+
+
+    /**
+     * Creates an Episode object based on a DB row.
+     *
+     * @param array $row The DB row containing Episode data.
+     * @return \Projet3\Domain\Episode
      */
     protected function buildDomainObject(array $row) {
         $episode = new Episode();
