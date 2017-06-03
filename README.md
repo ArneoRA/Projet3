@@ -93,7 +93,7 @@ Ce commit contient :
 
 ___________________________________________________________
 
-## 9-1 Commit : Saisie commentaires sur un Episode
+## 9-1 Commit : Saisie simple d'un commentaire sur un Episode
 
 Ce commit contient :
 - Ajout des composants nécessaires au bon fonctionnement de notre objet formulaire
