@@ -165,6 +165,7 @@ class CommentDAO extends DAO
             }
         } catch (exception $e){
             die('Souci au niveau du lien avec Episode : ' . $e->getMessage());
+
         }
 
         try{

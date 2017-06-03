@@ -149,3 +149,10 @@ Ce commit contient :
 - Ajout des methodes save et delete de la classe UserDAO
 - Modification du fichier routes.php pour la gestion des utilisateurs
 
+
+__________________________________________________________
+
+## 12eme Commit : Mise à jour fichiers UML - Episode
+
+Ce commit contient :
+- Mise à jour du fichier UML au niveau de la gestion des Episodes
