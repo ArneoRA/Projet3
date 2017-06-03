@@ -90,3 +90,18 @@ Ce commit contient :
 - Note : *Plutôt que de définir directement le lien href au niveau du titre de la barre de navigation, on utilise une fonction nommée **path()** qui permet de générer une URL dans un template. Pour pouvoir utiliser cette fonction, il faudra que toutes les routes de l'application portent un nom.*.
 - Modification du fichier *app.php* pour ajouter le service d'acces aux commentaires.
 - Modification du fichier *routes.php* pour ajouter la nouvelle route vers l'episode et ses commentaires.
+
+___________________________________________________________
+
+## 9-1 Commit : Saisie commentaires sur un Episode
+
+Ce commit contient :
+- Ajout des composants nécessaires au bon fonctionnement de notre objet formulaire
+**(composer.json)**
+- Création du fichier **CommentType.php** dans *SRC\Form\Type* qui permettra de gérer le formulaire de saisie d'un commentaire.
+- Ajout de la méthode **save()** dans notre class **CommentDAO** avec récupération du Pseudo par la variable session.
+- Ajout des fournisseurs de services dans le fichier **app.php** correspondant aux composants nouvellement chargés.
+- Modification du fichier routes.php pour créer le formulaire d'ajout d'un commentaire avant la génération de la vue.
+- Modification de la vue **episode.html.twig** pour intégrer le formulaire.
+- Ajustement visuel avec ajout de CSS et de balises BootStrap.
+- Ajout de l'extension Text de twig permettant en autre d'utiliser la fonction truncate.

@@ -4,7 +4,11 @@
         "doctrine/dbal": "~2.5",
         "twig/twig": "~1.28",
         "symfony/twig-bridge": "~2.8|3.0.*",
-        "symfony/asset": "~2.8|3.0.*"
+        "symfony/asset": "~2.8|3.0.*",
+        "symfony/form": "~2.8|3.0.*",
+        "symfony/translation": "~2.8|3.0.*",
+        "symfony/config": "~2.8|3.0.*",
+        "twig/extensions": "~1.4"
     },
 
     "autoload": {

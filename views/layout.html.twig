@@ -10,28 +10,42 @@
 </head>
 
 <body>
-    <div class="container">
-        {# Cette partie gére le menu de navigation #}
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ path('home') }}">Blog de <em>Jean Forteroche</em> pour son roman : <strong>Billet simple pour l'Alaska</strong></a>
+    <div class="container-fluid">
+        <header class="row">
+           {# Cette partie gére le menu de navigation #}
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ path('home') }}">Blog de <em>Jean Forteroche</em> pour son roman : <strong>Billet simple pour l'Alaska</strong></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse-target">
+                    </div>
                 </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
         {# Cette partie gére le corps de la page #}
-        <div class="content">
-            {% block content %}
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="{{ asset('/images/deco.jpg') }}" alt="page garde Roman" class="deco">
+            </div>
+            <div class="container-fluid">
+                <secion class="col-sm-8">
+                    <div class="content">
+                        {% block content %}
 
-            {% endblock %}
+                            {# ICI S'INTEGRE NOS VUES #}
+
+                        {% endblock %}
+                    </div>
+                </secion>
+            </div>
         </div>
+
         {# Cette partie gére le pied de page #}
         <footer class="footer">
             <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.

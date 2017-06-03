@@ -8,7 +8,7 @@
         <div class="panel panel-default">
             <h2 class="panel-heading">
               <a href="{{ path('episode', {'id':episode.id }) }}">{{ episode.titre }}</a></h2>
-            <p class="contenu panel-body">{{ episode.contenu }}</p>
+            <p class="contenu panel-body">{{ episode.contenu | truncate(500, true, ' ...') }}</p>
         </div>
     {% endfor %}
 {% endblock %}
