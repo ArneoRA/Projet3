@@ -156,3 +156,11 @@ __________________________________________________________
 
 Ce commit contient :
 - Mise à jour du fichier UML au niveau de la gestion des Episodes
+
+__________________________________________________________
+
+## 13eme Commit : Modification visuel : CSS, Vues
+
+Ce commit contient :
+- Mise à jour du fichier CSS pour intégrer la couverture du livre
+- Ajustement au niveau de l'orientation des vues
