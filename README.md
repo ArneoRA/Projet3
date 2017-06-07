@@ -164,3 +164,16 @@ __________________________________________________________
 Ce commit contient :
 - Mise à jour du fichier CSS pour intégrer la couverture du livre
 - Ajustement au niveau de l'orientation des vues
+
+__________________________________________________________
+
+## 14eme Commit : Signaler un Commentaire comme Spam
+
+Ce commit contient :
+- Ajustement de la vue **Index** pour intégrer un listing type panel "accordeon" de BootStrap
+- Ajout des champs **niveau** et **spam** dans la table commentaire pour une meilleure gestion de ceux-ci.
+- Ajustement de la vue **Episode** . en créant une vue-fille contenant uniquement l'affichage des commentaires (**subcomment.html.twig**).
+- Ajout de l'attribut **spam** dans la classe **Comment.php**.
+- Ajout de la méthode **spamC()** dans la classe **CommentDAO.php** pour incrémenter le champ **spam**.
+- Ajout de la méthode **FindComm()** dans la classe **EpisodeDAO.php** pour rafraichir la page apres signalement d'un spam.
+- Ajout d'une route spécifique **/episode/{id}/spam** dans le fichier **routes.php**.

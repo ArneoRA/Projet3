@@ -42,6 +42,26 @@ class EpisodeDAO extends DAO
     }
 
     /**
+     * Returns an episode matching the idcom Comment.
+     *
+     * @param integer $id
+     *
+     * @return \Projet3\Domain\Episode|throws an exception if no matching episode is found
+     */
+    public function findComm($id) {
+        $sql = "select * FROM episodes inner join commentaires on episodes.id = commentaires.epID where commentaires.idcom = ?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No episode matching with Comment id " . $id);
+    }
+
+
+
+
+    /**
      * Saves an episode into the database.
      *
      * @param \Projet3\Domain\Episode $episode The episode to save

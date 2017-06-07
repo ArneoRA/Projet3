@@ -3,24 +3,24 @@
 {% block title %}{{ episode.titre }}{% endblock %}
 
 {% block content %}
-    <div class="col-sm-8">
+    <div class="row">
+{# PARTIE POUR AFFICHER LE TITRE ET LE CONTENU DE L'EPISODE #}
         <div class="panel panel-default">
             <h2 class="panel-heading">
               <a class="episodeTitle" href="{{ path('home') }}">{{ episode.titre }}</a>
             </h2>
-            <p class="contenu panel-body">{{ episode.contenu | nl2br }}</p>
+            <p class="contenu panel-body episode">{{ episode.contenu | nl2br }}</p>
         </div>
     </div>
-    <div class="col-sm-4">
+{# PARTIE POUR AFFICHER LES COMMENTAIRES #}
+    <div class="container">
         <div class="panel panel-info">
             <h3 class="panel-heading">Commentaires</h3>
-                {% for comment in comments %}
-                    <p class="panel-body contenu">
-                        <strong>{{ comment.author.username }} a écrit le {{comment.dateCreat | date("d/m/Y")}} :</strong>  {{ comment.contenu |nl2br }}
-                    </p>
-                {% else %}
-                        Pas encore de commentaire.
-                {% endfor %}
+{# SOUS PARTIE POUR GERER L'AFFICHAGE DES COMMENTAIRES #}
+
+            {{ include("subcomment.html.twig") }}
+
+{# SOUS PARTIE POUR GERER L'AFFICHAGE DU FORMULAIRE COMMENTAIRE #}
             <div class="panel-body">
                 <h3>Ajouter un commentaire</h3>
                 {% if commentForm %}

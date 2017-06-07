@@ -20,7 +20,7 @@ body {
   font-size: 1.5em;
 }
 
-/* Lien Sur les Titres des Episodes */
+/* Lien Sur les Episodes */
 .episodeTitle{
     padding-left: 10px;
     font-size: 1.2em;
@@ -31,6 +31,11 @@ body {
     color: #222222;
 }
 
+.episode{
+    height: 50vh;
+    overflow-y: scroll;
+}
+
 .dateCrea{
   font-size: 0.8em;
 }
@@ -38,4 +43,9 @@ body {
 .adminTable {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+/* CSS POUR LES COMMENTAIRES */
+.comm{
+  border-bottom: 1px solid #bdc3c7;
 }

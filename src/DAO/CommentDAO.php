@@ -114,6 +114,25 @@ class CommentDAO extends DAO
     }
 
     /**
+     * Signal a spam comment from the database.
+     *
+     * @param @param Comment
+     */
+    public function spamC(Comment $comment){
+        $newValeur = $comment->getSpam() + 1;
+        $commentData = array(
+            'spam' =>$newValeur);
+
+        // error_log('Test $newValeur' .var_dump('Test $newValeur : '.$newValeur));
+        // error_log('Test $comment->getIdcom' .var_dump('Test $comment->getIdcom : '.$comment->getIdcom()));
+        if ($comment->getIdcom()){
+            // The comment has already been saved : update it
+            $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
+        }
+    }
+
+
+    /**
      * Removes all comments for an episode
      *
      * @param $episodeId The id of the episode

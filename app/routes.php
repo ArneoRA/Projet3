@@ -41,6 +41,39 @@ use Projet3\Form\Type\UserType;
   })->bind('episode');
 
 
+
+  // Signal a spam comment
+  $app->match('/episode/{id}/spam', function($id, Request $request) use ($app) {
+      $comment = $app['dao.comment']->find($id);
+      $comment = $app['dao.comment']->spamC($comment);
+      $episode = $app['dao.episode']->findComm($id);
+      $commentFormView = null;
+      if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
+          // A user is fully authenticated : he can add comments
+          $comment = new Comment();
+          $comment->setEpisode($episode);
+          $user = $app['user'];
+          $comment->setAuthor($user);
+          $commentForm = $app['form.factory']->create(CommentType::class, $comment);
+          $commentForm->handleRequest($request);
+          if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+              $app['dao.comment']->save($comment);
+              $app['session']->getFlashBag()->add('success', 'Votre commentaire a été correctement ajouté.');
+          }
+          $commentFormView = $commentForm->createView();
+      }
+      $comments = $app['dao.comment']->findAllByEpisode($id);
+
+      return $app['twig']->render('episode.html.twig', array(
+          'episode' => $episode,
+          'comments' => $comments,
+          'commentForm' => $commentFormView));
+  })->bind('comment_spam');
+
+
+
+
+
   // Add a new episode
   $app->match('/admin/episode/add', function(Request $request) use ($app) {
       $episode = new Episode();
@@ -114,6 +147,7 @@ use Projet3\Form\Type\UserType;
           'commentForm' => $commentForm->createView()));
   })->bind('admin_comment_edit');
 
+
   // Remove a comment
   $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
       $app['dao.comment']->delete($id);
@@ -121,6 +155,7 @@ use Projet3\Form\Type\UserType;
       // Redirect to admin home page
       return $app->redirect($app['url_generator']->generate('admin'));
   })->bind('admin_comment_delete');
+
 
   // Add a user
   $app->match('/admin/user/add', function(Request $request) use ($app) {

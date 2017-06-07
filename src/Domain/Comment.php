@@ -52,7 +52,12 @@ class Comment
    * @var \Projet3\Domain\User
    */
   private $author;
-
+  /**
+   * Comment spam.
+   *
+   * @var integer
+   */
+  private $spam;
 
 /** ============================ GETTERS ========================================= */
   public function getIdcom(){
@@ -81,6 +86,10 @@ class Comment
 
   public function getAuthor(){
     return $this->author;
+  }
+
+  public function getSpam(){
+    return $this->spam;
   }
 
 /** ============================ SETTERS ========================================= */
@@ -119,6 +128,10 @@ class Comment
         return $this;
     }
 
+  public function setSpam($spam){
+    $this->spam = $spam;
+    return $this;
+  }
 
 }
 
