@@ -30,7 +30,7 @@ class CommentDAO extends DAO
      * @return array A list of all comments.
      */
     public function findAll() {
-        $sql = "select * from commentaires order by idcom desc";
+        $sql = "select * from commentaires order by spam desc";
         $result = $this->getDb()->fetchAll($sql);
 
         // Convert query result to an array of domain objects
@@ -174,6 +174,8 @@ class CommentDAO extends DAO
         $comment->setContenu($row['message']);
         $comment->setDateCreat($row['dateCreat']);
         $comment->setParentid($row['parent_id']);
+        $comment->setNiveau($row['niveau']);
+        $comment->setSpam($row['spam']);
 
         try{
           if (array_key_exists('epID', $row)) {

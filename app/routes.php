@@ -62,7 +62,7 @@ use Projet3\Form\Type\UserType;
           }
           $commentFormView = $commentForm->createView();
       }
-      $comments = $app['dao.comment']->findAllByEpisode($id);
+      $comments = $app['dao.comment']->findAllByEpisode($episode->getId());
 
       return $app['twig']->render('episode.html.twig', array(
           'episode' => $episode,

@@ -177,3 +177,12 @@ Ce commit contient :
 - Ajout de la méthode **spamC()** dans la classe **CommentDAO.php** pour incrémenter le champ **spam**.
 - Ajout de la méthode **FindComm()** dans la classe **EpisodeDAO.php** pour rafraichir la page apres signalement d'un spam.
 - Ajout d'une route spécifique **/episode/{id}/spam** dans le fichier **routes.php**.
+
+__________________________________________________________
+
+## 15eme Commit : Signaler un commentaire 2eme partie
+
+Ce commit contient :
+- Modification de l'administration pour afficher aussi les commentaires signalés "spammé"
+- Modification de la méthode **FindAll()** afin de classer les commentaires dans l'ordre décroissant du champ **spam**.
+- Correction d'un bug lors du rechargement de la vue episode apres avoir signalé un commentaire en spam.
