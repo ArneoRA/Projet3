@@ -13,7 +13,12 @@ class EpisodeType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class)
-            ->add('contenu', TextareaType::class);
+            ->add('contenu', TextareaType::class,
+                array('attr'=> array(
+                    'class'=> 'tinymce',
+                    'data-theme' => 'modern')
+                )
+            );
     }
 
     public function getName()

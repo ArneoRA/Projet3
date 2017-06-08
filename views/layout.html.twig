@@ -89,6 +89,15 @@
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    {# Module TINYMCE #}
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    {# <script src="{{ asset('/../vendor/tinymce/tinymce/tinymce.min.js')}}"></script> #}
+    <script>
+        tinymce.init({
+            selector: 'episode_contenu',
+            themes :"modern"
+        });
+    </script>
 
 </body>
 </html>

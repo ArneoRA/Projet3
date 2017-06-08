@@ -186,3 +186,13 @@ Ce commit contient :
 - Modification de l'administration pour afficher aussi les commentaires signalés "spammé"
 - Modification de la méthode **FindAll()** afin de classer les commentaires dans l'ordre décroissant du champ **spam**.
 - Correction d'un bug lors du rechargement de la vue episode apres avoir signalé un commentaire en spam.
+
+__________________________________________________________
+
+## 16eme Commit : Integration de TinyMCE dans l'ajout d'un Episode
+
+Ce commit contient :
+- Ajout du composant **TinyMCE** dans notre fichier composer.json
+- Ajout d'une ligne de **script** dans notre vue principale **layout.html.twig**
+- Initialisation de **tinymce_init** avec l'**ID de ma zone contenu** de l'episode
+- Il reste encore un souci d'affichage le chemin vers **tinymce.min.js** n'est pas correct

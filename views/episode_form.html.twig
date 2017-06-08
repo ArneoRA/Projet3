@@ -35,9 +35,12 @@
             <div class="col-sm-6">
                 {{ form_errors(episodeForm.contenu) }}
                 {{ form_widget(episodeForm.contenu, { 'attr':  {
+                    'class': 'tinymce'
+                }}) }}
+                {# {{ form_widget(episodeForm.contenu, { 'attr':  {
                     'class': 'form-control',
                     'rows': '8'
-                }}) }}
+                }}) }} #}
             </div>
         </div>
         <div class="form-group">
