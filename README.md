@@ -196,3 +196,10 @@ Ce commit contient :
 - Ajout d'une ligne de **script** dans notre vue principale **layout.html.twig**
 - Initialisation de **tinymce_init** avec l'**ID de ma zone contenu** de l'episode
 - Il reste encore un souci d'affichage le chemin vers **tinymce.min.js** n'est pas correct
+
+__________________________________________________________
+
+## 17eme Commit : Mise à jour des fichiers DB
+
+Ce commit contient :
+- Mise à jour des fichiers SQL DB

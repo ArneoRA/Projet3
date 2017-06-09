@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 31 Mai 2017 à 17:08
+-- Généré le :  Jeu 08 Juin 2017 à 16:25
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -28,11 +28,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `commentaires` (
   `idcom` int(11) NOT NULL COMMENT 'Identifiant du commentaire',
-  `pseudo` varchar(30) NOT NULL COMMENT 'Pseudo de la personne qui saisie le commentaire',
   `message` text NOT NULL COMMENT 'Commentaire laissé',
-  `dateCreat` date NOT NULL COMMENT 'Date de création du commentaire',
+  `dateCreat` datetime NOT NULL COMMENT 'Date de création du commentaire',
   `parent_id` int(11) NOT NULL DEFAULT '0',
-  `epID` int(11) NOT NULL COMMENT 'Identifiant de l''episode'
+  `niveau` int(11) NOT NULL DEFAULT '0',
+  `epID` int(11) NOT NULL COMMENT 'Identifiant de l''episode',
+  `user_id` int(11) DEFAULT NULL,
+  `pseudo` varchar(30) NOT NULL,
+  `spam` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -45,10 +48,24 @@ CREATE TABLE `episodes` (
   `id` int(11) NOT NULL COMMENT 'identifiant du chapitre',
   `titre` varchar(50) NOT NULL COMMENT 'Titre du chapitre (episode)',
   `contenu` text NOT NULL COMMENT 'Contenu de l''episode',
-  `dateCrea` date NOT NULL COMMENT 'Date de création de l''episode',
-  `dateModif` date DEFAULT NULL COMMENT 'Date de modification de l''episode',
+  `dateCrea` datetime NOT NULL COMMENT 'Date de création de l''episode',
+  `dateModif` datetime DEFAULT NULL COMMENT 'Date de modification de l''episode',
   `valided` int(1) NOT NULL DEFAULT '0' COMMENT 'Si 1 validé, la modification et la suppression ne sont plus possible si 0 modif et suppr encore possible'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurs`
+--
+
+CREATE TABLE `utilisateurs` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `user_password` varchar(88) NOT NULL,
+  `user_salt` varchar(23) NOT NULL,
+  `user_role` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Index pour les tables exportées
@@ -67,6 +84,12 @@ ALTER TABLE `episodes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -74,12 +97,17 @@ ALTER TABLE `episodes`
 -- AUTO_INCREMENT pour la table `commentaires`
 --
 ALTER TABLE `commentaires`
-  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identifiant du commentaire', AUTO_INCREMENT=8;
+  MODIFY `idcom` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identifiant du commentaire', AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `episodes`
 --
 ALTER TABLE `episodes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identifiant du chapitre', AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
