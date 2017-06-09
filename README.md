@@ -203,3 +203,12 @@ __________________________________________________________
 
 Ce commit contient :
 - Mise à jour des fichiers SQL DB
+
+_________________________________________________________
+
+## 18eme Commit : Modification visuel : Tableau Admin des commentaires
+
+Ce commit contient :
+- Ajout de la fonction tri des colonnes pour le tableau des commentaires dans la partie administration. Réalisé avec les datatables ( javascript et bootstrap 3).
+
+

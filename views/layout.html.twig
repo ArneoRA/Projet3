@@ -6,9 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('/css/projet3.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {# Pour la mise en forme du tableau dynamique Commentaire en plus du CDN BootStrap#}
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
     <title>Projet 3 - {% block title %}{% endblock %}</title>
 </head>
 
@@ -98,6 +100,20 @@
             themes :"modern"
         });
     </script>
+    {# JavaScript pour tableau dynamique #}
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#TabComment').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">',
+                "langage": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
+              }
+            });
+        } );
+    </script>
+
 
 </body>
 </html>
