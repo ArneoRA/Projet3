@@ -84,7 +84,7 @@ use Projet3\Form\Type\UserType;
           $app['session']->getFlashBag()->add('success', 'L\'Episode a été créé correctement.');
       }
       return $app['twig']->render('episode_form.html.twig', array(
-          'title' => 'New episode',
+          'title' => 'Nouvel episode',
           'episodeForm' => $episodeForm->createView()));
   })->bind('admin_episode_add');
 
@@ -98,7 +98,7 @@ use Projet3\Form\Type\UserType;
           $app['session']->getFlashBag()->add('success', 'L\'Episode a été mis à jour avec succès.');
       }
       return $app['twig']->render('episode_form.html.twig', array(
-          'title' => 'Edit episode',
+          'title' => 'Ajouter un episode',
           'episodeForm' => $episodeForm->createView()));
   })->bind('admin_episode_edit');
 

@@ -211,4 +211,17 @@ _________________________________________________________
 Ce commit contient :
 - Ajout de la fonction tri des colonnes pour le tableau des commentaires dans la partie administration. Réalisé avec les datatables ( javascript et bootstrap 3).
 
+________________________________________________________
+
+## 19eme Commit : Implantation des commentaires imbriqués & TinyMCE
+
+Ce commit contient :
+-Modification des classes **Comment.php** et **CommentDAO.php** :
+-- **Comment.php** : Ajout d'un tableau **children** et de la méthode **addChildren($enreg)**.
+-- **CommentDAO.php** : Modification de la classe **findAllByEpisode()** afin qu'elle génére les commentaires imbriqués en fonction du champs **Parent_id**.
+- Création de 2 nouvelles vues :
+-- **signaler.html.twig** : permettant de gérer le bouton Signaler(Spam) d'un commentaire
+-- **actions.html.twig** : permettant de gérer les boutons actions sur un commentaire.
+- Ajustement de la vue **episode.html.twig** pour intégrer l'aspect imbriqué.
+- Intégration du composant TinyMCE
 

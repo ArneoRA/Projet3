@@ -52,3 +52,12 @@
 
     </div>
 {% endblock %}
+
+{% block javascript %}
+    {{parent()}}
+    <script>
+        tinymce.init({
+            selector: "textarea"
+        });
+    </script>
+{% endblock javascript%}

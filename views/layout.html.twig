@@ -11,6 +11,19 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     {# Pour la mise en forme du tableau dynamique Commentaire en plus du CDN BootStrap#}
     <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    {# Module TINYMCE #}
+    {# // <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script> #}
+    {# <script src="{{ asset('/../vendor/tinymce/tinymce/tinymce.min.js')}}"></script> #}
+    <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
+
+    {% block javascript %}
+        <script>
+            tinymce.init({
+                selector: "episode_contenu"
+            });
+    </script>
+    {% endblock javascript%}
+
     <title>Projet 3 - {% block title %}{% endblock %}</title>
 </head>
 
@@ -78,9 +91,6 @@
 
     </div>
 
-
-
-
     {# Cette partie gére le pied de page #}
     <footer class="footer">
         <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
@@ -91,15 +101,6 @@
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-    {# Module TINYMCE #}
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    {# <script src="{{ asset('/../vendor/tinymce/tinymce/tinymce.min.js')}}"></script> #}
-    <script>
-        tinymce.init({
-            selector: 'episode_contenu',
-            themes :"modern"
-        });
-    </script>
     {# JavaScript pour tableau dynamique #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
