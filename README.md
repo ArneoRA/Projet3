@@ -217,11 +217,11 @@ ________________________________________________________
 
 Ce commit contient :
 -Modification des classes **Comment.php** et **CommentDAO.php** :
--- **Comment.php** : Ajout d'un tableau **children** et de la méthode **addChildren($enreg)**.
--- **CommentDAO.php** : Modification de la classe **findAllByEpisode()** afin qu'elle génére les commentaires imbriqués en fonction du champs **Parent_id**.
+- **Comment.php** : Ajout d'un tableau **children** et de la méthode **addChildren($enreg)**.
+- **CommentDAO.php** : Modification de la classe **findAllByEpisode()** afin qu'elle génére les commentaires imbriqués en fonction du champs **Parent_id**.
 - Création de 2 nouvelles vues :
--- **signaler.html.twig** : permettant de gérer le bouton Signaler(Spam) d'un commentaire
--- **actions.html.twig** : permettant de gérer les boutons actions sur un commentaire.
+- **signaler.html.twig** : permettant de gérer le bouton Signaler(Spam) d'un commentaire
+- **actions.html.twig** : permettant de gérer les boutons actions sur un commentaire.
 - Ajustement de la vue **episode.html.twig** pour intégrer l'aspect imbriqué.
 - Intégration du composant TinyMCE
 
@@ -234,3 +234,10 @@ Ce commit contient :
 - Ajout dans .igtignore du répertoire lib/tinymce
 - Modification de l'image du Roman pour y intéger le nom de l'auteur et le titre du roman.
 
+________________________________________________________
+
+## 21eme Commit : Positionnement du footer
+
+Ce commit contient :
+- Footer fixé en bas de la page et mis en forme.
+- Lien vers agence **Arnege** et vers **Github/projet3** mis en forme.

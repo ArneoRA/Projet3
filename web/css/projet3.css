@@ -3,10 +3,24 @@ body {
 
 }
 
+.arnege{
+  color : #777;
+  text-decoration: none;
+}
 
-.footer {
-    border-top: 1px solid #ccc;
+.arnege:hover{
+  color :white;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+#conception{
+  color: #777;
+}
+
+.navbar-fixed-bottom {
     padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
 }
 
