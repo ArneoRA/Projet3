@@ -2,10 +2,14 @@
 
         <div class="panel-body">
           <div class="row col-sm-10 comm">
-            {# N° identifiant : {{ comment.idcom }} / ParentID : {{ comment.parentid }} /==/ #}
-            <strong>{{ comment.author.username }} a dit : </strong>  {{ comment.contenu }}
+            N° identifiant : {{ comment.idcom }} / ParentID : {{ comment.parentid }} /==/
+            Niveau : {{comment.niveau}} ===<strong> {{ comment.author.username }} a dit : </strong>  {{ comment.contenu }}
           </div>
-          {{ include("actions.html.twig") }}
+          {% if comment.niveau < 3 %}
+            {{ include("actions.html.twig") }}
+          {% else %}
+            {{ include("signaler.html.twig") }}
+          {% endif %}
         </div>
           {% if comment.children %}
             <div class="enfant">

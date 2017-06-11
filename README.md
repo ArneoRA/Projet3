@@ -225,3 +225,12 @@ Ce commit contient :
 - Ajustement de la vue **episode.html.twig** pour intégrer l'aspect imbriqué.
 - Intégration du composant TinyMCE
 
+________________________________________________________
+
+## 20eme Commit : Ajustements visuels
+
+Ce commit contient :
+- Gestion du niveau de commentaire pour les boutons actions (Niveau 3 uniquement signaler)
+- Ajout dans .igtignore du répertoire lib/tinymce
+- Modification de l'image du Roman pour y intéger le nom de l'auteur et le titre du roman.
+
