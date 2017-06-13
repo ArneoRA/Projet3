@@ -19,11 +19,11 @@ class UserType extends AbstractType
                 'type'            => PasswordType::class,
                  'invalid_message' => 'Le mot de passe doit être identique.',
                  'options'         => array('required' => true),
-                 'first_options'   => array('label' => 'Password'),
-                 'second_options'  => array('label' => 'Repeat password'),
+                 'first_options'   => array('label' => 'Mot de passe'),
+                 'second_options'  => array('label' => 'Resaisir le mot de passe'),
              ))
             ->add('role', ChoiceType::class, array(
-                'choices' => array('Admin' => 'ROLE_ADMIN', 'User' => 'ROLE_USER')
+                'choices' => array('Admin' => 'ROLE_ADMIN', 'Contributeur' => 'ROLE_USER')
             ));
     }
 

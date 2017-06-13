@@ -40,6 +40,18 @@ use Projet3\Form\Type\UserType;
           'commentForm' => $commentFormView));
   })->bind('episode');
 
+  // Répondre à un commentaire
+  $app->match('/episode/{id}/response/add', function ($id, Request $request) use ($app) {
+      $comment = $app['dao.comment']->find($id);
+      $comment = $app['dao.comment']->saveChildren($comment);
+      $episode = $app['dao.episode']->findComm($id);
+      $comments = $app['dao.comment']->findAllByEpisode($id);
+
+      return $app['twig']->render('episode.html.twig', array(
+          'episode' => $episode,
+          'comments' => $comments,
+          'commentForm' => $commentFormView));
+  })->bind('response_add');
 
 
   // Signal a spam comment
@@ -48,22 +60,7 @@ use Projet3\Form\Type\UserType;
       $comment = $app['dao.comment']->spamC($comment);
       $episode = $app['dao.episode']->findComm($id);
       $commentFormView = null;
-      if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
-          // A user is fully authenticated : he can add comments
-          $comment = new Comment();
-          $comment->setEpisode($episode);
-          $user = $app['user'];
-          $comment->setAuthor($user);
-          $commentForm = $app['form.factory']->create(CommentType::class, $comment);
-          $commentForm->handleRequest($request);
-          if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-              $app['dao.comment']->save($comment);
-              $app['session']->getFlashBag()->add('success', 'Votre commentaire a été correctement ajouté.');
-          }
-          $commentFormView = $commentForm->createView();
-      }
       $comments = $app['dao.comment']->findAllByEpisode($episode->getId());
-
       return $app['twig']->render('episode.html.twig', array(
           'episode' => $episode,
           'comments' => $comments,
@@ -71,14 +68,13 @@ use Projet3\Form\Type\UserType;
   })->bind('comment_spam');
 
 
-
-
-
   // Add a new episode
   $app->match('/admin/episode/add', function(Request $request) use ($app) {
       $episode = new Episode();
       $episodeForm = $app['form.factory']->create(EpisodeType::class, $episode);
       $episodeForm->handleRequest($request);
+      error_log('Test si le form Episode est transmis : ' .var_dump($episodeForm->isSubmitted()));
+      error_log('Test si le form Episode est valide : ' .var_dump($episodeForm->isValid()));
       if ($episodeForm->isSubmitted() && $episodeForm->isValid()) {
           $app['dao.episode']->save($episode);
           $app['session']->getFlashBag()->add('success', 'L\'Episode a été créé correctement.');
@@ -173,10 +169,10 @@ use Projet3\Form\Type\UserType;
           $password = $encoder->encodePassword($plainPassword, $user->getSalt());
           $user->setPassword($password);
           $app['dao.user']->save($user);
-          $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+          $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été ajouté avec succès.');
       }
       return $app['twig']->render('user_form.html.twig', array(
-          'title' => 'New user',
+          'title' => 'Nouvel Utilisateur',
           'userForm' => $userForm->createView()));
   })->bind('admin_user_add');
 

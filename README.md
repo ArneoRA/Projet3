@@ -241,3 +241,30 @@ ________________________________________________________
 Ce commit contient :
 - Footer fixé en bas de la page et mis en forme.
 - Lien vers agence **Arnege** et vers **Github/projet3** mis en forme.
+
+________________________________________________________
+
+## 22eme Commit : Modifications UML,
+
+Ce commit contient :
+-Modification du fichier UML **Schema_UML_Classes.dia** (A titre d'information uniquement, n'a pas servi pour réalisé les classes du projet).
+
+________________________________________________________
+
+## 23eme Commit : Modifications Footer, visuels, reponse Commentaire
+
+Ce commit contient :
+- Modification des liens (réseaux sociaux)
+- Ajustement de la marge top du footer
+- Ajustement du champ **contenu** de l'écran ajouter un nouvel episode (**tinymce**).
+- Amélioration de la route pour signaler un Spam.
+- Ajout d'une réponse d'un commentaire :
+- Modification de la classe **CommentDAO.php** en modifiant la méthode **save()** en y insérant :--'parent_id' =>$comment->getParentid(),--
+- Ajout dans la classe **CommentType.php** (Class du formulaire Commentaire), de 2 champs **parentid et niveau de type hidden** permettant la récupération de 'information parent'.
+- Modification de la vue episode.html.twig pour faciliter le traitement en JavaScript :
+**Ajout d'un Id pour le formulaire et le champ parentid**
+- Modification de la vue subcomment.html.twig pour faciliter le traitement en JavaScript :
+**Ajout d'un id sur le détail du commentaire**
+**Ajout d'un data-id sur le bouton servant à répondre ainsi qu'une classe reply**
+- Création du fichier projet3.js contenant le traitement nécessaire pour afficher le formulaire du commentaire sous le commentaire de la réponse.
+

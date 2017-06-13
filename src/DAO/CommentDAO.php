@@ -111,8 +111,14 @@ class CommentDAO extends DAO
      * @param @param Comment
      */
     public function save(Comment $comment){
+        $varNiv = 0;
+        if ($comment->getParentid() != 0){
+            $varNiv = $comment->getNiveau() + 1;
+        }
         $commentData = array(
             'message' =>$comment->getContenu(),
+            'parent_id' =>$comment->getParentid(),
+            'niveau' => $varNiv,
             'epID' => $comment->getEpisode()->getId(),
             'user_id' =>$comment->getAuthor()->getId()
 
@@ -164,6 +170,8 @@ class CommentDAO extends DAO
      * @param @param integer $id The comment id
      */
     public function delete($id) {
+        // Delete the comments children
+        $this->getDb()->delete('commentaires', array('parent_id'=> $id));
         // Delete the comment
         $this->getDb()->delete('commentaires', array('idcom' => $id));
     }
@@ -176,6 +184,7 @@ class CommentDAO extends DAO
     public function deleteAllByUser($userId) {
         $this->getDb()->delete('commentaires', array('user_id' => $userId));
     }
+
 
     /**
      * Creates a Comment object based on a DB row.

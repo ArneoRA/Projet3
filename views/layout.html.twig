@@ -21,7 +21,8 @@
             tinymce.init({
                 selector: "episode_contenu"
             });
-    </script>
+        </script>
+
     {% endblock javascript%}
 
     <title>Projet 3 - {% block title %}{% endblock %}</title>
@@ -107,9 +108,9 @@
                         </p>
                     </div>
                     <div class="col-sm-4 pull-right">
-                        <a class="btn btn-default rond" href="#"><i class="fa fa-twitter fa-2x"></i></a>
-                        <a class="btn btn-default rond" href="#"><i class="fa fa-facebook fa-2x"></i></a>
-                        <a class="btn btn-default rond" href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+                        <a class="btn btn-default rond" href="http://fr.linkedin.com/pub/arnaud-raoult/5b/957/208/"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                        <a class="btn btn-default rond" href="https://www.facebook.com/ArnaudRA"><i class="fa fa-facebook fa-2x"></i></a>
+                        <a class="btn btn-default rond" href="https://plus.google.com/u/0/108923850421269678473?rel=publisher"><i class="fa fa-google-plus fa-2x"></i></a>
                     </div>
                 </div>
 
@@ -122,6 +123,8 @@
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- JavaScript Perso -->
+    <script src="{{ asset('/lib/js/projet3.js') }}"></script>
     {# JavaScript pour tableau dynamique #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
