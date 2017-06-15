@@ -111,7 +111,7 @@ class CommentDAO extends DAO
             'parent_id' =>$comment->getParentid(),
             'niveau' => $varNiv,
             'epID' => $comment->getEpisode()->getId(),
-            'pseudo' =>$comment->getPseudo()->getId()
+            'pseudo' =>$comment->getPseudo()
 
             );
         if ($comment->getIdcom()) {

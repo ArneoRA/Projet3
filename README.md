@@ -178,3 +178,9 @@ Ce commit contient :
 **Ajout d'un id sur le détail du commentaire**
 **Ajout d'un data-id sur le bouton servant à répondre ainsi qu'une classe reply**.
 - Création du fichier projet3.js contenant le traitement nécessaire pour afficher le formulaire du commentaire sous le commentaire de la réponse.
+
+## 14eme Commit : Correction fichier CommentDAO et vue layout
+
+Ce commit contient :
+- Modification du fichier CommentDAO pour le test des champs niveau et Pseudo
+- Modification du fichier layout pour préciser la version du Site : Version Commentaire basic
