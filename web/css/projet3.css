@@ -24,3 +24,8 @@ p{
   width: 80%;
   margin: 0px 50px 15px 50px;
 }
+
+.adminTable {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

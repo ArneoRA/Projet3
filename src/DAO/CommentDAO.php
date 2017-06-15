@@ -14,6 +14,25 @@ class CommentDAO extends DAO
     public function setEpisodeDAO(EpisodeDAO $episodeDAO){
         $this->episodeDAO = $episodeDAO;
     }
+
+    /**
+     * Returns a list of all comments, sorted by date (most recent first).
+     *
+     * @return array A list of all comments.
+     */
+    public function findAll() {
+        $sql = "select * from commentaires order by spam desc";
+        $result = $this->getDb()->fetchAll($sql);
+
+        // Convert query result to an array of domain objects
+        $entities = array();
+        foreach ($result as $row) {
+            $id = $row['idcom'];
+            $entities[$id] = $this->buildDomainObject($row);
+        }
+        return $entities;
+    }
+
     /**
      * Return a list of all comments for an episode, sorted by date (most recent first).
      *
@@ -44,6 +63,24 @@ class CommentDAO extends DAO
 
 
     /**
+     * Returns a comment matching the supplied id.
+     *
+     * @param integer $id The comment id
+     *
+     * @return \Projet3\Domain\Comment|throws an exception if no matching comment is found
+     */
+    public function find($id) {
+        $sql = "select * from commentaires where idcom=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No comment matching id " . $id);
+    }
+
+
+    /**
      * Saves a comment into the database.
      *
      * @param \Projet3\Domain\Comment $comment The comment to save
@@ -68,8 +105,46 @@ class CommentDAO extends DAO
     }
 
 
+    /**
+     * Signal a spam comment from the database.
+     *
+     * @param @param Comment
+     */
+    public function spamC(Comment $comment){
+        $newValeur = $comment->getSpam() + 1;
+        $commentData = array(
+            'spam' =>$newValeur);
+
+        // error_log('Test $newValeur' .var_dump('Test $newValeur : '.$newValeur));
+        // error_log('Test $comment->getIdcom' .var_dump('Test $comment->getIdcom : '.$comment->getIdcom()));
+        if ($comment->getIdcom()){
+            // The comment has already been saved : update it
+            $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
+        }
+    }
 
 
+    /**
+     * Removes all comments for an episode
+     *
+     * @param $episodeId The id of the episode
+     */
+    public function deleteAllByEpisode($episodeId) {
+        $this->getDb()->delete('commentaires', array('ep_ID' => $episodeId));
+    }
+
+
+    /**
+     * Removes a comment from the database.
+     *
+     * @param @param integer $id The comment id
+     */
+    public function delete($id) {
+        // Delete the comments children
+        $this->getDb()->delete('commentaires', array('parent_id'=> $id));
+        // Delete the comment
+        $this->getDb()->delete('commentaires', array('idcom' => $id));
+    }
 
 
     /**
@@ -86,11 +161,16 @@ class CommentDAO extends DAO
         $comment->setDateCreat($row['dateCreat']);
         $comment->setParentid($row['parent_id']);
 
-        if (array_key_exists('ep_ID', $row)) {
+        try{
+          if (array_key_exists('epID', $row)) {
             // Find and set the associated episode
-            $episodeId = $row['art_id'];
+            $episodeId = $row['epID'];
             $episode = $this->episodeDAO->find($episodeId);
             $comment->setEpisode($episode);
+            }
+        } catch (exception $e){
+            die('Souci au niveau du lien avec Episode : ' . $e->getMessage());
+
         }
 
         return $comment;

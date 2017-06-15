@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% set adminMenu = true %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">{{ block('title') }}</h2>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage }}
+    </div>
+    {% endfor %}
+
+    <div class="well">
+    {{ form_start(episodeForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div class="form-group">
+            {{ form_label(episodeForm.titre, null, { 'label_attr':  {
+                'class': 'col-sm-2 control-label'
+            }}) }}
+            <div class="col-sm-10">
+                {{ form_errors(episodeForm.titre) }}
+                {{ form_widget(episodeForm.titre, { 'attr':  {
+                    'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(episodeForm.contenu, null, { 'label_attr':  {
+                'class': 'col-sm-2 control-label'
+            }}) }}
+            <div class="col-sm-10">
+                {{ form_errors(episodeForm.contenu) }}
+                {{ form_widget(episodeForm.contenu, { 'attr':  {
+                    'class': 'tinymce',
+                    'row': 20
+                }}) }}
+                {# {{ form_widget(episodeForm.contenu, { 'attr':  {
+                    'class': 'form-control',
+                    'rows': '8'
+                }}) }} #}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Enregistrer" />
+            </div>
+        </div>
+    {{ form_end(episodeForm) }}
+
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{parent()}}
+    <script>
+        tinymce.init({
+            selector: "textarea",
+            height: "480"
+        });
+    </script>
+{% endblock javascript%}

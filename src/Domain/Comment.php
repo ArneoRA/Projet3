@@ -46,7 +46,17 @@ class Comment
    * @var \Projet3\Domain\Episode
    */
   private $episode;
-
+  /**
+   * Comment spam.
+   *
+   * @var integer
+   */
+  private $spam;
+  /**
+   * Comment Enfant
+   * @var Array
+   */
+  private $children = array();
 
 /** ============================ GETTERS ========================================= */
   public function getIdcom(){
@@ -72,6 +82,14 @@ class Comment
   public function getEpisode(){
     return $this->episode;
   }
+
+  public function getSpam(){
+    return $this->spam;
+  }
+
+  public function getChildren() {
+        return $this->children;
+    }
 
 /** ============================ SETTERS ========================================= */
   public function setIdcom($idcom){
@@ -104,6 +122,14 @@ class Comment
     return $this;
   }
 
+  public function setSpam($spam){
+    $this->spam = $spam;
+    return $this;
+  }
+
+  public function addChildren($enreg){
+    array_push($this->children, $enreg);
+  }
 
 
 }
