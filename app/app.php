@@ -30,9 +30,38 @@ $app->register(new Silex\Provider\TranslationServiceProvider());
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'secured' => array(
+            'pattern' => '^/',
+            'anonymous' => true,
+            'logout' => true,
+            'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
+            'users' => function () use ($app) {
+                return new Projet3\DAO\UserDAO($app['db']);
+            },
+        ),
+    ),
+    // Nous modifions la configuration du pare-feu pour définir une hiérarchie entre ROLE_ADMIN et ROLE_USER...
+    // 'security.role_hierarchy' => array(
+    //     'ROLE_ADMIN' => array('ROLE_USER'),
+        // Puis pour protéger spécifiquement la zone/admin.
+    // ),
+    // 'security.access_rules' => array(
+    //         array('^/admin', 'ROLE_ADMIN'),
+    // ),
+  // Ce service fournit un moyen de gérer les utilisateurs en terme de connexion sécurisée
+));
+
+
 // Register services.
 $app['dao.episode'] = function ($app) {
     return new Projet3\DAO\EpisodeDAO($app['db']);
+};
+
+$app['dao.user'] = function ($app) {
+    return new Projet3\DAO\UserDAO($app['db']);
+
 };
 
 $app['dao.comment'] = function ($app) {
@@ -40,3 +69,5 @@ $app['dao.comment'] = function ($app) {
     $commentDAO->setEpisodeDAO($app['dao.episode']);
     return $commentDAO;
 };
+
+

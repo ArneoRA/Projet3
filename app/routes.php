@@ -3,6 +3,8 @@
 
   use Symfony\Component\HttpFoundation\Request;
   use Projet3\Domain\Comment;
+  use Projet3\Domain\Episode;
+  use Projet3\Domain\User;
   use Projet3\Form\Type\CommentType;
 
   // Home page
@@ -31,5 +33,16 @@
           'comments' => $comments,
           'commentForm' => $commentFormView));
   })->bind('episode');
+
+// Login form
+  $app->get('/login', function(Request $request) use ($app) {
+      return $app['twig']->render('login.html.twig', array(
+          'error'         => $app['security.last_error']($request),
+          'last_username' => $app['session']->get('_security.last_username'),
+      ));
+  })->bind('login');
+
+
+
 
 ?>

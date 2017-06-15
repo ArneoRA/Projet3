@@ -8,7 +8,8 @@
         "symfony/form": "~2.8|3.0.*",
         "symfony/translation": "~2.8|3.0.*",
         "symfony/config": "~2.8|3.0.*",
-        "twig/extensions": "~1.4"
+        "twig/extensions": "~1.4",
+        "symfony/security": "~2.8|3.0.*"
     },
 
     "autoload": {

@@ -105,3 +105,13 @@ Ce commit contient :
 - Modification de la vue **episode.html.twig** pour intégrer le formulaire.
 - Ajustement visuel avec ajout de CSS et de balises BootStrap.
 - Ajout de l'extension Text de twig permettant en autre d'utiliser la fonction truncate.
+
+## 10 Commit : Gestion de la sécurité Administration
+
+Ce commit contient :
+- Gestion de la sécurité : Création d'une table **utilisateurs**, de la classe **User** et de la classe DAO **UserDAO**.
+- Ajout dans *composer.json* la dépendance à *symfony/security*.
+- Modification du fichier **app.php** pour ajouter les fournisseurs de service pour la gestion de la sécurité.
+- Modification du fichier **routes.app** pour créer la route vers la page **login**.
+- Création de la vue **login.html.twig** associée à la route d'authentification.
+- Modification de la vue **layout.html.twig** pour ajouter à la barre de navigation un menu déroulant associé à l'éventuel utilisateur authentifié.
