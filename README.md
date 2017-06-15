@@ -135,10 +135,46 @@ Ce commit contient :
 - Modification de la classe **CommentDAO** pour y ajouter la méthode de recherche d'un commentaire ainsique sa suppression.
 - Modification des controleurs fichier **routes.php** pour ajouter les routes de modification et de suppression des commentaires.
 - Modification de la classe **CommentDAO** pour y ajouter la méthode permettant d'indiquer un commentaire en **spam**.
-- Modification de la classe **Comment.php** en y ajoutant 2 attributs (Spam et Children) avec les getter et setters associés.
+- Modification de la classe **Comment.php** en y ajoutant 2 attributs (**Spam** et **Children**) avec les getter et setters associés.
 - Gestion des utilisateurs : Création de l'objet formulaire **UserType.php** dans le répertoire *SRC\Form\Type*
 - Création de la vue associé à ce formulaire : **user_form.html.twig**.
 - Modifcation de la vue admin pour ajouter le code lié à la gestion des utilisateurs.
 - Modifcation de la vue admin pour ajouter le code lié à la gestion des utilisateurs.
 - Ajout des methodes save et delete de la classe UserDAO
 - Modification du fichier routes.php pour la gestion des utilisateurs
+
+
+## 12eme Commit : Signaler un Commentaire comme Spam
+
+Ce commit contient :
+- Ajout des champs **niveau** et **spam** dans la table commentaire pour une meilleure gestion de ceux-ci.
+- Ajustement de la vue **Episode** . en créant une vue-fille contenant uniquement l'affichage des commentaires (**subcomment.html.twig**).
+- Création de 2 autres vues pour gérer les boutons **répondre** et **signaler** en fonction du niveau du commentaire.
+- Ajout de l'attribut **spam** dans la classe **Comment.php**.
+- Ajout de la méthode **spamC()** dans la classe **CommentDAO.php** pour incrémenter le champ **spam** ainsi que la modifcation de la méthode **findAll** afin d'avoir les commentaires imbriqués.
+- Ajout de la méthode **FindComm()** dans la classe **EpisodeDAO.php** pour rafraichir la page apres signalement d'un spam.
+- Ajout d'une route spécifique **/episode/{id}/spam** dans le fichier **routes.php**.
+- Modification du fichier CSS afin d'obtenir un affichage des commentaires imbriqués en décalé.
+- Intégration manuelle des fichier TinyMCE dans **lib\tinymce**.
+
+## 13eme Commit : Integration de TinyMCE et reponse Commentaire
+
+Ce commit contient :
+- Ajout du composant **TinyMCE** dans notre fichier composer.json
+- Ajout d'une ligne de **script** dans notre vue principale **layout.html.twig**
+- Initialisation de **tinymce_init** avec l'**ID de ma zone contenu** de l'episode
+- Ajout de la fonction tri des colonnes pour le tableau des commentaires dans la partie administration. Réalisé avec les datatables ( javascript et bootstrap 3).
+- Footer fixé en bas de la page et mis en forme.
+- Lien vers agence **Arnege** et vers **Github/projet3** mis en forme.
+- Modification des liens (réseaux sociaux)
+- Ajustement de la marge top du footer
+- Ajustement du champ **contenu** de l'écran ajouter un nouvel episode (**tinymce**).
+- Ajout d'une réponse d'un commentaire :
+- Modification de la classe **CommentDAO.php** en modifiant la méthode **save()** en y insérant :--'parent_id' =>$comment->getParentid(),--
+- Ajout dans la classe **CommentType.php** (Class du formulaire Commentaire), de 2 champs **parentid et niveau de type hidden** permettant la récupération de 'information parent'.
+- Modification de la vue episode.html.twig pour faciliter le traitement en JavaScript :
+**Ajout d'un Id pour le formulaire et le champ parentid**.
+- Modification des vues **actions.html.twig** et **subcomment.html.twig** pour faciliter le traitement en JavaScript :
+**Ajout d'un id sur le détail du commentaire**
+**Ajout d'un data-id sur le bouton servant à répondre ainsi qu'une classe reply**.
+- Création du fichier projet3.js contenant le traitement nécessaire pour afficher le formulaire du commentaire sous le commentaire de la réponse.

@@ -14,22 +14,17 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
-
+// Fournisseur de service pour l'extension Text de Twig et ainsi utiliser la fonction truncate
 $app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
     $twig->addExtension(new Twig_Extensions_Extension_Text());
     return $twig;
 });
-
+// Fournisseur de service pour faciliter la mise en forme Fichier CSS, BootStrap, JS
 $app->register(new Silex\Provider\AssetServiceProvider(), array(
     'assets.version' => 'v1'
 ));
-
-$app->register(new Silex\Provider\FormServiceProvider());
-$app->register(new Silex\Provider\LocaleServiceProvider());
-$app->register(new Silex\Provider\TranslationServiceProvider());
-
+// Fournisseur de service pour la gestion de sécurité
 $app->register(new Silex\Provider\SessionServiceProvider());
-
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'secured' => array(
@@ -52,6 +47,10 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
   // Ce service fournit un moyen de gérer les utilisateurs en terme de connexion sécurisée
 ));
+// Fournisseur de services pour le formulaire et d'autres services associés
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\LocaleServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
 
 // Fournisseur de services pour tester et valider les champs de nos formulaires
 $app->register(new Silex\Provider\ValidatorServiceProvider());

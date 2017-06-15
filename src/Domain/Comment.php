@@ -39,7 +39,12 @@ class Comment
    * @var integer
    */
   private $parentid;
-
+  /**
+   * Comment niveau.
+   *
+   * @var integer
+   */
+  private $niveau;
   /**
    * Associated Episode.
    *
@@ -79,6 +84,10 @@ class Comment
     return $this->parentid;
   }
 
+  public function getNiveau(){
+    return $this->niveau;
+  }
+
   public function getEpisode(){
     return $this->episode;
   }
@@ -114,6 +123,11 @@ class Comment
 
   public function setParentid($parentid){
     $this->parentid = $parentid;
+    return $this;
+  }
+
+  public function setNiveau($niveau){
+    $this->niveau = $niveau;
     return $this;
   }
 

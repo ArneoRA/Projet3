@@ -1,3 +1,4 @@
 vendor/
 web/lib/bootstrap/
 web/lib/jquery/
+web/lib/tinymce/

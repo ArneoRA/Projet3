@@ -58,6 +58,22 @@ class CommentDAO extends DAO
             $comment->setEpisode($episode);
             $comments[$comId] = $comment;
         }
+        $comment_by_id=[];
+        // Avec cette boucle, nous avons un tableau des commentaires indexés par leur ID et non par un index défini par défaut
+        foreach ($comments as $comment){ // Je parcours tous les commentaires $comments
+            $comment_by_id[$comment->getIdcom()] = $comment;
+        }
+        // On parcours à nouveau tous les commentaires en gardant l'index $k
+        foreach ($comments as $k => $comment) {
+            // On vérifie d'abord si le commentaire est une réponse à un commentaire
+            // Si la valeur de parent_id est différent de zero alors c'est une réponse
+            if($comment->getParentid() !=0){
+            // On l'ajoute donc dans l'enfant (children) du commentaire en cours.
+              $comment_by_id[$comment->getParentid()]->addChildren($comment);
+            // On masque les sous commentaires que nous venons de déplacer
+              unset($comments[$k]);
+            }
+        }
         return $comments;
     }
 
@@ -86,12 +102,18 @@ class CommentDAO extends DAO
      * @param \Projet3\Domain\Comment $comment The comment to save
      */
     public function save(Comment $comment) {
+        $varNiv = 0;
+        if ($comment->getParentid() != 0){
+            $varNiv = $comment->getNiveau() + 1;
+        }
         $commentData = array(
+            'message' =>$comment->getContenu(),
+            'parent_id' =>$comment->getParentid(),
+            'niveau' => $varNiv,
             'epID' => $comment->getEpisode()->getId(),
-            'pseudo' => $comment->getPseudo(),
-            'message' => $comment->getContenu()
-            );
+            'pseudo' =>$comment->getPseudo()->getId()
 
+            );
         if ($comment->getIdcom()) {
             // The comment has already been saved : update it
             $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getId()));
@@ -160,6 +182,8 @@ class CommentDAO extends DAO
         $comment->setContenu($row['message']);
         $comment->setDateCreat($row['dateCreat']);
         $comment->setParentid($row['parent_id']);
+        $comment->setNiveau($row['niveau']);
+        $comment->setSpam($row['spam']);
 
         try{
           if (array_key_exists('epID', $row)) {

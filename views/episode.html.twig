@@ -9,19 +9,37 @@
             <h2 class="panel-heading">{{ episode.titre }}</h2>
             <p class="contenu panel-body">{{ episode.contenu | truncate(1000, true, (' ...'))}}</p>
         </div>
+    {# Affichage des Messages Flash #}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {# PARTIE POUR AFFICHER LES COMMENTAIRES #}
+        <div class="container">
+            <div class="panel panel-info">
+                <h3 class="panel-heading">Commentaires</h3>
+    {# SOUS PARTIE POUR GERER L'AFFICHAGE DES COMMENTAIRES #}
 
-        <div class="panel panel-info">
-            <h3 class="panel-heading">Commentaires</h3>
-            <p class="panel-body">
-                {% for comment in comments %}
-                    <strong>{{ comment.pseudo }} said :</strong> {{ comment.contenu }}<br>
-                {% else %}
-                        Pas encore de commentaire.
-                {% endfor %}
-            </p>
+                {{ include("subcomment.html.twig") }}
 
-            <h3>Ajouter un Commentaire : </h3>
-            {{ form_start(commentForm) }}
+    {# SOUS PARTIE POUR GERER L'AFFICHAGE DU FORMULAIRE COMMENTAIRE #}
+
+            {{ form_start(commentForm, {'attr':  {
+                        'id': 'comment'
+            }}) }}
+                <h4>Ajouter un Commentaire : </h4>
+                {# Ce champ sera modifié en JS en fonction du commentaire traité #}
+                {{ form_errors(commentForm.parentid) }}
+                {{ form_widget(commentForm.parentid, { 'attr':  {
+                   'value': 0
+                }}) }}
+                {# Ce champ sera modifié en JS en fonction du commentaire traité #}
+                {{ form_errors(commentForm.niveau) }}
+                {{ form_widget(commentForm.niveau, { 'attr':  {
+                   'value': 0
+                }}) }}
+
                 <div class="form-group">
                     {{ form_errors(commentForm.pseudo) }}
                     {{ form_widget(commentForm.pseudo, { 'attr':  {
@@ -39,7 +57,6 @@
                         'placeholder': 'Saisir votre message'
                     }}) }}
                 </div>
-
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Publish comment" />
                 </div>

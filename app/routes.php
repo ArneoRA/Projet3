@@ -1,11 +1,12 @@
 <?php
 
-
   use Symfony\Component\HttpFoundation\Request;
   use Projet3\Domain\Comment;
   use Projet3\Domain\Episode;
   use Projet3\Domain\User;
   use Projet3\Form\Type\CommentType;
+  use Projet3\Form\Type\EpisodeType;
+  use Projet3\Form\Type\UserType;
 
   // Home page
   $app->get('/', function () use ($app) {
@@ -36,21 +37,18 @@
   })->bind('episode');
 
 
-// Add a new episode
-  $app->match('/admin/episode/add', function(Request $request) use ($app) {
-      $episode = new Episode();
-      $episodeForm = $app['form.factory']->create(EpisodeType::class, $episode);
-      $episodeForm->handleRequest($request);
-      error_log('Test si le form Episode est transmis : ' .var_dump($episodeForm->isSubmitted()));
-      error_log('Test si le form Episode est valide : ' .var_dump($episodeForm->isValid()));
-      if ($episodeForm->isSubmitted() && $episodeForm->isValid()) {
-          $app['dao.episode']->save($episode);
-          $app['session']->getFlashBag()->add('success', 'L\'Episode a été créé correctement.');
-      }
-      return $app['twig']->render('episode_form.html.twig', array(
-          'title' => 'Nouvel episode',
-          'episodeForm' => $episodeForm->createView()));
-  })->bind('admin_episode_add');
+// Répondre à un commentaire
+  $app->match('/episode/{id}/response/add', function ($id, Request $request) use ($app) {
+      $comment = $app['dao.comment']->find($id);
+      $comment = $app['dao.comment']->saveChildren($comment);
+      $episode = $app['dao.episode']->findComm($id);
+      $comments = $app['dao.comment']->findAllByEpisode($id);
+
+      return $app['twig']->render('episode.html.twig', array(
+          'episode' => $episode,
+          'comments' => $comments,
+          'commentForm' => $commentFormView));
+  })->bind('response_add');
 
 
 // Signal a spam comment
@@ -60,11 +58,30 @@
       $episode = $app['dao.episode']->findComm($id);
       $commentFormView = null;
       $comments = $app['dao.comment']->findAllByEpisode($episode->getId());
+      $commentForm = $app['form.factory']->create(CommentType::class, $comment);
+      $commentFormView = $commentForm->createView();
       return $app['twig']->render('episode.html.twig', array(
           'episode' => $episode,
           'comments' => $comments,
           'commentForm' => $commentFormView));
   })->bind('comment_spam');
+
+
+// Add a new episode
+  $app->match('/admin/episode/add', function(Request $request) use ($app) {
+      $episode = new Episode();
+      $episodeForm = $app['form.factory']->create(EpisodeType::class, $episode);
+      $episodeForm->handleRequest($request);
+      // error_log('Test si le form Episode est transmis : ' .var_dump($episodeForm->isSubmitted()));
+      // error_log('Test si le form Episode est valide : ' .var_dump($episodeForm->isValid()));
+      if ($episodeForm->isSubmitted() && $episodeForm->isValid()) {
+          $app['dao.episode']->save($episode);
+          $app['session']->getFlashBag()->add('success', 'L\'Episode a été créé correctement.');
+      }
+      return $app['twig']->render('episode_form.html.twig', array(
+          'title' => 'Nouvel episode',
+          'episodeForm' => $episodeForm->createView()));
+  })->bind('admin_episode_add');
 
 
 // Edit an existing episode
@@ -102,6 +119,7 @@
       ));
   })->bind('login');
 
+
 // Admin home page
   $app->get('/admin', function() use ($app) {
       $episodes = $app['dao.episode']->findAll();
@@ -112,6 +130,7 @@
           'comments' => $comments,
           'users' => $users));
   })->bind('admin');
+
 
 // Edit an existing comment
   $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($app) {
@@ -174,7 +193,7 @@
           $password = $encoder->encodePassword($plainPassword, $user->getSalt());
           $user->setPassword($password);
           $app['dao.user']->save($user);
-          $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
+          $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été mise à jour avec succès.');
       }
       return $app['twig']->render('user_form.html.twig', array(
           'title' => 'Edit user',
@@ -188,7 +207,7 @@
       $app['dao.comment']->deleteAllByUser($id);
       // Delete the user
       $app['dao.user']->delete($id);
-      $app['session']->getFlashBag()->add('success', 'The user was successfully removed.');
+      $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été supprimé correctement.');
       // Redirect to admin home page
       return $app->redirect($app['url_generator']->generate('admin'));
   })->bind('admin_user_delete');

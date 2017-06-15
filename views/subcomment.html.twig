@@ -1,0 +1,35 @@
+{% for comment in comments %}
+
+        <div class="panel-body">
+          <div class="row col-sm-10 comm" id="comment-{{ comment.idcom }}">
+            {# en rajoutant un id sur le div, cela permettra d'avoir des ancres mais aussi de travailler l'element plus facilementent JS #}
+            <p>
+              N° identifiant : {{ comment.idcom }} / ParentID : {{ comment.parentid }} / Niveau : {{comment.niveau}} ===<strong> {{ comment.pseudo }} a dit : </strong>  {{ comment.contenu }}
+            </p>
+          </div>
+          {# <p class="row col-sm-2 pull-right text-right">
+              <button class="btn btn-primary reply" data-id="{{ comment.idcom }}">
+                <!-- le data-id va permettre de travailler en JavaScript sur l'affichage du formulaire -->
+                <span class="glyphicon glyphicon-comment"></span>
+              </button>
+
+          </p> #}
+          {% if comment.niveau < 3 %}
+            {{ include("actions.html.twig") }}
+          {% else %}
+            {{ include("signaler.html.twig") }}
+          {% endif %}
+        </div>
+          {% if comment.children %}
+            <div class="enfant">
+              {% include "subcomment.html.twig" with {'comments': comment.children} %}
+            </div>
+          {% endif %}
+
+{% else %}
+
+        Pas encore de commentaire.
+
+{% endfor %}
+
+
