@@ -67,10 +67,17 @@ class EpisodeDAO extends DAO
      * @param \Projet3\Domain\Episode $episode The episode to save
      */
     public function save(Episode $episode) {
+        error_log('je suis dans la méthode save');
         $episodeData = array(
             'titre' => $episode->getTitre(),
             'contenu' => $episode->getContenu(),
             );
+        var_dump($episodeData['contenu']);
+        if (!isset($episodeData['contenu'])) {
+            throw new \Exception('Le contenu est null, donc impossible d\'enregistrer le contenu');
+            die();
+
+        }
 
         if ($episode->getId()) {
             // The episode has already been saved : update it
@@ -91,7 +98,7 @@ class EpisodeDAO extends DAO
      */
     public function delete($id) {
         // Delete the episode
-        $this->getDb()->delete('episodes', array('idcom' => $id));
+        $this->getDb()->delete('episodes', array('id' => $id));
     }
 
 

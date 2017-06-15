@@ -15,7 +15,8 @@ class EpisodeType extends AbstractType
             ->add('titre', TextType::class)
             ->add('contenu', TextareaType::class,
                 array('attr'=> array(
-                    'class'=> 'tinymce')
+                    'class'=> 'tinymce',
+                    'required' => false)
                 )
             );
     }

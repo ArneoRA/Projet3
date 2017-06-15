@@ -46,7 +46,8 @@ use Projet3\Form\Type\UserType;
       $comment = $app['dao.comment']->saveChildren($comment);
       $episode = $app['dao.episode']->findComm($id);
       $comments = $app['dao.comment']->findAllByEpisode($id);
-
+      $commentForm = $app['form.factory']->create(CommentType::class);
+      $commentFormView = null;//$commentForm->createView();
       return $app['twig']->render('episode.html.twig', array(
           'episode' => $episode,
           'comments' => $comments,
@@ -57,14 +58,20 @@ use Projet3\Form\Type\UserType;
   // Signal a spam comment
   $app->match('/episode/{id}/spam', function($id, Request $request) use ($app) {
       $comment = $app['dao.comment']->find($id);
+      // error_log('Contenu de $comment avant lancement spamC : '. var_dump($comment));
       $comment = $app['dao.comment']->spamC($comment);
       $episode = $app['dao.episode']->findComm($id);
-      $commentFormView = null;
+      $commentForm = null;
+      // Création du Message Flash
+      $app['session']->getFlashBag()->add('success', 'Le commentaire a bien été signalé à l\'administrateur du site.');
+      // Préparation et regénération de la page Episode
       $comments = $app['dao.comment']->findAllByEpisode($episode->getId());
       return $app['twig']->render('episode.html.twig', array(
           'episode' => $episode,
           'comments' => $comments,
-          'commentForm' => $commentFormView));
+          'commentForm' => $commentForm));
+      // // Redirection vers la page Episode
+      // return $app->redirect($app['url_generator']->generate('home'));
   })->bind('comment_spam');
 
 
@@ -73,16 +80,20 @@ use Projet3\Form\Type\UserType;
       $episode = new Episode();
       $episodeForm = $app['form.factory']->create(EpisodeType::class, $episode);
       $episodeForm->handleRequest($request);
-      error_log('Test si le form Episode est transmis : ' .var_dump($episodeForm->isSubmitted()));
-      error_log('Test si le form Episode est valide : ' .var_dump($episodeForm->isValid()));
+      // error_log('Test si le form Episode est transmis : ' .var_dump($episodeForm->isSubmitted()));
+      // error_log('Test si le form Episode est valide : ' .var_dump($episodeForm->isValid()));
       if ($episodeForm->isSubmitted() && $episodeForm->isValid()) {
+        error_log('je passe dans le test');
           $app['dao.episode']->save($episode);
           $app['session']->getFlashBag()->add('success', 'L\'Episode a été créé correctement.');
       }
+      error_log('je suis hors du test');
       return $app['twig']->render('episode_form.html.twig', array(
           'title' => 'Nouvel episode',
           'episodeForm' => $episodeForm->createView()));
   })->bind('admin_episode_add');
+
+
 
   // Edit an existing episode
   $app->match('/admin/episode/{id}/edit', function($id, Request $request) use ($app) {
@@ -97,6 +108,9 @@ use Projet3\Form\Type\UserType;
           'title' => 'Ajouter un episode',
           'episodeForm' => $episodeForm->createView()));
   })->bind('admin_episode_edit');
+
+
+
 
   // Remove an episode
   $app->get('/admin/episode/{id}/delete', function($id, Request $request) use ($app) {

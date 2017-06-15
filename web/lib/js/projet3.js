@@ -21,7 +21,7 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
 
         // ====================== Traitement =========================== //
         // On modifie le titre du formulaire pour que le H3 corresponde à une réponse
-        $form.find('h3').text('Répondre à ce commentaire');
+        $form.find('h4').text('Répondre à ce commentaire');
         // On change la valeur de notre champs caché comment_parentid afin qu'il prenne la bonne valeur
         $('#comment_parentid').val(parent_id);
         // On change la valeur de notre champs caché comment_niveau afin qu'il prenne la bonne valeur
@@ -30,6 +30,49 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         $comment.after($form);
 
 
-    })
+    });
+
+    // // Appel de la fonction valider
+    valider();
 
 });
+
+
+function valider(){
+
+        console.log('je passe ici');
+        // Déclaration des variables
+        var $tForm = $('#eForm'); // On stocke le formulaire
+        console.log ('Contenu de la variable $tForm : ' + $tForm);
+        var titrEpi = document.getElementById('episode_titre'); //$('#episode_titre');
+        console.log (titrEpi);
+        var test1 = titrEpi.value;
+        console.log('la valeur du titre est : ' + test1);
+        var contEpi = tinyMCE.get('episode_contenu').getContent(); //$('#mceu_25');
+        // console.log ('Contenu de la varaible contEpi : ' + contEpi);
+
+        // Traitement
+        if (!test1 || !contEpi) {
+            console.log ('Le titre est vide : ' + test1);
+            console.log ('Le contenu est vide aussi : ' + contEpi);
+
+        } else{
+            console.log ('Le titre est devenu : ' + test1);
+            console.log ('Le contenu est devenu : ' + contEpi);
+        }
+
+        //     // Nous affichons le message suivant
+        //     console.log('je passe dans le test');
+        //     swal({
+        //         title: "Veuillez Saisir un titre et un contenu à votre episode",
+        //         text: "",
+        //         type: "warning",
+        //         confirmButtonText: "Ok"
+        //     });
+        //     return false;
+        //     }
+        //     else {
+        //         // Sinon, le formulaire est envoyé pour enregistrement
+                return false;
+        //     }
+    }

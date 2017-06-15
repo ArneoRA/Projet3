@@ -18,7 +18,7 @@
               </h2>
               <div id="{{episode.id}}" class="panel-collapse collapse">
                 <p class="panel-body contenu">
-                    {{ episode.contenu | truncate(1000,true,'...') }}
+                    {{ episode.contenu | truncate(1000,true,'...') | raw }}
                     <hr>
                     <a class="episodeTitle" href="{{ path('episode', {'id':episode.id }) }}"><strong>En lire plus...</strong></a>
                 </p>

@@ -40,7 +40,7 @@
                     {% for episode in episodes %}
                     <tr>
                         <td><a class="episodeTitle" href="{{ path('episode', { 'id': episode.id }) }}">{{ episode.titre }}</a></td>
-                        <td class="td_contenu">{{ episode.contenu | truncate(200) }}</td>
+                        <td class="td_contenu">{{ episode.contenu | truncate(200)  }}</td>
                         <td>
                             <a href="{{ path('admin_episode_edit', { 'id': episode.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                             <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#episodeDialog{{ episode.id }}"><span class="glyphicon glyphicon-remove"></span>
@@ -86,36 +86,38 @@
                                 <th>Actions possibles</th>
                             </tr>
                         </thead>
-                        {% for comment in comments %}
-                        <tr>
-                            <td><span class="badge btn-danger">{{ comment.spam }}</span></td>
-                            <td><a class="episodeTitle" href="{{ path('episode', { 'id': comment.episode.id }) }}">{{ comment.episode.titre }}</a></td>
-                            <td>{{ comment.author.username }}</td>
-                            <td class="td_contenu">{{ comment.contenu | truncate(100,true,'...') }}</td>
-                            <td>
-                                <a href="{{ path('admin_comment_edit', { 'id': comment.idcom }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.idcom }}"><span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <div class="modal fade" id="commentDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel">Confirmation nécessaire</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                Voulez vous vraiment supprimer ce commentaire ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                                <a href="{{ path('admin_comment_delete', { 'id': comment.idcom }) }}" class="btn btn-danger">Confirmer</a>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-                            </td>
-                        </tr>
-                        {% endfor %}
+                        <tbody>
+                            {% for comment in comments %}
+                            <tr>
+                                <td><span class="badge btn-danger">{{ comment.spam }}</span></td>
+                                <td><a class="episodeTitle" href="{{ path('episode', { 'id': comment.episode.id }) }}">{{ comment.episode.titre }}</a></td>
+                                <td>{{ comment.author.username }}</td>
+                                <td class="td_contenu">{{ comment.contenu | truncate(100,true,'...') | raw }}</td>
+                                <td>
+                                    <a href="{{ path('admin_comment_edit', { 'id': comment.idcom }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.idcom }}"><span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <div class="modal fade" id="commentDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation nécessaire</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez vous vraiment supprimer ce commentaire ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                    <a href="{{ path('admin_comment_delete', { 'id': comment.idcom }) }}" class="btn btn-danger">Confirmer</a>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
                 {% else %}

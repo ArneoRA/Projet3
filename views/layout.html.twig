@@ -12,17 +12,10 @@
     {# Pour la mise en forme du tableau dynamique Commentaire en plus du CDN BootStrap#}
     <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
     {# Module TINYMCE #}
-    {# // <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script> #}
-    {# <script src="{{ asset('/../vendor/tinymce/tinymce/tinymce.min.js')}}"></script> #}
     <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
 
     {% block javascript %}
-        <script>
-            tinymce.init({
-                selector: "episode_contenu"
-            });
-        </script>
-
+        {# le contenu se trouve dans la vue episode_form.html.twig #}
     {% endblock javascript%}
 
     <title>Projet 3 - {% block title %}{% endblock %}</title>
@@ -123,8 +116,7 @@
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-    <!-- JavaScript Perso -->
-    <script src="{{ asset('/lib/js/projet3.js') }}"></script>
+
     {# JavaScript pour tableau dynamique #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
@@ -138,6 +130,9 @@
             });
         } );
     </script>
+
+    <!-- JavaScript Perso -->
+    <script src="{{ asset('/lib/js/projet3.js') }}"></script>
 
 
 </body>

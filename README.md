@@ -268,3 +268,12 @@ Ce commit contient :
 **Ajout d'un data-id sur le bouton servant à répondre ainsi qu'une classe reply**
 - Création du fichier projet3.js contenant le traitement nécessaire pour afficher le formulaire du commentaire sous le commentaire de la réponse.
 
+________________________________________________________
+
+## 24eme Commit : Enregistrement d'un nouvel Episode avec Tinymce
+
+Ce commit contient :
+- Modification de la vue **episode_form.html.twig**
+- Modifciation du fichier **Projet3.js**
+- Modifcation de la classe **EpisodeDAO** afin qu'on sorte une exception si le contenu est vide.
+- Modification de la vue index.html.twig afin qu'il affiche le contenu tinymce proprement.

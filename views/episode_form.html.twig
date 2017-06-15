@@ -10,13 +10,17 @@
     <h2 class="text-center">{{ block('title') }}</h2>
 
     {% for flashMessage in app.session.flashbag.get('success') %}
-    <div class="alert alert-success">
+    <div class="alert alert-success " id="alerte">
         {{ flashMessage }}
     </div>
     {% endfor %}
 
     <div class="well">
-    {{ form_start(episodeForm, { 'attr': {'class': 'form-horizontal'} }) }}
+    {{ form_start(episodeForm, { 'attr': {
+                'class': 'form-horizontal',
+                'onsubmit': 'return valider()',
+                'id': 'eForm'
+            }}) }}
         <div class="form-group">
             {{ form_label(episodeForm.titre, null, { 'label_attr':  {
                 'class': 'col-sm-2 control-label'
@@ -34,19 +38,12 @@
             }}) }}
             <div class="col-sm-10">
                 {{ form_errors(episodeForm.contenu) }}
-                {{ form_widget(episodeForm.contenu, { 'attr':  {
-                    'class': 'tinymce',
-                    'row': 20
-                }}) }}
-                {# {{ form_widget(episodeForm.contenu, { 'attr':  {
-                    'class': 'form-control',
-                    'rows': '8'
-                }}) }} #}
+                {{ form_widget(episodeForm.contenu) }}
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-3">
-                <input type="submit" class="btn btn-primary" value="Enregistrer" />
+                <input type="submit" formnovalidate="true"  class="btn btn-primary btn-episode" value="Enregistrer" />
             </div>
         </div>
     {{ form_end(episodeForm) }}
@@ -59,7 +56,49 @@
     <script>
         tinymce.init({
             selector: "textarea",
-            height: "480"
+            height: "480",
+            plugins: "save"
         });
     </script>
+    <script type="text/javascript">
+        function valider(){
+            console.log('je passe ici');
+            // Déclaration des variables
+            var $tForm = $('#eForm'); // On stocke le formulaire
+            console.log ($tForm);
+            var titrEpi = document.getElementById(episode_titre).value;
+            console.log (titrEpi);
+            var contEpi = document.getElementById(mceu_11).value;
+            console.log (contEpi);
+
+            // Traitement
+            document.querySelector($tForm).onsubmit = function(){
+                swal({
+                    title: "Veuillez Saisir un titre et un contenu à votre episode",
+                    text: "tu n as rien saisi dans le champ contenu !!!",
+                    type: "warning",
+                    confirmButtonText: "Ok"
+                 });
+            }
+            // if(!titrEpi || !contEpi){ // si titre ou contenu est vide ou null
+            //     // Nous affichons le message suivant
+            //     console.log('je passe dans le test');
+            //     swal({
+            //         title: "Veuillez Saisir un titre et un contenu à votre episode",
+            //         text: "",
+            //         type: "warning",
+            //         confirmButtonText: "Ok"
+            //     });
+                return false;
+            //     }
+            //     else {
+            //         // Sinon, le formulaire est envoyé pour enregistrement
+            //         return true;
+            //     }
+        }
+
+    </script>
+
 {% endblock javascript%}
+
+
