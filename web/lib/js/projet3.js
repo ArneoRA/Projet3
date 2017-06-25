@@ -2,7 +2,7 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
 
     $('.reply').click(function(e){ // Des qu'on click sur les boutons avec la class reply on execute la fonction
         e.preventDefault(); // On court-circuite l'evenement
-        // On stocke les élèments nécessaires dans des variables
+        // ====================== On stocke les élèments dans des variables ========================== /
         console.log('Je suis activé');
         var $form = $('#comment'); // on stock le formulaire dont l'id est "comment_contenu"
         var Vthis = $(this); // on stocke l'élement que nous avons cliqué
@@ -28,51 +28,94 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         $('#comment_niveau').val(commNiveau);
         // On insere notre formulaire APRES (after) notre commentaire
         $comment.after($form);
-
-
     });
 
-    // // Appel de la fonction valider
-    valider();
+    $('.spamc').click(function(e){
+        e.preventDefault();
+
+        console.log('je suis dans spamc');
+        // Déclaration des variables nécessaires
+        var Vthis = $(this); // on stocke l'élement que nous avons cliqué
+        var idcom = Vthis.data('id'); // On stocke la valeur du identifiant du commentaire data-id
+        var valspam = Vthis.data('sp'); // On stocke la valeur du data-sp
+        console.log('Identifiant du commentaire : ' + idcom);
+        console.log ('La valeur SPAM est : ' + valspam);
+        var newValSpam = valspam + 1;
+        // Traitement
+        console.log('La valeur à enregistrer sera donc : ' + newValSpam);
+        var $commentData = {
+                // idcom: idcom,
+                spam: newValSpam};
+        console.log($commentData);
+        let myJson = JSON.stringify($commentData);
+        console.log(myJson);
+        console.log("http://projet3/api/comment/" + idcom + "/spam");
+        // MAJ DANS LA BASE
+        // ajaxPost("http://projet3/api/comment/" + idcom + "/spam", $commentData, function (reponse) {
+        //     var messageElt = document.createElement("p");
+        //     messageElt.textContent = "Le commentaire a bien été signalé";
+        //     document.getElementById("info").appendChild(messageElt);
+        // });
+        // setTimeout($("#info").hide(), 5000);
+        ajaxGet("http://projet3/api/comment/" + idcom + "/spam", function (reponse){
+            var messageElt = document.createElement("p");
+            messageElt.textContent = "Le commentaire a bien été signalé";
+            document.getElementById("info").appendChild(messageElt);
+        });
+    })
+
+
+
+    ////////////////////// Exécute un appel AJAX POST /////////////////////////////////////
+    // Prend en paramètres l'URL cible, la donnée à envoyer et la fonction callback appelée en cas de succès
+    function ajaxPost(url, data, callback, isJson) {
+        var req = new XMLHttpRequest();
+        console.log(req);
+        req.open("POST", url);
+        req.addEventListener("load", function () {
+            if (req.status >= 200 && req.status < 400) {
+                // Appelle la fonction callback en lui passant la réponse de la requête
+                callback(req.responseText);
+            } else {
+                console.error(req.status + " " + req.statusText + " " + url);
+            }
+        });
+        req.addEventListener("error", function () {
+            console.error("Erreur réseau avec l'URL " + url);
+        });
+        if (isJson){
+            // Définit le contenu de la requete comme étant du JSON
+            req.setRequestHeader("Content-Type", "application/json");
+            // Transforme la donnée du format JSON vers le format texte avant l'envoi
+            data = JSON.stringify(data);
+        }
+        req.send(data);
+    }
+
+
+    function ajaxGet(url, callback) {
+        var req = new XMLHttpRequest();
+        req.open("GET", url);
+        req.addEventListener("load", function () {
+            if (req.status >= 200 && req.status < 400) {
+                // Appelle la fonction callback en lui passant la réponse de la requête
+                callback(req.responseText);
+            } else {
+                console.error(req.status + " " + req.statusText + " " + url);
+            }
+        });
+        req.addEventListener("error", function () {
+            console.error("Erreur réseau avec l'URL " + url);
+        });
+        req.send(null);
+    }
+    // création d'une fonction permetant l'affichage en console des resultats
+    function afficher(reponse) {
+        console.log(reponse);
+    }
+
 
 });
 
 
-function valider(){
 
-        console.log('je passe ici');
-        // Déclaration des variables
-        var $tForm = $('#eForm'); // On stocke le formulaire
-        console.log ('Contenu de la variable $tForm : ' + $tForm);
-        var titrEpi = document.getElementById('episode_titre'); //$('#episode_titre');
-        console.log (titrEpi);
-        var test1 = titrEpi.value;
-        console.log('la valeur du titre est : ' + test1);
-        var contEpi = tinyMCE.get('episode_contenu').getContent(); //$('#mceu_25');
-        // console.log ('Contenu de la varaible contEpi : ' + contEpi);
-
-        // Traitement
-        if (!test1 || !contEpi) {
-            console.log ('Le titre est vide : ' + test1);
-            console.log ('Le contenu est vide aussi : ' + contEpi);
-
-        } else{
-            console.log ('Le titre est devenu : ' + test1);
-            console.log ('Le contenu est devenu : ' + contEpi);
-        }
-
-        //     // Nous affichons le message suivant
-        //     console.log('je passe dans le test');
-        //     swal({
-        //         title: "Veuillez Saisir un titre et un contenu à votre episode",
-        //         text: "",
-        //         type: "warning",
-        //         confirmButtonText: "Ok"
-        //     });
-        //     return false;
-        //     }
-        //     else {
-        //         // Sinon, le formulaire est envoyé pour enregistrement
-                return false;
-        //     }
-    }

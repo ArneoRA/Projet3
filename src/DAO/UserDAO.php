@@ -12,11 +12,11 @@ class UserDAO extends DAO implements UserProviderInterface
 // UserProviderInterface : Cette interface contient les méthodes nécessaires pour qu'une classe puisse être utilisée comme fournisseur de données utilisateur par le composant de gestion de la sécurité de Symfony au cours du processus d'authentification.
 {
     /**
-     * Returns a user matching the supplied id.
+     * Renvoie l'utilisateur correspondant à l'identifiant passé en paramétre.
      *
-     * @param integer $id The user id.
+     * @param integer Identifiant de l'utilisateur
      *
-     * @return \Projet3\Domain\User|throws an exception if no matching user is found
+     * @return \Projet3\Domain\User| ou une exception si pas d'utilisateur trouvé
      */
     public function find($id) {
         $sql = "select * from utilisateurs where user_id=?";
@@ -29,15 +29,15 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
     /**
-     * Returns a list of all users, sorted by role and name.
+     * Renvoie une liste de tous les utilisateurs trié par role et nom.
      *
-     * @return array A list of all users.
+     * @return Tableau contenant la liste des utilisateurs
      */
     public function findAll() {
         $sql = "select * from utilisateurs order by user_role, user_name";
         $result = $this->getDb()->fetchAll($sql);
 
-        // Convert query result to an array of domain objects
+        // Convertie le resultat de la requete en un tableau d'objets du domaine
         $entities = array();
         foreach ($result as $row) {
             $id = $row['user_id'];
@@ -47,9 +47,9 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
     /**
-     * Saves a user into the database.
+     * Sauvegarde d'un utilisateur dans la base.
      *
-     * @param \Projet3\Domain\User $user The user to save
+     * @param \Projet3\Domain\User
      */
     public function save(User $user) {
         $userData = array(
@@ -60,24 +60,24 @@ class UserDAO extends DAO implements UserProviderInterface
             );
 
         if ($user->getId()) {
-            // The user has already been saved : update it
+            // Si l'utilisateur existe déjà : Mise à jour
             $this->getDb()->update('utilisateurs', $userData, array('user_id' => $user->getId()));
         } else {
-            // The user has never been saved : insert it
+            // Sinon : Insertion (création)
             $this->getDb()->insert('utilisateurs', $userData);
-            // Get the id of the newly created user and set it on the entity.
+            // On récupére le dernier identifiant enregistré
             $id = $this->getDb()->lastInsertId();
             $user->setId($id);
         }
     }
 
     /**
-     * Removes a user from the database.
+     * Suppression d'un utilisateur de la BD
      *
-     * @param @param integer $id The user id.
+     * @param @param integer Identifiant de l'utilisateur
      */
     public function delete($id) {
-        // Delete the user
+        // On supprime l'utilisateur
         $this->getDb()->delete('utilisateurs', array('user_id' => $id));
     }
 
@@ -116,9 +116,9 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
     /**
-     * Creates a User object based on a DB row.
+     * Creation d'un objet User basé sur les éléments de la BD
      *
-     * @param array $row The DB row containing User data.
+     * @param Varaible $row (tableau) contenant les données d'un utilisateurt.
      * @return \Projet3\Domain\User
      */
     protected function buildDomainObject(array $row) {

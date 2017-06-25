@@ -277,3 +277,14 @@ Ce commit contient :
 - Modifciation du fichier **Projet3.js**
 - Modifcation de la classe **EpisodeDAO** afin qu'on sorte une exception si le contenu est vide.
 - Modification de la vue index.html.twig afin qu'il affiche le contenu tinymce proprement.
+
+________________________________________________________
+
+## 25eme Commit : Recettage version 1
+
+Ce commit contient :
+- Intégration au final du code JS directement dans la vue avec ajout d'un block twig pour gérer ce JS au bon endroit.
+- création d'une API pour gérer le signalement d'un commentaire spam sans passer par une route.
+- Modification des fichiers : **subcomment**, **actions** et **signaler**.
+- Correction de bug d'affichage des tableaux dynamiques DataTable. Fichiers impactés : **layout.html.twig**, **admin.html.twig**.
+- Ajustement de l'aspect Responsive du site.

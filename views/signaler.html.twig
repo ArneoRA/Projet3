@@ -1,8 +1,9 @@
 <div class="row col-sm-2 pull-right actions">
-    <button type="button" class="btn btn-danger btn-ms" title="Signaler" data-toggle="modal" data-target="#spamDialog{{ comment.idcom }}">
+    <button type="button" class="btn btn-danger btn-ms spamc" data-id="{{comment.idcom }}" data-sp="{{ comment.spam }}" title="Signaler" data-toggle="modal" data-target="#spamDialog{{ comment.idcom }}">
       <span class="glyphicon glyphicon-thumbs-down"></span>
     </button>
-    <div class="modal fade" id="spamDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    {# <div class="modal fade" id="spamDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -10,14 +11,14 @@
             <h4 class="modal-title" id="myModalLabel">Confirmation nécessaire</h4>
           </div>
           <div class="modal-body">
-            Voulez-vous vraiment Signaler ce commentaire ?
+            Voulez-vous vraiment Signaler ce commentaire ?<br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-default  spamc" data-dismiss="modal">Annuler</button>
             <a href="{{ path('comment_spam', { 'id': comment.idcom }) }}" class="btn btn-danger">Confirmer</a>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div><!-- /.modal --> #}
 
 </div>

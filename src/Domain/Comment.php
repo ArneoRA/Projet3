@@ -75,10 +75,6 @@ class Comment
     return $this->idcom;
   }
 
-  // public function getPseudo(){
-  //   return $this->pseudo;
-  // }
-
   public function getContenu(){
     return $this->contenu;
   }
@@ -116,11 +112,6 @@ class Comment
     $this->idcom = $idcom;
     return $this;
   }
-
-  // public function setPseudo($pseudo){
-  //   $this->pseudo = $pseudo;
-  //   return $this;
-  // }
 
   public function setContenu($contenu){
     $this->contenu = $contenu;

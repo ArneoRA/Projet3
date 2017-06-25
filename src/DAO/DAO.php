@@ -7,14 +7,14 @@ use Doctrine\DBAL\Connection;
 abstract class DAO
 {
     /**
-     * Database connection
+     * Connexion à la base
      *
      * @var \Doctrine\DBAL\Connection
      */
     private $db;
 
     /**
-     * Constructor
+     * Constructeur
      *
      * @param \Doctrine\DBAL\Connection The database connection object
      */
@@ -23,7 +23,7 @@ abstract class DAO
     }
 
     /**
-     * Grants access to the database connection object
+     * Accorde l'accès à l'objet de connexion à la base de données
      *
      * @return \Doctrine\DBAL\Connection The database connection object
      */
@@ -32,8 +32,8 @@ abstract class DAO
     }
 
     /**
-     * Builds a domain object from a DB row.
-     * Must be overridden by child classes.
+     * Crée un objet de domaine à partir d'une ligne DB.
+     * Doit être remplacé par les classes d'enfants.
      */
     protected abstract function buildDomainObject(array $row);
 }

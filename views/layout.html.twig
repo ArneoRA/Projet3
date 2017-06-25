@@ -6,11 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {# CDN permettant le lien vers BootStrap 3.3.7 et Font-awesome 4.3.0 #}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('/css/projet3.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    {# Pour la mise en forme du tableau dynamique Commentaire en plus du CDN BootStrap#}
-    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    {# Pour la mise en forme des tableaux dynamiques en plus du CDN BootStrap#}
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    {# Mon fichier CSS #}
+    <link href="{{ asset('/css/projet3.css') }}" rel="stylesheet">
     {# Module TINYMCE #}
     <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
 
@@ -24,7 +26,7 @@
 <body>
     <div class="container-fluid">
         <header class="row">
-            <div class="col-sm-12">
+            <div class="col-md-12">
                 {# Cette partie gére le menu de navigation #}
                 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
                     <div class="container">
@@ -34,7 +36,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="{{ path('home') }}">Blog de <em>Jean Forteroche</em> pour son roman : <strong>Billet simple pour l'Alaska</strong></a>
+                            <a class="navbar-brand" href="{{ path('home') }}">Blog de <em>Jean Forteroche</em></a>
                         </div>
                         <div class="collapse navbar-collapse" id="navbar-collapse-target">
                             <ul class="nav navbar-nav navbar-right">
@@ -69,47 +71,35 @@
 
         {# Cette partie gére le corps de la page #}
         <div class="row">
-            <div class="col-sm-3">
-              <img src="{{ asset('/images/deco.jpg') }}" alt="page garde Roman" class="deco">
+            <div class="col-md-3 hidden-xs">
+              <img src="{{ asset('/images/deco.jpg') }}" alt="page de garde Roman" class="deco">
             </div>
-            <div class="container-fluid">
-                <section class="col-sm-9">
-                    <div id="content">
-                        {% block content %}
+            <section class="col-md-9">
+                {% block content %}
 
-                        {% endblock %}
-                    </div>
-                </section>
-            </div>
+                {% endblock %}
+            </section>
         </div>
 
-    </div>
 
-    {# Cette partie gére le pied de page #}
-    <footer>
-{#         <a href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a> Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
-    </footer>
-    <footer> #}
-        <div class="container-fluid navbar-fixed-bottom navbar-inverse">
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <a class="arnege" href="http://www.arnege.fr">Réalisation ARNEGE</a> /
-                        <a class="arnege"href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a>
-                        <p id=conception>
-                            Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
-                        </p>
-                    </div>
-                    <div class="col-sm-4 pull-right">
-                        <a class="btn btn-default rond" href="http://fr.linkedin.com/pub/arnaud-raoult/5b/957/208/"><i class="fa fa-linkedin-square fa-2x"></i></a>
-                        <a class="btn btn-default rond" href="https://www.facebook.com/ArnaudRA"><i class="fa fa-facebook fa-2x"></i></a>
-                        <a class="btn btn-default rond" href="https://plus.google.com/u/0/108923850421269678473?rel=publisher"><i class="fa fa-google-plus fa-2x"></i></a>
-                    </div>
+        {# Cette partie gére le pied de page #}
+        <footer class="row navbar-fixed-bottom navbar-inverse">
+            <div class="row">
+                <div class="col-md-8">
+                    <a class="arnege" href="http://www.arnege.fr">Réalisation ARNEGE</a> /
+                    <a class="arnege" href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a>
+                    <p id="conception">
+                        Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
+                    </p>
                 </div>
-
-
-        </div>
-    </footer>
+                <div class="col-md-4">
+                    <a class="btn btn-default rond" href="http://fr.linkedin.com/pub/arnaud-raoult/5b/957/208/"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                    <a class="btn btn-default rond" href="https://www.facebook.com/ArnaudRA"><i class="fa fa-facebook fa-2x"></i></a>
+                    <a class="btn btn-default rond" href="https://plus.google.com/u/0/108923850421269678473?rel=publisher"><i class="fa fa-google-plus fa-2x"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
 
 
     <!-- jQuery -->
@@ -117,17 +107,44 @@
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
 
-    {# JavaScript pour tableau dynamique #}
+    {# JavaScript pour les tableaux dynamiques #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#TabComment').DataTable({
-                "sDom": '<"top">rt<"bottom"p><"clear">',
-                "langage": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
-              }
+            // Gestion Datatable pour les episodes
+            $('#TabEpisode').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
+                "pageLength": 6, // Permet de définir le nombre de lignes par page
+                "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 2 ] } // Retire le tri sur la colonne des actions
+                ]
             });
+
+            // Gestion Datatable pour les commentaires
+            $('#TabComment').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
+                "pageLength": 8, // Permet de définir le nombre de lignes par page
+                "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 4 ] } // Retire le tri sur la colonne des actions
+                ]
+            });
+
+            // Gestion Datatable pour les utilisateurs
+            $('#TabUser').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
+                "autoWidth": false,
+                "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 2 ] } // Retire le tri sur la colonne des actions
+                ],
+                "columnDefs": [
+                    {"width": '20px', "target": 2}
+                ]
+
+            });
+
+
+
         } );
     </script>
 

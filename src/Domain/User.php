@@ -28,7 +28,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * Salt that was originally used to encode the password.
+     * Variable de "salage" qui a été utilisé à l'origine pour coder le mot de passe.
      *
      * @var string
      */
@@ -42,20 +42,37 @@ class User implements UserInterface
      */
     private $role;
 
+
+/** ============================ GETTERS ========================================= */
     public function getId() {
         return $this->id;
     }
 
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getSalt()  {
+        return $this->salt;
+    }
+
+    public function getRole()  {
+        return $this->role;
+    }
+
+    public function getRoles() {
+        return array($this->getRole());
+    }
+
+
+/** ============================ SETTERS ========================================= */
     public function setId($id) {
         $this->id = $id;
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUsername() {
-        return $this->username;
     }
 
     public function setUsername($username) {
@@ -63,35 +80,14 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getPassword() {
-        return $this->password;
-    }
-
     public function setPassword($password) {
         $this->password = $password;
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    public function setSalt($salt)
-    {
+    public function setSalt($salt) {
         $this->salt = $salt;
         return $this;
-    }
-
-    public function getRole()
-    {
-        return $this->role;
     }
 
     public function setRole($role) {
@@ -99,13 +95,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return array($this->getRole());
-    }
+
 
     /**
      * @inheritDoc

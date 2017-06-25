@@ -10,7 +10,7 @@
     <h2 class="text-center">{{ block('title') }}</h2>
 
     {% for flashMessage in app.session.flashbag.get('success') %}
-    <div class="alert alert-success " id="alerte">
+    <div class="alert alert-success" id="msgAlerte">
         {{ flashMessage }}
     </div>
     {% endfor %}
@@ -57,44 +57,46 @@
         tinymce.init({
             selector: "textarea",
             height: "480",
-            plugins: "save"
+            plugins: "save",
+            style_formats: [
+                {
+                  selector: 'p',
+                  styles: {
+                    'text-align': 'justify',
+                    'font-family': 'Georgia, Tahoma, Verdana',
+                    'font-size': '1.5em'
+                  }
+                }
+            ]
         });
+        console.log('Je passe dans le block javascript dans tiny');
     </script>
     <script type="text/javascript">
+        console.log('Je passe dans le block javascript dans valider()');
         function valider(){
             console.log('je passe ici');
             // Déclaration des variables
             var $tForm = $('#eForm'); // On stocke le formulaire
-            console.log ($tForm);
-            var titrEpi = document.getElementById(episode_titre).value;
-            console.log (titrEpi);
-            var contEpi = document.getElementById(mceu_11).value;
-            console.log (contEpi);
+            console.log ('Contenu de la variable $tForm : ' + $tForm);
+            var titrEpi = document.getElementById('episode_titre'); //$('#episode_titre');
+            var valtirEpi = titrEpi.value;
+            console.log('la valeur du titre est : ' + valtirEpi);
+            var contEpi = tinyMCE.get('episode_contenu').getContent(); //$('#mceu_25');
+            console.log ('Contenu de la variable contEpi : ' + contEpi);
 
             // Traitement
-            document.querySelector($tForm).onsubmit = function(){
-                swal({
-                    title: "Veuillez Saisir un titre et un contenu à votre episode",
-                    text: "tu n as rien saisi dans le champ contenu !!!",
-                    type: "warning",
-                    confirmButtonText: "Ok"
-                 });
-            }
-            // if(!titrEpi || !contEpi){ // si titre ou contenu est vide ou null
-            //     // Nous affichons le message suivant
-            //     console.log('je passe dans le test');
-            //     swal({
-            //         title: "Veuillez Saisir un titre et un contenu à votre episode",
-            //         text: "",
-            //         type: "warning",
-            //         confirmButtonText: "Ok"
-            //     });
+            if (!valtirEpi || !contEpi) {
+                console.log ('Le titre est vide : ' + test1);
+                console.log ('Le contenu est vide aussi : ' + contEpi);
+                // Mettre un message d'avertissement ICI //
+                // msgAlerte.innerHTML = "Veuillez saisir un titre et un contenu !!";
                 return false;
-            //     }
-            //     else {
-            //         // Sinon, le formulaire est envoyé pour enregistrement
-            //         return true;
-            //     }
+
+            } else{
+                console.log ('Le titre est devenu : ' + test1);
+                console.log ('Le contenu est devenu : ' + contEpi);
+                return false;
+            }
         }
 
     </script>

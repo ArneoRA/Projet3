@@ -25,15 +25,15 @@ class CommentDAO extends DAO
     }
 
     /**
-     * Returns a list of all comments, sorted by date (most recent first).
+     * Renvoie la liste des commentaires trié par idcom (le plus récent en premier.
      *
-     * @return array A list of all comments.
+     * @return Tableau contenant l'ensemble des commentaires.
      */
     public function findAll() {
-        $sql = "select * from commentaires order by spam desc";
+        $sql = "select * from commentaires order by idcom desc";
         $result = $this->getDb()->fetchAll($sql);
 
-        // Convert query result to an array of domain objects
+        // Convertie le resultat de la requete en un tableau d'objet
         $entities = array();
         foreach ($result as $row) {
             $id = $row['idcom'];
@@ -45,33 +45,32 @@ class CommentDAO extends DAO
 
 
     /**
-     * Return a list of all comments for an episode, sorted by date (most recent first).
+     * Renvoie la liste des commentaires pour un episode donné trié par idcom.
      *
-     * @param integer $episodeId The episode id.
+     * @param integer Identifiant de l'episode
      *
-     * @return array A list of all comments for the episode.
+     * @return Tableau contenant la liste des commentaires pour un episode.
      */
     public function findAllByEpisode($episodeId) {
-        // The associated episode is retrieved only once
+        // L'épisode associé est récupéré une seule fois
         $episode = $this->episodeDAO->find($episodeId);
 
-        // ep_ID is not selected by the SQL query
-        // The episode won't be retrieved during domain objet construction
         $sql = "select * from commentaires where epID=? order by idcom";
         $result = $this->getDb()->fetchAll($sql, array($episodeId));
 
-        // Convert query result to an array of domain objects
+        // Convertie le resultat de requete en un tableau d'objet du domaine
         $comments = array();
         foreach ($result as $row) {
             $comId = $row['idcom'];
             $comment = $this->buildDomainObject($row);
-            // The associated episode is defined for the constructed comment
+            // L'épisode associé est défini pour le commentaire construit
             $comment->setEpisode($episode);
             $comments[] = $comment;
         }
+        // Tableau qui va nous permettre d'imbriquer les commentaires
         $comment_by_id=[];
         // Avec cette boucle, nous avons un tableau des commentaires indexés par leur ID et non par un index défini par défaut
-        foreach ($comments as $comment){ // Je parcours tous les commentaires $comments
+        foreach ($comments as $comment){
             $comment_by_id[$comment->getIdcom()] = $comment;
         }
         // On parcours à nouveau tous les commentaires en gardant l'index $k
@@ -81,7 +80,7 @@ class CommentDAO extends DAO
             if($comment->getParentid() !=0){
             // On l'ajoute donc dans l'enfant (children) du commentaire en cours.
               $comment_by_id[$comment->getParentid()]->addChildren($comment);
-            // On masque les sous commentaires que nous venons de déplacer
+            // On supprime les sous commentaires que nous venons de déplacer
               unset($comments[$k]);
             }
         }
@@ -89,16 +88,16 @@ class CommentDAO extends DAO
     }
 
     /**
-     * Returns a comment matching the supplied id.
+     * Renvoie le commentaire correspondant à l'identifiant passé en paramétre.
      *
      * @param integer $id The comment id
      *
-     * @return \Projet3\Domain\Comment|throws an exception if no matching comment is found
+     * @return \Projet3\Domain\Comment| ou renvoie une exception si pas de commentaire trouvé
      */
     public function find($id) {
         $sql = "select * from commentaires where idcom=?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
-
+        error_log('je suis dans la methode find()');
         if ($row)
             return $this->buildDomainObject($row);
         else
@@ -106,7 +105,7 @@ class CommentDAO extends DAO
     }
 
     /**
-     * Save a comment from the database.
+     * SAuvegarde un commentaire dans la BD.
      *
      * @param @param Comment
      */
@@ -124,40 +123,37 @@ class CommentDAO extends DAO
 
             );
         if ($comment->getIdcom()){
-            // The comment has already been saved : update it
+            // Le commentaire existe déjà : Mise à jour
             $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
         } else{
-            // The comment has never been saved : insert it
+            // Le commentaire n'existe pas : Insertion
             $this->getDb()->insert('commentaires', $commentData);
-            // Get the id of the newly created comment and set it on the entity.
+            // On récupére le dernier identifiant enregistré
             $id = $this->getDb()->lastInsertId();
             $comment->setIdcom($id);
         }
     }
 
     /**
-     * Signal a spam comment from the database.
+     * Signaler un commentaire (spam)
      *
-     * @param @param Comment
+     * @param Comment
      */
     public function spamC(Comment $comment){
         $newValeur = $comment->getSpam() + 1;
         $commentData = array(
             'spam' =>$newValeur);
-
+        error_log('je suis dans la méthode spamC()');
         // error_log('Test $newValeur' .var_dump('Test $newValeur : '.$newValeur));
         // error_log('Test $comment->getIdcom' .var_dump('Test $comment->getIdcom : '.$comment->getIdcom()));
-        if ($comment->getIdcom()){
-            // The comment has already been saved : update it
-            $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
-        }
+        $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
     }
 
 
     /**
-     * Removes all comments for an episode
+     * Suppression de tous les commentaires d'un episode donné
      *
-     * @param $episodeId The id of the episode
+     * @param L'identifiant de l'episode
      */
     public function deleteAllByEpisode($episodeId) {
 
@@ -166,21 +162,22 @@ class CommentDAO extends DAO
 
 
     /**
-     * Removes a comment from the database.
+     * Suppression d'un commentaire de la BD
      *
-     * @param @param integer $id The comment id
+     * @param Identifiant du commentaire en question
      */
     public function delete($id) {
-        // Delete the comments children
+        // Supprime les commentaires enfants en premier lieu
         $this->getDb()->delete('commentaires', array('parent_id'=> $id));
-        // Delete the comment
+        // Puis on supprime le commentaire en question
         $this->getDb()->delete('commentaires', array('idcom' => $id));
     }
 
+
     /**
-     * Removes all comments for a user
+     * Suppression de tous les commentaires d'un utilisateur
      *
-     * @param integer $userId The id of the user
+     * @param integer Identifiant de l'utilisateur
      */
     public function deleteAllByUser($userId) {
         $this->getDb()->delete('commentaires', array('user_id' => $userId));
@@ -188,15 +185,14 @@ class CommentDAO extends DAO
 
 
     /**
-     * Creates a Comment object based on a DB row.
+     * Creation d'un objet Commentiare basé sur les champs de la BD
      *
-     * @param array $row The DB row containing Comment data.
+     * @param Tableau contenant les champs et les valeurs pour la BD
      * @return \Projet3\Domain\Comment
      */
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setIdcom($row['idcom']);
-        // $comment->setPseudo($row['pseudo']);
         $comment->setContenu($row['message']);
         $comment->setDateCreat($row['dateCreat']);
         $comment->setParentid($row['parent_id']);
@@ -205,7 +201,7 @@ class CommentDAO extends DAO
 
         try{
           if (array_key_exists('epID', $row)) {
-            // Find and set the associated episode
+            // On trouve et on définit l'episode associé
             $episodeId = $row['epID'];
             $episode = $this->episodeDAO->find($episodeId);
             $comment->setEpisode($episode);
@@ -217,7 +213,7 @@ class CommentDAO extends DAO
 
         try{
           if (array_key_exists('user_id', $row)) {
-            // Find and set the associated author
+            // On trouve et on définit l'utilisateur associé
             $userId = $row['user_id'];
             $user = $this->userDAO->find($userId);
             $comment->setAuthor($user);

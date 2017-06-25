@@ -9,7 +9,7 @@
             <h2 class="panel-heading">
               <a class="episodeTitle" href="{{ path('home') }}">{{ episode.titre }}</a>
             </h2>
-            <p class="contenu panel-body episode">{{ episode.contenu | raw }}</p>
+            <div class="contenu panel-body episode">{{ episode.contenu | raw }}</div>
         </div>
     </div>
     {# Affichage des Messages Flash #}
@@ -19,7 +19,8 @@
         </div>
     {% endfor %}
 {# PARTIE POUR AFFICHER LES COMMENTAIRES #}
-    <div class="container">
+	<div id="info"></div>
+    <div class="row">
         <div class="panel panel-info">
             <h3 class="panel-heading">Commentaires</h3>
 {# SOUS PARTIE POUR GERER L'AFFICHAGE DES COMMENTAIRES #}
@@ -27,7 +28,7 @@
             {{ include("subcomment.html.twig") }}
 
 {# SOUS PARTIE POUR GERER L'AFFICHAGE DU FORMULAIRE COMMENTAIRE #}
-            <div class="panel-body">
+            <div class="panel-footer">
                 {% if commentForm %}
                     {{ form_start(commentForm, {'attr':  {
                                 'id': 'comment'
