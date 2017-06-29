@@ -116,7 +116,7 @@ class CommentDAO extends DAO
             );
         if ($comment->getIdcom()) {
             // The comment has already been saved : update it
-            $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getId()));
+            $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
         } else {
             // The comment has never been saved : insert it
             $this->getDb()->insert('commentaires', $commentData);
@@ -136,13 +136,10 @@ class CommentDAO extends DAO
         $newValeur = $comment->getSpam() + 1;
         $commentData = array(
             'spam' =>$newValeur);
-
-        // error_log('Test $newValeur' .var_dump('Test $newValeur : '.$newValeur));
+        error_log('je suis dans la méthode spamC()');
+        error_log('Test $newValeur :' .$newValeur);
         // error_log('Test $comment->getIdcom' .var_dump('Test $comment->getIdcom : '.$comment->getIdcom()));
-        if ($comment->getIdcom()){
-            // The comment has already been saved : update it
-            $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
-        }
+        $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
     }
 
 

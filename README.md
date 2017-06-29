@@ -198,3 +198,20 @@ Ce commit contient :
 - Modification de la vue episode_form.html.twig
 - Modification du fichier porjet3.js
 - Modification de la méthode **save()** de la classe **EpisodeDAO**.
+
+## 16eme Commit : Modif proc Spam - Réorganisation des controleurs - Ajout tests fonctionnels
+
+Ce commit contient :
+- Modifcation de la méthode spamC() de la classe CommentDAO
+- Modification de la procédure pour signaler un commentaire (spam).
+- Création d'un répertoire **SRC/Controller** regroupant mes controleurs
+- Création d'un fichier **HomeController.php** qui va gérer l'ensemble des routes en *frontend* sous forme de méthode de la classe **Homecontroller**.
+- Création d'un fichier **AdminController.php** qui va gérer l'ensemble des routes en *backend* (administration) sous forme de méthode de la classe **Admincontroller**.
+- Création d'un fichier **ApiController.php** qui contient la méthode permettant de *signaler un commentaire*. Elle aussi sous forme d'une méthode de la classe **ApiController**.
+- Modification du fichier **routes.php** afin d'associer chaque route à sa méthode.
+- **Ajout de tests fonctionnels** :
+[x] Installer le composant *PHPUnit* avec le fichier composer.json
+[x] Création de l'arborescence *tests/Tests* à la racine
+[x] Création dans ce répertoire du fichier *AppTest.php*
+[x] Création du fichier *phpunit.xml.dist* pour faciliter les tests.
+[x] Modification du fichier *dev.php* en utilisant l'adresse IP au lieu de localhost
