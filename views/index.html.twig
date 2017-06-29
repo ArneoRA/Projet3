@@ -4,11 +4,28 @@
 
 {% block content %}
     {# Cette partie gére le corps de la page #}
-    {% for episode in episodes %}
-        <div class="panel panel-default">
-            <h2 class="panel-heading">
-              <a href="{{ path('episode', {'id':episode.id }) }}">{{ episode.titre }}</a></h2>
-            <p class="contenu panel-body">{{ episode.contenu | truncate(500, true, ' ...') }}</p>
-        </div>
-    {% endfor %}
+    <div class="row">
+        <div id="monListing" class="panel-group col-lg-12">
+        <h3>Episodes déjà publiés pour le roman : <em>Billet Simple pour l'Alaska</em> </h3>
+        {% for episode in episodes %}
+            <div class="panel panel-default">
+              <h2 class="panel-heading">
+                <a href="#{{episode.id}}" data-parent="#monListing" data-toggle="collapse" class="episodeTitle">
+                    {{ episode.titre }}
+                    <em class="dateCrea"> - Edité le : {{episode.DateCrea | date("d/m/Y")}}</em>
+                </a>
+              </h2>
+              <div id="{{episode.id}}" class="panel-collapse collapse">
+                <div class="panel-body contenu">
+                    {{ episode.contenu | truncate(1000,true,'...') | raw }}
+                    <hr>
+                </div>
+                <div class="panel-footer">
+                    <a href="{{ path('episode', {'id':episode.id }) }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> En lire plus...</button></a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
 {% endblock %}

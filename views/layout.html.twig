@@ -1,26 +1,23 @@
 <!doctype html>
+
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {# CDN permettant le lien vers BootStrap 3.3.7 et Font-awesome 4.3.0 #}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('/css/projet3.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    {# Pour la mise en forme du tableau dynamique Commentaire en plus du CDN BootStrap#}
-    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    {# Pour la mise en forme des tableaux dynamiques en plus du CDN BootStrap#}
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    {# Mon fichier CSS #}
+    <link href="{{ asset('/css/projet3.css') }}" rel="stylesheet">
     {# Module TINYMCE #}
-    {# // <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script> #}
-    {# <script src="{{ asset('/../vendor/tinymce/tinymce/tinymce.min.js')}}"></script> #}
     <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
 
     {% block javascript %}
-        <script>
-            tinymce.init({
-                selector: "episode_contenu"
-            });
-        </script>
-
+        {# le contenu se trouve dans la vue episode_form.html.twig #}
     {% endblock javascript%}
 
     <title>Projet 3 - {% block title %}{% endblock %}</title>
@@ -115,17 +112,43 @@
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+
     {# JavaScript pour tableau dynamique #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#TabComment').DataTable({
-                "sDom": '<"top">rt<"bottom"p><"clear">',
-                "langage": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
-              }
+            // Gestion Datatable pour les episodes
+            $('#TabEpisode').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
+                "pageLength": 6, // Permet de définir le nombre de lignes par page
+                "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 2 ] } // Retire le tri sur la colonne des actions
+                ]
             });
+
+            // Gestion Datatable pour les commentaires
+            $('#TabComment').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
+                "pageLength": 8, // Permet de définir le nombre de lignes par page
+                "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 4 ] } // Retire le tri sur la colonne des actions
+                ]
+            });
+
+            // Gestion Datatable pour les utilisateurs
+            $('#TabUser').DataTable({
+                "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
+                "autoWidth": false,
+                "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 2 ] } // Retire le tri sur la colonne des actions
+                ],
+                "columnDefs": [
+                    {"width": '20px', "target": 2}
+                ]
+
+            });
+
         } );
     </script>
     <script src="{{ asset('/lib/js/projet3.js') }}"></script>

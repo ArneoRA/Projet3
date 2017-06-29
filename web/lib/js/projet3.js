@@ -1,8 +1,8 @@
 $(document).ready(function($){ // Des que le document est ready (chargé, on execute la fonction)
 
-    $('.reply').click(function(e){ // Des qu'on click sur les boutons avec la class reply on execute la fonction
+    $('.reply').click(function(e){ // Des qu'on click sur le bouton avec la class reply on execute la fonction
         e.preventDefault(); // On court-circuite l'evenement
-        // On stocke les élèments nécessaires dans des variables
+        // ====================== On stocke les élèments dans des variables ========================== //
         console.log('Je suis activé');
         var $form = $('#comment'); // on stock le formulaire dont l'id est "comment_contenu"
         var Vthis = $(this); // on stocke l'élement que nous avons cliqué
@@ -28,8 +28,54 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         $('#comment_niveau').val(commNiveau);
         // On insere notre formulaire APRES (after) notre commentaire
         $comment.after($form);
+    });
+
+    $('.spamc').click(function(e){
+        e.preventDefault();
+
+        console.log('je suis dans spamc');
+        // ====================== On stocke les élèments dans des variables ========================== //
+        var Vthis = $(this); // on stocke l'élement que nous avons cliqué
+        var idcom = Vthis.data('id'); // On stocke la valeur de l'identifiant du commentaire 'data-id)
+        var valspam = Vthis.data('sp'); // On stocke la valeur du champ spam (data-sp)
+        var epid = Vthis.data('ep'); // On Stocke la valeur de l'episode (data-ep)
+        console.log('Identifiant de l\'episode : '+ epid);
+        console.log('Identifiant du commentaire : ' + idcom);
+        console.log ('La valeur SPAM est : ' + valspam);
+        var newValSpam = valspam + 1;
+        console.log('La valeur à enregistrer sera donc : ' + newValSpam);
+        // ====================== Traitement par requete AJAX =========================== //
+        ajaxGet("http://projet3/api/comment/" + idcom + "/spam", function (reponse){
+            var messageElt = document.createElement("p");
+            messageElt.textContent = "Le commentaire a bien été signalé";
+            document.getElementById("info").appendChild(messageElt);
+            // On ajoute la classe succes pour la mise en forme de l'affichage
+            document.getElementById("info").className = "alert ";
+            document.getElementById("info").className += "alert-success";
+            // On recharge la page
+            setTimeout("location.reload();", 2000);
+        });
+
 
 
     })
+
+    ////////////////////// Exécute un appel AJAX GET /////////////////////////////////////
+    function ajaxGet(url, callback) {
+        var req = new XMLHttpRequest();
+        req.open("GET", url);
+        req.addEventListener("load", function () {
+            if (req.status >= 200 && req.status < 400) {
+                // Appelle la fonction callback en lui passant la réponse de la requête
+                callback(req.responseText);
+            } else {
+                console.error(req.status + " " + req.statusText + " " + url);
+            }
+        });
+        req.addEventListener("error", function () {
+            console.error("Erreur réseau avec l'URL " + url);
+        });
+        req.send(null);
+    }
 
 });

@@ -1,8 +1,9 @@
 <div class="row col-sm-2 pull-right actions">
-    <button type="button" class="btn btn-danger btn-ms" title="Signaler" data-toggle="modal" data-target="#commentDialog{{ comment.idcom }}">
+    <button type="button" class="btn btn-danger btn-ms spamc" data-id="{{comment.idcom }}" data-sp="{{ comment.spam }}" data-ep="{{comment.episode.id }}" title="Signaler" data-toggle="modal" data-target="#spamDialog{{ comment.idcom }}">
       <span class="glyphicon glyphicon-thumbs-down"></span>
     </button>
-    <div class="modal fade" id="commentDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    {# <div class="modal fade" id="commentDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -18,6 +19,6 @@
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div><!-- /.modal --> #}
 
 </div>

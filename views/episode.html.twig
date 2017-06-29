@@ -5,66 +5,71 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+{# PARTIE POUR AFFICHER LE TITRE ET LE CONTENU DE L'EPISODE #}
         <div class="panel panel-default">
-            <h2 class="panel-heading">{{ episode.titre }}</h2>
-            <p class="contenu panel-body">{{ episode.contenu | truncate(1000, true, (' ...'))}}</p>
+            <h2 class="panel-heading">
+              <a class="episodeTitle" href="{{ path('home') }}">{{ episode.titre }}</a>
+            </h2>
+            <div class="contenu panel-body episode">{{ episode.contenu | raw }}</div>
         </div>
+    </div>
     {# Affichage des Messages Flash #}
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {# PARTIE POUR AFFICHER LES COMMENTAIRES #}
-        <div class="container">
-            <div class="panel panel-info">
-                <h3 class="panel-heading">Commentaires</h3>
-    {# SOUS PARTIE POUR GERER L'AFFICHAGE DES COMMENTAIRES #}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+{# PARTIE POUR AFFICHER LES COMMENTAIRES #}
+    <div id="info">
+    {# Ici s'affiche le message envoyé apres signalement d'un commentaire #}
+    </div>
 
-                {{ include("subcomment.html.twig") }}
+    <div class="row">
+        <div class="panel panel-info">
+            <h3 class="panel-heading">Commentaires</h3>
+{# SOUS PARTIE POUR GERER L'AFFICHAGE DES COMMENTAIRES #}
 
-    {# SOUS PARTIE POUR GERER L'AFFICHAGE DU FORMULAIRE COMMENTAIRE #}
+            {{ include("subcomment.html.twig") }}
 
-            {{ form_start(commentForm, {'attr':  {
+{# SOUS PARTIE POUR GERER L'AFFICHAGE DU FORMULAIRE COMMENTAIRE #}
+            <div class="panel-footer">
+               {{ form_start(commentForm, {'attr':  {
                         'id': 'comment'
-            }}) }}
-                <h4>Ajouter un Commentaire : </h4>
-                {# Ce champ sera modifié en JS en fonction du commentaire traité #}
-                {{ form_errors(commentForm.parentid) }}
-                {{ form_widget(commentForm.parentid, { 'attr':  {
-                   'value': 0
                 }}) }}
-                {# Ce champ sera modifié en JS en fonction du commentaire traité #}
-                {{ form_errors(commentForm.niveau) }}
-                {{ form_widget(commentForm.niveau, { 'attr':  {
-                   'value': 0
-                }}) }}
-
-                <div class="form-group">
-                    {{ form_errors(commentForm.pseudo) }}
-                    {{ form_widget(commentForm.pseudo, { 'attr':  {
-                        'rows': '4',
-                        'class': 'form-control',
-                        'placeholder': 'Saisir votre Pseudo'
+                    <h4>Ajouter un Commentaire : </h4>
+                    {# Ce champ sera modifié en JS en fonction du commentaire traité #}
+                    {{ form_errors(commentForm.parentid) }}
+                    {{ form_widget(commentForm.parentid, { 'attr':  {
+                       'value': 0
                     }}) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_errors(commentForm.contenu) }}
-                    {{ form_widget(commentForm.contenu, { 'attr':  {
-                        'rows': '4',
-                        'class': 'form-control',
-                        'placeholder': 'Saisir votre message'
+                    {# Ce champ sera modifié en JS en fonction du commentaire traité #}
+                    {{ form_errors(commentForm.niveau) }}
+                    {{ form_widget(commentForm.niveau, { 'attr':  {
+                       'value': 0
                     }}) }}
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Publish comment" />
-                </div>
-            {{ form_end(commentForm) }}
-            {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="alert alert-success">
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
+
+                    <div class="form-group">
+                        {{ form_errors(commentForm.pseudo) }}
+                        {{ form_widget(commentForm.pseudo, { 'attr':  {
+                            'rows': '4',
+                            'class': 'form-control',
+                            'placeholder': 'Saisir votre Pseudo'
+                        }}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(commentForm.contenu) }}
+                        {{ form_widget(commentForm.contenu, { 'attr':  {
+                            'rows': '4',
+                            'class': 'form-control',
+                            'placeholder': 'Saisir votre message'
+                        }}) }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Envoyer" />
+                    </div>
+                {{ form_end(commentForm) }}
+            </div>
         </div>
 {% endblock %}

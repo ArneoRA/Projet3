@@ -59,7 +59,48 @@
     <script>
         tinymce.init({
             selector: "textarea",
-            height: "480"
+            height: "480",
+            plugins: "save",
+            style_formats: [
+                {
+                  selector: 'p',
+                  styles: {
+                    'text-align': 'justify',
+                    'font-family': 'Georgia, Tahoma, Verdana',
+                    'font-size': '1.5em'
+                  }
+                }
+            ]
         });
+        console.log('Je passe dans le block javascript dans tiny');
+    </script>
+    <script type="text/javascript">
+        console.log('Je passe dans le block javascript dans valider()');
+        function valider(){
+            console.log('je passe ici');
+            // Déclaration des variables
+            var $tForm = $('#eForm'); // On stocke le formulaire
+            console.log ('Contenu de la variable $tForm : ' + $tForm);
+            var titrEpi = document.getElementById('episode_titre'); //$('#episode_titre');
+            var valtirEpi = titrEpi.value;
+            console.log('la valeur du titre est : ' + valtirEpi);
+            var contEpi = tinyMCE.get('episode_contenu').getContent(); //$('#mceu_25');
+            console.log ('Contenu de la variable contEpi : ' + contEpi);
+
+            // Traitement
+            if (!valtirEpi || !contEpi) {
+                console.log ('Le titre est vide : ' + test1);
+                console.log ('Le contenu est vide aussi : ' + contEpi);
+                // Mettre un message d'avertissement ICI //
+                // msgAlerte.innerHTML = "Veuillez saisir un titre et un contenu !!";
+                return false;
+
+            } else{
+                console.log ('Le titre est devenu : ' + test1);
+                console.log ('Le contenu est devenu : ' + contEpi);
+                return false;
+            }
+        }
+
     </script>
 {% endblock javascript%}

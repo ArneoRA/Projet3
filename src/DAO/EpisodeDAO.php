@@ -61,21 +61,28 @@ class EpisodeDAO extends DAO
     /**
      * Saves an episode into the database.
      *
-     * @param \Projet3\Domain\Episode $episode The episode to save
+     * @param Episode $episode Objet episode
      */
     public function save(Episode $episode) {
+        error_log('je suis dans la méthode save');
         $episodeData = array(
             'titre' => $episode->getTitre(),
             'contenu' => $episode->getContenu(),
             );
+        // var_dump($episodeData['contenu']);
+        if (!isset($episodeData['contenu'])) {
+            throw new \Exception('Le contenu est null, donc impossible d\'enregistrer le contenu');
+            die();
+
+        }
 
         if ($episode->getId()) {
-            // The episode has already been saved : update it
+            // L'épisode a déjà été enregistré --> Mise à jour
             $this->getDb()->update('episodes', $episodeData, array('id' => $episode->getId()));
         } else {
-            // The episode has never been saved : insert it
+            // L'épisode n'a jamais été enregistré --> insertion
             $this->getDb()->insert('episodes', $episodeData);
-            // Get the id of the newly created episode and set it on the entity.
+            // On récupére le dernier identifiant enregistré
             $id = $this->getDb()->lastInsertId();
             $episode->setId($id);
         }

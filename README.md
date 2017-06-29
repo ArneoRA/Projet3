@@ -184,3 +184,17 @@ Ce commit contient :
 Ce commit contient :
 - Modification du fichier CommentDAO pour le test des champs niveau et Pseudo
 - Modification du fichier layout pour préciser la version du Site : Version Commentaire basic
+
+
+## 15eme Commit : Ajustement visuel des episodes, commentaires
+
+Ce commit contient :
+- Modification de la vue index.html.twig
+- Modification de la vue episode.html.twig
+- Modification de la vue subcomment.html.twig
+- Modification de la vue actions.html.twig
+- Modification de la vue signaler.html.twig
+- Modification de la vue layout.html.twig
+- Modification de la vue episode_form.html.twig
+- Modification du fichier porjet3.js
+- Modification de la méthode **save()** de la classe **EpisodeDAO**.
