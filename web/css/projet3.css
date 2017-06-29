@@ -1,5 +1,6 @@
-body, footer {
+body{
     padding-top: 90px;
+    padding-bottom: 90px;
 
 }
 
@@ -34,14 +35,23 @@ body, footer {
   font-size: 1.5em;
 }
 
+.contenu h3{
+  font-weight: bolder;
+}
+
 h2{
   font-size: 24px;
 }
 
+h2, h3{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
 /* Lien Sur les Episodes */
 .episodeTitle{
-    padding-left: 10px;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .episodeTitle:hover, .episodeTitle:focus {
@@ -49,27 +59,35 @@ h2{
     color: #222222;
 }
 
-.episode{
-    height: 50vh;
-    overflow-y: scroll;
-}
-
 .dateCrea{
   font-size: 0.8em;
 }
 
-.adminTable {
-    margin-top: 20px;
-    margin-bottom: 20px;
+/* Ajustement CSS PANEL */
+.panel-heading{
+  padding: 0px 10px;
+}
+
+.panel-body{
+  padding: 10px;
 }
 
 .panel {
   background-color: #f5f5f5;
+  margin-right: 15px;
 }
+
+.episode{
+  height: 50vh;
+  overflow-y: scroll;
+}
+
 /* CSS POUR LES COMMENTAIRES */
 .comm{
   text-align: justify;
-  padding: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .enfant{
@@ -79,18 +97,16 @@ h2{
   border-left: 2px solid #bdc3c7;
 }
 
-.panel-body{
-  padding: 10px;
-}
 .actions{
   text-align: right;
 }
 
-.badge{
-  background-color: #e74c3c;
-  padding: 5px 10px 5px 10px;
+.form-control{
+  width: 50%;
 }
 
+
+/* CSS POUR LES TABLEAUX DYNAMIQUES & ADMIN */
 td, th {
   text-align: center;
 }
@@ -98,4 +114,18 @@ td, th {
 .td_contenu{
   text-align: justify;
   width: 570px;
+}
+
+.badge{
+  background-color: #e74c3c;
+  padding: 5px 10px 5px 10px;
+}
+
+.adminTable {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.bt-action{
+  display: inline-block;
 }

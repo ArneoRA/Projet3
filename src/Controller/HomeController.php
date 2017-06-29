@@ -40,6 +40,9 @@
             $app['dao.comment']->save($comment);
             $app['session']->getFlashBag()->add('success', 'Votre commentaire a été ajouté avec succes.');
         }
+        // Réinitialisation du formulaire commentaire
+        $comment = new Comment();
+        $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentFormView = $commentForm->createView();
         $comments = $app['dao.comment']->findAllByEpisode($id);
         return $app['twig']->render('episode.html.twig', array(

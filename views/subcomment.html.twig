@@ -4,7 +4,7 @@
           <div class="row col-sm-10 comm" id="comment-{{ comment.idcom }}">
             {# en rajoutant un id sur le div, cela permettra d'avoir des ancres mais aussi de travailler l'element plus facilementent JS #}
             <p>
-              <strong> {{ comment.pseudo }} a dit : </strong>  {{ comment.contenu }}
+              <strong> {{ comment.pseudo }} a dit : </strong>  {{ comment.contenu | raw }}
               <br>
             </p>
             <h6 id="infospam">{{comment.spam}}</h6>

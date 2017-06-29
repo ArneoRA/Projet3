@@ -149,7 +149,7 @@ class CommentDAO extends DAO
      * @param $episodeId The id of the episode
      */
     public function deleteAllByEpisode($episodeId) {
-        $this->getDb()->delete('commentaires', array('ep_ID' => $episodeId));
+        $this->getDb()->delete('commentaires', array('epID' => $episodeId));
     }
 
 

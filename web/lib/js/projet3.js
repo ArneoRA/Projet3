@@ -37,13 +37,13 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         // ====================== On stocke les élèments dans des variables ========================== //
         var Vthis = $(this); // on stocke l'élement que nous avons cliqué
         var idcom = Vthis.data('id'); // On stocke la valeur de l'identifiant du commentaire 'data-id)
-        var valspam = Vthis.data('sp'); // On stocke la valeur du champ spam (data-sp)
-        var epid = Vthis.data('ep'); // On Stocke la valeur de l'episode (data-ep)
-        console.log('Identifiant de l\'episode : '+ epid);
+        // var valspam = Vthis.data('sp'); // On stocke la valeur du champ spam (data-sp)
+        // var epid = Vthis.data('ep'); // On Stocke la valeur de l'episode (data-ep)
         console.log('Identifiant du commentaire : ' + idcom);
-        console.log ('La valeur SPAM est : ' + valspam);
-        var newValSpam = valspam + 1;
-        console.log('La valeur à enregistrer sera donc : ' + newValSpam);
+        // console.log('Identifiant de l\'episode : '+ epid);
+        // console.log ('La valeur SPAM est : ' + valspam);
+        // var newValSpam = valspam + 1;
+        // console.log('La valeur à enregistrer sera donc : ' + newValSpam);
         // ====================== Traitement par requete AJAX =========================== //
         ajaxGet("http://projet3/api/comment/" + idcom + "/spam", function (reponse){
             var messageElt = document.createElement("p");

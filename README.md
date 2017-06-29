@@ -210,8 +210,24 @@ Ce commit contient :
 - Création d'un fichier **ApiController.php** qui contient la méthode permettant de *signaler un commentaire*. Elle aussi sous forme d'une méthode de la classe **ApiController**.
 - Modification du fichier **routes.php** afin d'associer chaque route à sa méthode.
 - **Ajout de tests fonctionnels** :
-[x] Installer le composant *PHPUnit* avec le fichier composer.json
-[x] Création de l'arborescence *tests/Tests* à la racine
-[x] Création dans ce répertoire du fichier *AppTest.php*
-[x] Création du fichier *phpunit.xml.dist* pour faciliter les tests.
-[x] Modification du fichier *dev.php* en utilisant l'adresse IP au lieu de localhost
+- [x] Installer le composant *PHPUnit* avec le fichier composer.json
+- [x] Création de l'arborescence *tests/Tests* à la racine
+- [x] Création dans ce répertoire du fichier *AppTest.php*
+- [x] Création du fichier *phpunit.xml.dist* pour faciliter les tests.
+- [x] Modification du fichier *dev.php* en utilisant l'adresse IP au lieu de localhost
+
+## 16 bis Commit : Ajout de 5 fichiers pour tests fonctionnels
+
+Ce commit contient :
+- Ajout de 5 fichiers pour tests fonctionnels suite à un oubli d'un git add .
+
+## 17 Commit : 1er recettage
+
+Ce commit contient :
+- Modification de la route pour afficher le detail de l'episode. Remise à zero du formulaire apres envoi.
+- Modification du fichier CSS.
+- Modification de la vue subcomment.html.twig
+- Modification de la vie episode_form.html.twig
+- Correction methode delete() dans la classe EpisodeDAO
+- Correction Initialisation de TinyMCE
+

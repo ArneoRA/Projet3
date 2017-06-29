@@ -52,8 +52,7 @@
                     <div class="form-group">
                         {{ form_errors(commentForm.pseudo) }}
                         {{ form_widget(commentForm.pseudo, { 'attr':  {
-                            'rows': '4',
-                            'class': 'form-control',
+                              'class': 'form-control',
                             'placeholder': 'Saisir votre Pseudo'
                         }}) }}
                     </div>
@@ -61,7 +60,6 @@
                     <div class="form-group">
                         {{ form_errors(commentForm.contenu) }}
                         {{ form_widget(commentForm.contenu, { 'attr':  {
-                            'rows': '4',
                             'class': 'form-control',
                             'placeholder': 'Saisir votre message'
                         }}) }}

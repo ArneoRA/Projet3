@@ -70,38 +70,32 @@
         </header>
         {# Cette partie gére le corps de la page #}
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3 hidden-xs">
                 <img src="{{ asset('/images/deco.jpg') }}" alt="page garde Roman" class="deco">
             </div>
-            <div class="container-fluid">
-                <secion class="col-sm-9">
-                    <div class="content">
-                        {% block content %}
+            <secion class="col-sm-9">
+                {% block content %}
 
-                            {# ICI S'INTEGRE NOS VUES #}
+                    {# ICI S'INTEGRE NOS VUES #}
 
-                        {% endblock %}
-                    </div>
-                </secion>
-            </div>
+                {% endblock %}
+            </secion>
         </div>
 
         {# Cette partie gére le pied de page #}
-        <footer>
-            <div class="container-fluid navbar-fixed-bottom navbar-inverse">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <a class="arnege" href="http://www.arnege.fr">Réalisation ARNEGE</a> /
-                        <a class="arnege"href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a>
-                        <p id="conception">
-                            Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
-                        </p>
-                    </div>
-                    <div class="col-sm-4 pull-right">
-                        <a class="btn btn-default rond" href="http://fr.linkedin.com/pub/arnaud-raoult/5b/957/208/"><i class="fa fa-linkedin-square fa-2x"></i></a>
-                        <a class="btn btn-default rond" href="https://www.facebook.com/ArnaudRA"><i class="fa fa-facebook fa-2x"></i></a>
-                        <a class="btn btn-default rond" href="https://plus.google.com/u/0/108923850421269678473?rel=publisher"><i class="fa fa-google-plus fa-2x"></i></a>
-                    </div>
+        <footer class="container-fluid navbar-fixed-bottom navbar-inverse perso">
+            <div class="row">
+                <div class="col-md-8">
+                    <a class="arnege" href="http://www.arnege.fr">Réalisation ARNEGE</a> /
+                    <a class="arnege"href="https://github.com/ArneoRA/Projet3">Projet 3 - GitHub</a>
+                    <p id="conception">
+                        Blog Personnalisé utilisant : PHP - MVC - POO - MiniFramework Silex - BootStrap - Twig.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-default rond" href="http://fr.linkedin.com/pub/arnaud-raoult/5b/957/208/"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                    <a class="btn btn-default rond" href="https://www.facebook.com/ArnaudRA"><i class="fa fa-facebook fa-2x"></i></a>
+                    <a class="btn btn-default rond" href="https://plus.google.com/u/0/108923850421269678473?rel=publisher"><i class="fa fa-google-plus fa-2x"></i></a>
                 </div>
             </div>
         </footer>

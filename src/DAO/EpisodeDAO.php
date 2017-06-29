@@ -95,7 +95,7 @@ class EpisodeDAO extends DAO
      */
     public function delete($id) {
         // Delete the episode
-        $this->getDb()->delete('episodes', array('idcom' => $id));
+        $this->getDb()->delete('episodes', array('id' => $id));
     }
 
     /**
