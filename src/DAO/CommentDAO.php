@@ -144,7 +144,7 @@ class CommentDAO extends DAO
         $commentData = array(
             'spam' =>$newValeur);
         error_log('je suis dans la méthode spamC()');
-        // error_log('Test $newValeur' .var_dump('Test $newValeur : '.$newValeur));
+        error_log('Test $newValeur :' .$newValeur);
         // error_log('Test $comment->getIdcom' .var_dump('Test $comment->getIdcom : '.$comment->getIdcom()));
         $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
     }
