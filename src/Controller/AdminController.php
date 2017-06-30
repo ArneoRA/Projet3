@@ -127,13 +127,13 @@
       $userForm = $app['form.factory']->create(UserType::class, $user);
       $userForm->handleRequest($request);
       if ($userForm->isSubmitted() && $userForm->isValid()) {
-          // generate a random salt value
+          // Genere une valeur aléatoire pour le "salage" salt
           $salt = substr(md5(time()), 0, 23);
           $user->setSalt($salt);
           $plainPassword = $user->getPassword();
-          // find the default encoder
+          // Trouve l'encoder par défaut
           $encoder = $app['security.encoder.bcrypt'];
-          // compute the encoded password
+          // Genere le mot de passe avec le salage
           $password = $encoder->encodePassword($plainPassword, $user->getSalt());
           $user->setPassword($password);
           $app['dao.user']->save($user);
@@ -157,9 +157,9 @@
       $userForm->handleRequest($request);
       if ($userForm->isSubmitted() && $userForm->isValid()) {
           $plainPassword = $user->getPassword();
-          // find the encoder for the user
+          // Trouve l'encoder pour l'utilisateur
           $encoder = $app['security.encoder_factory']->getEncoder($user);
-          // compute the encoded password
+          // Genere le mot de passe
           $password = $encoder->encodePassword($plainPassword, $user->getSalt());
           $user->setPassword($password);
           $app['dao.user']->save($user);
@@ -177,12 +177,12 @@
      * @param Application $app Application Silex
      */
     public function deleteUserAction ($id, Application $app){
-      // Delete all associated comments
+      // Supprime tous les commentaires associés à l'utilisateur
       $app['dao.comment']->deleteAllByUser($id);
-      // Delete the user
+      // Supprime l'utilisateur
       $app['dao.user']->delete($id);
       $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été supprimé correctement.');
-      // Redirect to admin home page
+      // Redirige vers la home Page Admin
       return $app->redirect($app['url_generator']->generate('admin'));
     }
 

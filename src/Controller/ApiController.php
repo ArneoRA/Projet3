@@ -15,9 +15,9 @@
      * @param Application $app Application Silex
      */
     public function signalCommentAction ($id, Application $app){
-      error_log('Je passe par la bonne route');
+      $app['monolog']->addInfo("Je passe par la route signalCommentAction");
       $comment = $app['dao.comment']->find($id);
-      $comment = $app['dao.comment']->spamC($comment);
+      $comment = $app['dao.comment']->spamC($comment, $app);
 
       return $app->json($comment, 200);  // 200 = OK
     }

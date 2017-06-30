@@ -11,5 +11,6 @@
     'password'=>'1234',
   );
 
-// enable the debug mode
-$app['debug'] = true;
+// Définition du niveau de log
+$app['monolog.level'] = 'INFO';
+// Avertissements, erreurs et Informations seront journalisées

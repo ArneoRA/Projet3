@@ -101,10 +101,6 @@ h2, h3{
   text-align: right;
 }
 
-.form-control{
-  width: 50%;
-}
-
 
 /* CSS POUR LES TABLEAUX DYNAMIQUES & ADMIN */
 td, th {
@@ -122,10 +118,27 @@ td, th {
 }
 
 .adminTable {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 5%;
+    margin-bottom: 10%;
 }
 
 .bt-action{
   display: inline-block;
+}
+
+/* CSS FORMULAIRE USER */
+.well{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.form-control{
+  width: 100%;
+}
+
+
+/* CSS POUR LA PAGE D ERREUR */
+#errorPanel {
+    padding-top: 30px;
+    padding-bottom: 10px;
 }

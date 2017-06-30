@@ -4,12 +4,14 @@
 // pour qu'elles soient plus explicites
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
+// Pour la gestion des erreurs
+use Symfony\Component\HttpFoundation\Request;
 
-// Register global error and exception handlers
+// Enregistre les erreurs globales et les gestionnaires d'exception
 ErrorHandler::register();
 ExceptionHandler::register();
 
-// Register service providers.
+// Fournisseur de service pour l'accés à la DB (Doctrine) et au template Twig.
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
@@ -55,7 +57,37 @@ $app->register(new Silex\Provider\TranslationServiceProvider());
 // Fournisseur de services pour tester et valider les champs de nos formulaires
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 
-// Register services.
+// Fournisseur de services pour la journalisation (Librairie Monolog)
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => __DIR__.'/../log/projet3.log',
+    'monolog.name' => 'Projet3',
+    'monolog.level' => $app['monolog.level']
+));
+
+// Gestionnaire d'erreurs
+$app->error(function (\Exception $e, Request $request, $code) use ($app) {
+    switch ($code) {
+        case 403:
+            $message = 'Accès refusé.';
+            $image = '404-ghost.jpg';
+            $bouton = 'btn-danger';
+            break;
+        case 404:
+            $message = 'La ressource demandée n\'a pas pu été trouvée.';
+            $image = '404.png';
+            $bouton = 'btn-success';
+            break;
+        default:
+            $message = "Quelque chose ne va pas :-(.";
+            $image = '404-ghost.jpg';
+            $bouton = 'btn-default';
+    }
+    return $app['twig']->render('error.html.twig', array('message' => $message, 'img' => $image, 'bouton' => $bouton));
+});
+
+
+
+// Enregistrements des services Episode, User, Comment.
 $app['dao.episode'] = function ($app) {
     return new Projet3\DAO\EpisodeDAO($app['db']);
 };

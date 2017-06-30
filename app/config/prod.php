@@ -20,3 +20,7 @@
   //   'user'    =>'php',
   //   'password'=>'1234',
   // );
+
+// Définition du niveau de log
+$app['monolog.level'] = 'WARNING';
+// Seul les avertissements et les erreurs seront journalisés

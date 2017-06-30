@@ -19,10 +19,10 @@ _________________________________________________________
 
 Ce commit comprends les actions suivantes :
 - Création du fichier *composer.json* permettant de récupérer un certains nombres d'éléments pour automatiser notre application :
--- MiniFramework Silex
--- Module Doctrine/DBAL
--- Module Twig
--- Twig-bridge et asset pour simplifier la partie mise en forme (CSS, JS, etc...)
+- [x] MiniFramework Silex
+- [x] Module Doctrine/DBAL
+- [x] Module Twig
+- [x] Twig-bridge et asset pour simplifier la partie mise en forme (CSS, JS, etc...)
 - Création des répertoires : **bootstrap**, **jquery** et **js**
 
 ___________________________________________________________
@@ -40,9 +40,9 @@ ___________________________________________________________
 
 Ce commit contient :
 - Création des 3 premiers fichiers *MVC* de base pour lister les episodes.
--- *Index.php* : qui contient maintenant que le lien entre acces aux données(model.php) et présentation (View.php)
--- *Model.php* : qui contient la fonction qui se connecte à la base et execute la requete d'affichage de tous les episodes
--- *View.php* : qui contient le code HTML et PHP permettant l'affichage basic des episodes.
+- [x] *Index.php* : qui contient maintenant que le lien entre acces aux données(model.php) et présentation (View.php)
+- [x] *Model.php* : qui contient la fonction qui se connecte à la base et execute la requete d'affichage de tous les episodes
+- [x] *View.php* : qui contient le code HTML et PHP permettant l'affichage basic des episodes.
 - Mise en place des fichiers dans les répertoires MVC de base *(SRC=model.php)* , *(VIEWS=view.php)*, *(WEB=index.php)*.
 - Création du fichier *routes.php* dans le répertoire **APP** suite à l'installation de Silex dans le commit 2.
 
@@ -107,6 +107,8 @@ Ce commit contient :
 - Ajustement visuel avec ajout de CSS et de balises BootStrap.
 - Ajout de l'extension Text de twig permettant en autre d'utiliser la fonction truncate.
 
+___________________________________________________________
+
 ## 10eme Commit : Gestion de la sécurité Administration
 
 Ce commit contient :
@@ -116,6 +118,8 @@ Ce commit contient :
 - Modification du fichier **routes.app** pour créer la route vers la page **login**.
 - Création de la vue **login.html.twig** associée à la route d'authentification.
 - Modification de la vue **layout.html.twig** pour ajouter à la barre de navigation un menu déroulant associé à l'éventuel utilisateur authentifié.
+
+___________________________________________________________
 
 ## 11eme Commit : Création du BackOffice - 1ere version
 
@@ -144,6 +148,7 @@ Ce commit contient :
 - Ajout des methodes save et delete de la classe UserDAO
 - Modification du fichier routes.php pour la gestion des utilisateurs
 
+___________________________________________________________
 
 ## 12eme Commit : Signaler un Commentaire comme Spam
 
@@ -157,6 +162,8 @@ Ce commit contient :
 - Ajout d'une route spécifique **/episode/{id}/spam** dans le fichier **routes.php**.
 - Modification du fichier CSS afin d'obtenir un affichage des commentaires imbriqués en décalé.
 - Intégration manuelle des fichier TinyMCE dans **lib\tinymce**.
+
+___________________________________________________________
 
 ## 13eme Commit : Integration de TinyMCE et reponse Commentaire
 
@@ -180,12 +187,15 @@ Ce commit contient :
 **Ajout d'un data-id sur le bouton servant à répondre ainsi qu'une classe reply**.
 - Création du fichier projet3.js contenant le traitement nécessaire pour afficher le formulaire du commentaire sous le commentaire de la réponse.
 
+___________________________________________________________
+
 ## 14eme Commit : Correction fichier CommentDAO et vue layout
 
 Ce commit contient :
 - Modification du fichier CommentDAO pour le test des champs niveau et Pseudo
 - Modification du fichier layout pour préciser la version du Site : Version Commentaire basic
 
+___________________________________________________________
 
 ## 15eme Commit : Ajustement visuel des episodes, commentaires
 
@@ -199,6 +209,8 @@ Ce commit contient :
 - Modification de la vue episode_form.html.twig
 - Modification du fichier porjet3.js
 - Modification de la méthode **save()** de la classe **EpisodeDAO**.
+
+___________________________________________________________
 
 ## 16eme Commit : Modif proc Spam - Réorganisation des controleurs - Ajout tests fonctionnels
 
@@ -217,10 +229,14 @@ Ce commit contient :
 - [x] Création du fichier *phpunit.xml.dist* pour faciliter les tests.
 - [x] Modification du fichier *dev.php* en utilisant l'adresse IP au lieu de localhost
 
+___________________________________________________________
+
 ## 16 bis Commit : Ajout de 5 fichiers pour tests fonctionnels
 
 Ce commit contient :
 - Ajout de 5 fichiers pour tests fonctionnels suite à un oubli d'un git add .
+
+___________________________________________________________
 
 ## 17eme Commit : 1er recettage
 
@@ -232,9 +248,26 @@ Ce commit contient :
 - Correction methode delete() dans la classe EpisodeDAO
 - Correction Initialisation de TinyMCE
 
+___________________________________________________________
+
 ## 18eme Commit : 2eme recettage
 
 Ce commit contient :
 - Correction du signalement d'un commentaire qui doublait le commentaire saisie juste avant.
 - Ajout de la colonne **Date** pour les **episodes** et les **commentaires** avec la possiblité de tri avec le format datatable.
 - Ajout d'un message d'alerte si le titre et/ou le contenu de l'episode ne sont pas renseignés.
+
+___________________________________________________________
+
+## 19eme Commit : Journalisation et Gestion des erreurs
+
+Ce commit contient :
+- Ajout dans composer.json de la librairie **Monolog**.
+- Modification des fichiers **dev.php** et **prod.php** afin de définir le niveau de log.
+- Ajoutons le nouveau fournisseur de service dans le fichier **app.php**.
+- Création du répertoire **log** permettant de stocker la journalisation.
+- Création d'un fichier **.gitignore** dans le répertoire log permettant d'ajouter le répertoire log tout en excluant son contenu.
+- Ajout d'un *use Silex\Application;* afin que Monolog soit reconnu aussi dans nos classes **EpisodeDAO** et **CommentDAO**.
+- Ajout du fournisseur de service **error handler** dans le fichier **app.php**
+- Création d'une page **error.html.twig** permettant d'afficher le message en conservant la mise en forme du site.
+- Ajustement visuel onglets Administration

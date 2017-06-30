@@ -2,20 +2,21 @@
 
 namespace Projet3\DAO;
 
+use Silex\Application;
 use Projet3\Domain\Episode;
 
 class EpisodeDAO extends DAO
 {
     /**
-     * Return a list of all articles, sorted by date (most recent first).
+     * Renvoie une liste de tous les episodes, triés par id (les plus récents en premier).
      *
-     * @return array A list of all articles.
+     * @return un tableau d'une liste de tous les episodes
      */
     public function findAll() {
         $sql = "select * from episodes order by dateCrea desc";
         $result = $this->getDb()->fetchAll($sql);
 
-        // Convert query result to an array of domain objects
+        // Convertie le resultat de larequete en un tableau d'objets
         $episodes = array();
         foreach ($result as $row) {
             $episodeId = $row['id'];
@@ -25,11 +26,11 @@ class EpisodeDAO extends DAO
     }
 
     /**
-     * Returns an episode matching the supplied id.
+     * Renvoie un épisode correspondant à l'identifiant fourni.
      *
      * @param integer $id
      *
-     * @return \Projet3\Domain\Episode|throws an exception if no matching episode is found
+     * @return \Projet3\Domain\Episode ou une exception si aucun episode n'est trouvé
      */
     public function find($id) {
         $sql = "select * from episodes where id=?";
@@ -42,11 +43,11 @@ class EpisodeDAO extends DAO
     }
 
     /**
-     * Returns an episode matching the idcom Comment.
+     * Renvoie un episode correspondant à l'identifiant du commentaire
      *
      * @param integer $id
      *
-     * @return \Projet3\Domain\Episode|throws an exception if no matching episode is found
+     * @return \Projet3\Domain\Episode| ou une exception si aucun episode n'est trouvé
      */
     public function findComm($id) {
         $sql = "select * FROM episodes inner join commentaires on episodes.id = commentaires.epID where commentaires.idcom = ?";
@@ -59,12 +60,13 @@ class EpisodeDAO extends DAO
     }
 
     /**
-     * Saves an episode into the database.
+     * Sauvegarde un episode dans la base
      *
-     * @param Episode $episode Objet episode
+     * @param \Projet3\Domain\Episode
      */
     public function save(Episode $episode) {
-        error_log('je suis dans la méthode save');
+
+        $app['monolog']->addInfo("je suis dans la méthode save");
         $episodeData = array(
             'titre' => $episode->getTitre(),
             'contenu' => $episode->getContenu(),
@@ -89,20 +91,21 @@ class EpisodeDAO extends DAO
     }
 
     /**
-     * Removes an episode from the database.
+     * Suppression d'un episode de la BD.
      *
      * @param integer $id The episode id.
      */
     public function delete($id) {
-        // Delete the episode
+        // Supprime l'episode
         $this->getDb()->delete('episodes', array('id' => $id));
     }
 
     /**
-     * Creates an Article object based on a DB row.
+     * Création d'un objet Episode basé sur les champs de la BD
      *
-     * @param array $row The DB row containing Article data.
-     * @return \MicroCMS\Domain\Article
+     * @param array $row contenant les données de l'episode
+     *
+     * @return \Projet3\Domain\Episode
      */
     protected function buildDomainObject(array $row) {
         $episode = new Episode();
