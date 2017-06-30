@@ -17,7 +17,7 @@
     public function signalCommentAction ($id, Application $app){
       error_log('Je passe par la bonne route');
       $comment = $app['dao.comment']->find($id);
-      $comment = $app['dao.comment']->spamC($comment);
+      $app['dao.comment']->spamC($comment);
 
       return $app->json($comment, 200);  // 200 = OK
     }

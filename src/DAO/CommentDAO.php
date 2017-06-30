@@ -147,6 +147,7 @@ class CommentDAO extends DAO
         error_log('Test $newValeur :' .$newValeur);
         // error_log('Test $comment->getIdcom' .var_dump('Test $comment->getIdcom : '.$comment->getIdcom()));
         $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
+
     }
 
 

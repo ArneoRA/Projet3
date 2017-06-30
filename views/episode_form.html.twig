@@ -56,46 +56,44 @@
     <script>
         tinymce.init({
             selector: "textarea",
-            height: "480",
-            plugins: "save",
-            style_formats: [
-                {
-                  selector: 'p',
-                  styles: {
-                    'text-align': 'justify',
-                    'font-family': 'Georgia, Tahoma, Verdana',
-                    'font-size': '1.5em'
-                  }
-                }
-            ]
+            height: "480"
         });
-        console.log('Je passe dans le block javascript dans tiny');
+        // console.log('Je passe dans le block javascript dans tiny');
     </script>
+
+    {# Script pour tester si le titre ou le contenu sont vides #}
     <script type="text/javascript">
-        console.log('Je passe dans le block javascript dans valider()');
+        // console.log('Je passe dans le block javascript dans valider()');
         function valider(){
-            console.log('je passe ici');
             // Déclaration des variables
-            var $tForm = $('#eForm'); // On stocke le formulaire
-            console.log ('Contenu de la variable $tForm : ' + $tForm);
-            var titrEpi = document.getElementById('episode_titre'); //$('#episode_titre');
-            var valtirEpi = titrEpi.value;
-            console.log('la valeur du titre est : ' + valtirEpi);
-            var contEpi = tinyMCE.get('episode_contenu').getContent(); //$('#mceu_25');
+            var titrEpi = document.getElementById('episode_titre');
+            var valTirEpi = titrEpi.value;
+            console.log('Contenu de la variable valTirEpi : ' + valTirEpi);
+            var contEpi = tinyMCE.get('episode_contenu').getContent();
             console.log ('Contenu de la variable contEpi : ' + contEpi);
 
             // Traitement
-            if (!valtirEpi || !contEpi) {
-                console.log ('Le titre est vide : ' + test1);
-                console.log ('Le contenu est vide aussi : ' + contEpi);
+            if (!valTirEpi || !contEpi) {
+                console.log ('Le titre est : ' + valTirEpi);
+                console.log ('Le contenu est  : ' + contEpi);
                 // Mettre un message d'avertissement ICI //
-                // msgAlerte.innerHTML = "Veuillez saisir un titre et un contenu !!";
+                alert('Il faut qq chose');
+                // $("#msgAlerte").html("Il faut qq chose");
+                //
+                // Les versions ci-dessous ne fonctionnent pas et post directement le formulaire malgré le return false;
+                // document.getElementById("msgAlerte").innerHTML = "Alerte il faut qq chose";
+                // var messageElt = document.createElement("p");
+                // messageElt.textContent = "Merci de saisir un titre et un contenu pour que l\'épisode soit enregistré";
+                // document.getElementById("msgAlerte").appendChild(messageElt);
+                // // On recharge la page
+                // setTimeout("location.reload();", 2000);
+
                 return false;
 
             } else{
-                console.log ('Le titre est devenu : ' + test1);
+                console.log ('Le titre est devenu : ' + valTirEpi);
                 console.log ('Le contenu est devenu : ' + contEpi);
-                return false;
+                return true;
             }
         }
 

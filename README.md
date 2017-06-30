@@ -302,11 +302,15 @@ Ce commit contient :
 - Création d'un fichier **ApiController.php** qui contient la méthode permettant de *signaler un commentaire*. Elle aussi sous forme d'une méthode de la classe **ApiController**.
 - Modification du fichier **routes.php** afin d'associer chaque route à sa méthode.
 - **Ajout de tests fonctionnels** :
-[x] Installer le composant *PHPUnit* avec le fichier composer.json
-[x] Création de l'arborescence *tests/Tests* à la racine
-[x] Création dans ce répertoire du fichier *AppTest.php*
-[x] Création du fichier *phpunit.xml.dist* pour faciliter les tests.
-[x] Modification du fichier *dev.php* en utilisant l'adresse IP au lieu de localhost
+- [x] Installer le composant *PHPUnit* avec le fichier composer.json
+- [x] Création de l'arborescence *tests/Tests* à la racine
+- [x] Création dans ce répertoire du fichier *AppTest.php*
+- [x] Création du fichier *phpunit.xml.dist* pour faciliter les tests.
+- [x] Modification du fichier *dev.php* en utilisant l'adresse IP au lieu de localhost
 
+## 27eme Commit : 2eme recettage
 
+Ce commit contient :
+- Correction de l'initialisation de TinyMCE dans le fichier episode_form.html.twig.
+- Correction de la procédure de signalement d'un commentaire (suite bug du doublement du commentaire en cas de signalement). **projet3.js**
 

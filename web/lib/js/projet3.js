@@ -52,8 +52,8 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
             // On ajoute la classe succes pour la mise en forme de l'affichage
             document.getElementById("info").className = "alert ";
             document.getElementById("info").className += "alert-success";
-            // On recharge la page
-            setTimeout("location.reload();", 2000);
+            // // On recharge la page
+            // setTimeout("location.reload();", 2000);
         });
 
 
