@@ -3,7 +3,7 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
     $('.reply').click(function(e){ // Des qu'on click sur le bouton avec la class reply on execute la fonction
         e.preventDefault(); // On court-circuite l'evenement
         // ====================== On stocke les élèments dans des variables ========================== //
-        console.log('Je suis activé');
+        // console.log('Je suis activé');
         var $form = $('#comment'); // on stock le formulaire dont l'id est "comment_contenu"
         var Vthis = $(this); // on stocke l'élement que nous avons cliqué
         var parent_id = Vthis.data('id'); // On stocke la valeur du parentid
@@ -11,13 +11,13 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         var commParentId = document.getElementById('comment_parentid'); // On stock le champ Parent_id du formulaire
         var commNiveau = Vthis.data('niv'); // On stock le champ Niveau du formulaire
         var test = commParentId.value;
-        console.log($form);
-        console.log(Vthis);
-        console.log(parent_id);
-        console.log($comment);
-        console.log(test);
-        console.log(commNiveau);
-        console.log(commNiveau + 1);
+        // console.log($form);
+        // console.log(Vthis);
+        // console.log(parent_id);
+        // console.log($comment);
+        // console.log(test);
+        // console.log(commNiveau);
+        // console.log(commNiveau + 1);
 
         // ====================== Traitement =========================== //
         // On modifie le titre du formulaire pour que le H3 corresponde à une réponse
@@ -37,13 +37,8 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         // ====================== On stocke les élèments dans des variables ========================== //
         var Vthis = $(this); // on stocke l'élement que nous avons cliqué
         var idcom = Vthis.data('id'); // On stocke la valeur de l'identifiant du commentaire 'data-id)
-        // var valspam = Vthis.data('sp'); // On stocke la valeur du champ spam (data-sp)
-        // var epid = Vthis.data('ep'); // On Stocke la valeur de l'episode (data-ep)
         console.log('Identifiant du commentaire : ' + idcom);
-        // console.log('Identifiant de l\'episode : '+ epid);
-        // console.log ('La valeur SPAM est : ' + valspam);
-        // var newValSpam = valspam + 1;
-        // console.log('La valeur à enregistrer sera donc : ' + newValSpam);
+
         // ====================== Traitement par requete AJAX =========================== //
         ajaxGet("http://projet3/api/comment/" + idcom + "/spam", function (reponse){
             var messageElt = document.createElement("p");
@@ -52,11 +47,7 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
             // On ajoute la classe succes pour la mise en forme de l'affichage
             document.getElementById("info").className = "alert ";
             document.getElementById("info").className += "alert-success";
-            // On recharge la page
-            setTimeout("location.reload();", 2000);
         });
-
-
 
     })
 

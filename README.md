@@ -1,5 +1,6 @@
 # ============== Projet3 ===============
 ## Repository sur le Projet 3 - Formation OpenClassrooms
+### Version Commentaire basic
 _________________________________________________________
 
 ## 1er Commit : Mise en place Architecture MVC de base
@@ -106,7 +107,7 @@ Ce commit contient :
 - Ajustement visuel avec ajout de CSS et de balises BootStrap.
 - Ajout de l'extension Text de twig permettant en autre d'utiliser la fonction truncate.
 
-## 10 Commit : Gestion de la sécurité Administration
+## 10eme Commit : Gestion de la sécurité Administration
 
 Ce commit contient :
 - Gestion de la sécurité : Création d'une table **utilisateurs**, de la classe **User** et de la classe DAO **UserDAO**.
@@ -221,7 +222,7 @@ Ce commit contient :
 Ce commit contient :
 - Ajout de 5 fichiers pour tests fonctionnels suite à un oubli d'un git add .
 
-## 17 Commit : 1er recettage
+## 17eme Commit : 1er recettage
 
 Ce commit contient :
 - Modification de la route pour afficher le detail de l'episode. Remise à zero du formulaire apres envoi.
@@ -231,3 +232,9 @@ Ce commit contient :
 - Correction methode delete() dans la classe EpisodeDAO
 - Correction Initialisation de TinyMCE
 
+## 18eme Commit : 2eme recettage
+
+Ce commit contient :
+- Correction du signalement d'un commentaire qui doublait le commentaire saisie juste avant.
+- Ajout de la colonne **Date** pour les **episodes** et les **commentaires** avec la possiblité de tri avec le format datatable.
+- Ajout d'un message d'alerte si le titre et/ou le contenu de l'episode ne sont pas renseignés.

@@ -109,15 +109,18 @@
 
     {# JavaScript pour tableau dynamique #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/datetime-moment.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
+            $.fn.dataTable.moment('DD/MM/YYYY');
             // Gestion Datatable pour les episodes
             $('#TabEpisode').DataTable({
                 "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
                 "pageLength": 6, // Permet de définir le nombre de lignes par page
                 "aoColumnDefs": [
-                  { "bSortable": false, "aTargets": [ 2 ] } // Retire le tri sur la colonne des actions
+                  { "bSortable": false, "aTargets": [ 3 ] } // Retire le tri sur la colonne des actions
                 ]
             });
 
@@ -126,7 +129,7 @@
                 "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
                 "pageLength": 8, // Permet de définir le nombre de lignes par page
                 "aoColumnDefs": [
-                  { "bSortable": false, "aTargets": [ 4 ] } // Retire le tri sur la colonne des actions
+                  { "bSortable": false, "aTargets": [ 5 ] } // Retire le tri sur la colonne des actions
                 ]
             });
 

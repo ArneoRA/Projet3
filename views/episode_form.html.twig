@@ -10,7 +10,7 @@
     <h2 class="text-center">{{ block('title') }}</h2>
 
     {% for flashMessage in app.session.flashbag.get('success') %}
-    <div class="alert alert-success">
+    <div class="alert alert-success" id="msgAlerte">
         {{ flashMessage }}
     </div>
     {% endfor %}
@@ -58,33 +58,32 @@
             selector: "textarea",
             height: "480"
         });
-        console.log('Je passe dans le block javascript dans tiny');
+        // console.log('Je passe dans le block javascript dans tiny');
     </script>
+
     <script type="text/javascript">
         console.log('Je passe dans le block javascript dans valider()');
         function valider(){
-            console.log('je passe ici');
             // Déclaration des variables
-            var $tForm = $('#eForm'); // On stocke le formulaire
-            console.log ('Contenu de la variable $tForm : ' + $tForm);
-            var titrEpi = document.getElementById('episode_titre'); //$('#episode_titre');
-            var valtirEpi = titrEpi.value;
-            console.log('la valeur du titre est : ' + valtirEpi);
-            var contEpi = tinyMCE.get('episode_contenu').getContent(); //$('#mceu_25');
-            console.log ('Contenu de la variable contEpi : ' + contEpi);
+            var titrEpi = document.getElementById('episode_titre');
+            var valTirEpi = titrEpi.value;
+            var contEpi = tinyMCE.get('episode_contenu').getContent();
 
             // Traitement
-            if (!valtirEpi || !contEpi) {
-                console.log ('Le titre est vide : ' + test1);
-                console.log ('Le contenu est vide aussi : ' + contEpi);
+            if (!valTirEpi || !contEpi) {
+                console.log ('Contenu de la variable valTriEpi pendant test : ' + valTirEpi);
+                console.log ('Contenu de la variable contEpi pendant test : ' + contEpi);
                 // Mettre un message d'avertissement ICI //
-                // msgAlerte.innerHTML = "Veuillez saisir un titre et un contenu !!";
+                alert('Infos blog : \n\nVous devez saisir : \n1 Titre\n&\n1 Contenu \npour que l\'épisode soit enregistré.');
+                // debugger;
+                // $("#msgAlerte").html("Vous devez saisir : 1 Titre & 1 Contenu pour que l\'épisode soit enregistré.");
+                // debugger;
                 return false;
 
             } else{
-                console.log ('Le titre est devenu : ' + test1);
+                console.log ('Le titre est devenu : ' + valTirEpi);
                 console.log ('Le contenu est devenu : ' + contEpi);
-                return false;
+                return true;
             }
         }
 

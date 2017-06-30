@@ -32,6 +32,7 @@
                 <table id="TabEpisode" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th>Date de Création</th>
                             <th>Titre</th>
                             <th>Contenu</th>
                             <th>Actions Possibles</th>
@@ -39,16 +40,14 @@
                     </thead>
                     {% for episode in episodes %}
                     <tr>
+                        <td>{{episode.dateCrea | date("d/m/Y")}}</td>
                         <td><a class="episodeTitle" href="{{ path('episode', { 'id': episode.id }) }}">{{ episode.titre }}</a></td>
                         <td class="td_contenu">{{ episode.contenu | truncate(350) | raw }}</td>
                         <td>
-                            <div class="bt-action">
-                                <a href="{{ path('admin_episode_edit', { 'id': episode.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                            </div>
-                            <div class="bt-action">
-                                <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#episodeDialog{{ episode.id }}"><span class="glyphicon glyphicon-remove"></span>
+                            <a href="{{ path('admin_episode_edit', { 'id': episode.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+
+                            <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#episodeDialog{{ episode.id }}"><span class="glyphicon glyphicon-remove"></span>
                             </button>
-                            </div>
 
                             <div class="modal fade" id="episodeDialog{{ episode.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -84,6 +83,7 @@
                         <thead>
                             <tr>
                                 <th>Signaler</th>
+                                <th>Date Commentaire</th>
                                 <th>Episode</th>
                                 <th>Auteur</th>
                                 <th>Message</th>
@@ -93,17 +93,16 @@
                         {% for comment in comments %}
                         <tr>
                             <td><span class="badge btn-danger">{{ comment.spam }}</span></td>
+                            <td>{{comment.dateCreat | date("d/m/Y")}}</td>
                             <td><a class="episodeTitle" href="{{ path('episode', { 'id': comment.episode.id }) }}">{{ comment.episode.titre }}</a></td>
                             <td>{{ comment.pseudo }}</td>
                             <td class="td_contenu">{{ comment.contenu | truncate(100,true,'...') }}</td>
                             <td>
-                                <div class="bt-action">
-                                    <a href="{{ path('admin_comment_edit', { 'id': comment.idcom }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                </div>
-                                <div class="bt-action">
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.idcom }}"><span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </div>
+                                <a href="{{ path('admin_comment_edit', { 'id': comment.idcom }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+
+                                <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.idcom }}"><span class="glyphicon glyphicon-remove"></span>
+                                </button>
+
                                 <div class="modal fade" id="commentDialog{{ comment.idcom }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -152,13 +151,11 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <div class="bt-action">
-                                    <a href="{{ path('admin_user_edit', { 'id': user.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                </div>
-                                <div class="bt-action">
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ user.id }}"><span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </div>
+                                <a href="{{ path('admin_user_edit', { 'id': user.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+
+                                <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ user.id }}"><span class="glyphicon glyphicon-remove"></span>
+                                </button>
+
                                 <div class="modal fade" id="userDialog{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

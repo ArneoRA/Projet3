@@ -12,7 +12,7 @@ class EpisodeDAO extends DAO
      * @return array A list of all articles.
      */
     public function findAll() {
-        $sql = "select * from episodes order by id desc";
+        $sql = "select * from episodes order by dateCrea desc";
         $result = $this->getDb()->fetchAll($sql);
 
         // Convert query result to an array of domain objects
