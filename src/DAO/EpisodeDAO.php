@@ -64,25 +64,31 @@ class EpisodeDAO extends DAO
      *
      * @param \Projet3\Domain\Episode
      */
-    public function save(Episode $episode) {
+    public function save(Episode $episode, Application $app) {
 
         $app['monolog']->addInfo("je suis dans la méthode save");
-        $episodeData = array(
-            'titre' => $episode->getTitre(),
-            'contenu' => $episode->getContenu(),
-            );
         // var_dump($episodeData['contenu']);
-        if (!isset($episodeData['contenu'])) {
-            throw new \Exception('Le contenu est null, donc impossible d\'enregistrer le contenu');
-            die();
-
-        }
 
         if ($episode->getId()) {
             // L'épisode a déjà été enregistré --> Mise à jour
+            $episodeData = array(
+            'titre' => $episode->getTitre(),
+            'contenu' => $episode->getContenu(),
+            'dateCrea' => $episode->getDateCrea(),
+            'dateModif' => date("Y-m-d H:i:s")
+            );
             $this->getDb()->update('episodes', $episodeData, array('id' => $episode->getId()));
         } else {
             // L'épisode n'a jamais été enregistré --> insertion
+            $episodeData = array(
+            'titre' => $episode->getTitre(),
+            'contenu' => $episode->getContenu(),
+            'dateCrea' => date("Y-m-d H:i:s")
+            );
+            if (!isset($episodeData['contenu'])) {
+                throw new \Exception('Le contenu est null, donc impossible d\'enregistrer le contenu');
+                die();
+            }
             $this->getDb()->insert('episodes', $episodeData);
             // On récupére le dernier identifiant enregistré
             $id = $this->getDb()->lastInsertId();

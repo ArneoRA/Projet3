@@ -1,0 +1,17 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Error!{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-5">
+        <img class="img-responsive pull-right" src="{{ asset('/images/' ~ img)}}" alt="Error ghost"/>
+
+    </div>
+    <div class="col-xs-6">
+        <h1>Whoops...<br><small>{{ message }}</small></h1>
+        <a href="/"><button type="button" class="{{ 'btn ' ~ bouton }}"><span class="glyphicon glyphicon-play"></span> Retour à la page d'accueil</button></a>
+    </div>
+</div>
+
+{% endblock %}

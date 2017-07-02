@@ -39,7 +39,7 @@
       $episodeForm = $app['form.factory']->create(EpisodeType::class, $episode);
       $episodeForm->handleRequest($request);
       if ($episodeForm->isSubmitted() && $episodeForm->isValid()) {
-          $app['dao.episode']->save($episode);
+          $app['dao.episode']->save($episode, $app);
           $app['session']->getFlashBag()->add('success', 'L\'Episode a été créé correctement.');
       }
       return $app['twig']->render('episode_form.html.twig', array(
@@ -59,7 +59,7 @@
       $episodeForm = $app['form.factory']->create(EpisodeType::class, $episode);
       $episodeForm->handleRequest($request);
       if ($episodeForm->isSubmitted() && $episodeForm->isValid()) {
-          $app['dao.episode']->save($episode);
+          $app['dao.episode']->save($episode, $app);
           $app['session']->getFlashBag()->add('success', 'L\'Episode a été mis à jour avec succès.');
       }
       return $app['twig']->render('episode_form.html.twig', array(
@@ -177,8 +177,6 @@
      * @param Application $app Application Silex
      */
     public function deleteUserAction ($id, Application $app){
-      // Supprime tous les commentaires associés à l'utilisateur
-      $app['dao.comment']->deleteAllByUser($id);
       // Supprime l'utilisateur
       $app['dao.user']->delete($id);
       $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été supprimé correctement.');

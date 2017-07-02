@@ -271,3 +271,19 @@ Ce commit contient :
 - Ajout du fournisseur de service **error handler** dans le fichier **app.php**
 - Création d'une page **error.html.twig** permettant d'afficher le message en conservant la mise en forme du site.
 - Ajustement visuel onglets Administration
+
+___________________________________________________________
+
+## 20eme Commit : 3eme recettage
+
+Ce commit contient :
+- Correction de la classe CommentDAO pour la suppression d'un utilisateur
+- Modification pour masquer les label parentid et niveau dans le formulaire de modification d'un commentaire.
+- Modification de la vue comment_form.html.twig pour afficher le pseudo (voir si c'est utile avec le client)
+- Modification du fichier projet3.js pour :
+- [x] Application de la fonction **ajax()** de JQuery pour remplacer ma fonction manuelle.
+- [x] Ajout de **location.reload()** pour que la page se refraichisse sinon à partir du 2eme signalement le message ne s'affiche plus mais bien comptabilisé.
+- Ajout dans la classe **Comment.php** de l'attribut **dateModif**.
+- Modification de la méthode **save()** des classes **EpisodeDAO** et **CommentDAO** pour la prise en compte de la date de modification.
+- Modification de la vue **admin.html.twig** pour faire afficher La date de Création si la date de Modification est null sinon on affiche la date de Modification.
+- Modification de la vue **subcomment.html.twig** pour masquer la valeur du champ **Spam**.

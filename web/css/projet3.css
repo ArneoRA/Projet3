@@ -126,6 +126,11 @@ td, th {
   display: inline-block;
 }
 
+label[for="comment_parentid"], label[for="comment_niveau"] {
+  display: none;
+}
+
+
 /* CSS FORMULAIRE USER */
 .well{
   margin-left: 50px;

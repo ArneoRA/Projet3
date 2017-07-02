@@ -106,19 +106,29 @@ class CommentDAO extends DAO
         if ($comment->getParentid() != 0){
             $varNiv = $comment->getNiveau() + 1;
         }
-        $commentData = array(
+
+        if ($comment->getIdcom()) {
+            // Le commentaire existe déjà : Mise à jour
+            $commentData = array(
             'message' =>$comment->getContenu(),
+            'dateCreat' =>$comment->getDateCreat(),
+            'dateModif' =>date("Y-m-d H:i:s"),
             'parent_id' =>$comment->getParentid(),
             'niveau' => $varNiv,
             'epID' => $comment->getEpisode()->getId(),
             'pseudo' =>$comment->getPseudo()
-
             );
-        if ($comment->getIdcom()) {
-            // Le commentaire existe déjà : Mise à jour
             $this->getDb()->update('commentaires', $commentData, array('idcom' => $comment->getIdcom()));
         } else {
             // Le commentaire n'existe pas : Insertion
+            $commentData = array(
+            'message' =>$comment->getContenu(),
+            'dateCreat' =>date("Y-m-d H:i:s"),
+            'parent_id' =>$comment->getParentid(),
+            'niveau' => $varNiv,
+            'epID' => $comment->getEpisode()->getId(),
+            'pseudo' =>$comment->getPseudo()
+            );
             $this->getDb()->insert('commentaires', $commentData);
             /// On récupére le dernier identifiant enregistré
             $id = $this->getDb()->lastInsertId();
@@ -178,6 +188,7 @@ class CommentDAO extends DAO
         $comment->setPseudo($row['pseudo']);
         $comment->setContenu($row['message']);
         $comment->setDateCreat($row['dateCreat']);
+        $comment->setDateModif($row['dateModif']);
         $comment->setParentid($row['parent_id']);
         $comment->setNiveau($row['niveau']);
         $comment->setSpam($row['spam']);

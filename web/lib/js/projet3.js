@@ -40,33 +40,32 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         console.log('Identifiant du commentaire : ' + idcom);
 
         // ====================== Traitement par requete AJAX =========================== //
-        ajaxGet("http://projet3/api/comment/" + idcom + "/spam", function (reponse){
-            var messageElt = document.createElement("p");
-            messageElt.textContent = "Le commentaire a bien été signalé";
-            document.getElementById("info").appendChild(messageElt);
-            // On ajoute la classe succes pour la mise en forme de l'affichage
-            document.getElementById("info").className = "alert ";
-            document.getElementById("info").className += "alert-success";
+        // En utilisant la fonction Ajax de JQUERY au lieu de la fonction du cours
+        $.ajax({
+            url : 'http://projet3/api/comment/' + idcom + '/spam',
+            type : 'GET',
+            dataType : 'html',
+            success : function(code_html, statut){
+                var messageElt = document.createElement("p");
+                messageElt.textContent = "Le commentaire a bien été signalé";
+                // On ajoute la classe succes pour la mise en forme de l'affichage
+                document.getElementById("info").className = "alert ";
+                document.getElementById("info").className += "alert-danger";
+                // On ajoute le message dans la zone info
+                document.getElementById("info").appendChild(messageElt);
+                // On le supprime apres 5 secondes
+                $("#info").fadeOut(5000, function(){
+                    $("#info").empty();
+                    // Sans le rechargement le page, les autres signalements
+                    // ne sont pas affichés mais bien comptabilisés
+                    location.reload();
+                });
+            },
+            error : function(resultat, statut, erreur){
+                alert('Il y a eu un souci : ' + resultat + ' dont l\'erreur est : '+ erreur)
+            }
         });
 
     })
-
-    ////////////////////// Exécute un appel AJAX GET /////////////////////////////////////
-    function ajaxGet(url, callback) {
-        var req = new XMLHttpRequest();
-        req.open("GET", url);
-        req.addEventListener("load", function () {
-            if (req.status >= 200 && req.status < 400) {
-                // Appelle la fonction callback en lui passant la réponse de la requête
-                callback(req.responseText);
-            } else {
-                console.error(req.status + " " + req.statusText + " " + url);
-            }
-        });
-        req.addEventListener("error", function () {
-            console.error("Erreur réseau avec l'URL " + url);
-        });
-        req.send(null);
-    }
 
 });

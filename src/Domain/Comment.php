@@ -34,6 +34,13 @@ class Comment
   private $dateCreat;
 
   /**
+   * Comment dateCrea.
+   *
+   * @var date
+   */
+  private $dateModif;
+
+  /**
    * Comment parentid.
    *
    * @var integer
@@ -80,6 +87,10 @@ class Comment
     return $this->dateCreat;
   }
 
+  public function getDateModif(){
+    return $this->dateModif;
+  }
+
   public function getParentid(){
     return $this->parentid;
   }
@@ -118,6 +129,11 @@ class Comment
 
   public function setDateCreat($dateCreat){
     $this->dateCreat = $dateCreat;
+    return $this;
+  }
+
+  public function setDateModif($dateModif){
+    $this->dateModif = $dateModif;
     return $this;
   }
 

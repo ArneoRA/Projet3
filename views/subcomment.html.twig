@@ -7,8 +7,7 @@
               <strong> {{ comment.pseudo }} a dit : </strong>  {{ comment.contenu | raw }}
               <br>
             </p>
-            <h6 id="infospam">{{comment.spam}}</h6>
-
+            {# <h6 id="infospam">{{comment.spam}}</h6> #}
           </div>
 
           {% if comment.niveau < 3 %}

@@ -18,7 +18,6 @@
       $app['monolog']->addInfo("Je passe par la route signalCommentAction");
       $comment = $app['dao.comment']->find($id);
       $comment = $app['dao.comment']->spamC($comment, $app);
-
       return $app->json($comment, 200);  // 200 = OK
     }
 
