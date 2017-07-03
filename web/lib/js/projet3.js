@@ -46,19 +46,15 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
             type : 'GET',
             dataType : 'html',
             success : function(code_html, statut){
-                var messageElt = document.createElement("p");
-                messageElt.textContent = "Le commentaire a bien été signalé";
-                // On ajoute la classe succes pour la mise en forme de l'affichage
-                document.getElementById("info").className = "alert ";
-                document.getElementById("info").className += "alert-danger";
-                // On ajoute le message dans la zone info
-                document.getElementById("info").appendChild(messageElt);
-                // On le supprime apres 5 secondes
-                $("#info").fadeOut(5000, function(){
+                // On affiche la zone qui est masqué par le CSS
+                $("#info").show();
+                // On ajoute le message d'alerte dans la zone info
+                $('<p>', {
+                    text: 'Le commentaire a bien été signalé'
+                }).appendTo("#info");
+                // On le supprime apres 4 secondes
+                $("#info").fadeOut(4000, function(){
                     $("#info").empty();
-                    // Sans le rechargement le page, les autres signalements
-                    // ne sont pas affichés mais bien comptabilisés
-                    location.reload();
                 });
             },
             error : function(resultat, statut, erreur){

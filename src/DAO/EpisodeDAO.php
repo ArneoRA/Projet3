@@ -13,7 +13,7 @@ class EpisodeDAO extends DAO
      * @return un tableau d'une liste de tous les episodes
      */
     public function findAll() {
-        $sql = "select * from episodes order by dateCrea desc";
+        $sql = "select * from episodes order by id desc";
         $result = $this->getDb()->fetchAll($sql);
 
         // Convertie le resultat de larequete en un tableau d'objets

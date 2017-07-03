@@ -47,8 +47,28 @@
             </div>
         </div>
     {{ form_end(episodeForm) }}
-
     </div>
+    {# Fenetre Modale pour alerter JF #}
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" id="myAlert">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Informations Blog JF</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Pour rappel :</h4>
+                    <p>
+                        Vous devez saisir <strong><em>un titre ET un contenu</em></strong> pour que l'épisode soit enregistré.<br>
+                        Merci.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Ok Compris</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 {% endblock %}
 
 {% block javascript %}
@@ -73,11 +93,8 @@
             if (!valTirEpi || !contEpi) {
                 console.log ('Contenu de la variable valTriEpi pendant test : ' + valTirEpi);
                 console.log ('Contenu de la variable contEpi pendant test : ' + contEpi);
-                // Mettre un message d'avertissement ICI //
-                alert('Infos blog : \n\nVous devez saisir : \n1 Titre\n&\n1 Contenu \npour que l\'épisode soit enregistré.');
-                // debugger;
-                // $("#msgAlerte").html("Vous devez saisir : 1 Titre & 1 Contenu pour que l\'épisode soit enregistré.");
-                // debugger;
+                // On affiche la fenetre modale contenant le message d'alerte //
+                $('#myAlert').modal('show');
                 return false;
 
             } else{

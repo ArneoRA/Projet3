@@ -287,3 +287,12 @@ Ce commit contient :
 - Modification de la méthode **save()** des classes **EpisodeDAO** et **CommentDAO** pour la prise en compte de la date de modification.
 - Modification de la vue **admin.html.twig** pour faire afficher La date de Création si la date de Modification est null sinon on affiche la date de Modification.
 - Modification de la vue **subcomment.html.twig** pour masquer la valeur du champ **Spam**.
+
+___________________________________________________________
+
+## 21eme Commit : Corrections bugs
+
+Ce commit contient :
+- Correction du bug doublant le dernier commentaire saisie apres avoir signaler un commentaire : **fichier projet3.js**
+- Correction du bug n'affichant plus le message indiquant la bonne comptabilisation du signalement : **fichier projet3.js**
+- Correction de la vue **episode_form.html.twig** pour qu'il affiche correctement la fenetre d'alerte. j'ai choisi d'utiliser une **fenetre modale**.

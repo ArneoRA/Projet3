@@ -22,7 +22,7 @@ class CommentDAO extends DAO
      * @return Tableau contenant l'ensemble des commentaires.
      */
     public function findAll() {
-        $sql = "select * from commentaires order by spam desc";
+        $sql = "select * from commentaires order by idcom desc";
         $result = $this->getDb()->fetchAll($sql);
 
         // Convertie le resultat de la requete en un tableau d'objet

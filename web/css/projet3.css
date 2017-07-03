@@ -101,6 +101,9 @@ h2, h3{
   text-align: right;
 }
 
+#info{
+  display: none;
+}
 
 /* CSS POUR LES TABLEAUX DYNAMIQUES & ADMIN */
 td, th {
