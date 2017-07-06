@@ -35,12 +35,12 @@
       $comment->setEpisode($episode);
 
       $commentForm = $app['form.factory']->create(CommentType::class, $comment);
+        // On soumet le formulaire avec les données de la requete
         $commentForm->handleRequest($request);
+        // On effectue nos tests avant d'enregistrer
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
             $app['session']->getFlashBag()->add('success', 'Votre commentaire a été ajouté avec succes.');
-
-
         }
         // Réinitialisation du formulaire commentaire
         $comment = new Comment();

@@ -290,9 +290,22 @@ Ce commit contient :
 
 ___________________________________________________________
 
-## 21eme Commit : Corrections bugs
+## 21eme Commit : Corrections derniers bugs
 
 Ce commit contient :
 - Correction du bug doublant le dernier commentaire saisie apres avoir signaler un commentaire : **fichier projet3.js**
 - Correction du bug n'affichant plus le message indiquant la bonne comptabilisation du signalement : **fichier projet3.js**
 - Correction de la vue **episode_form.html.twig** pour qu'il affiche correctement la fenetre d'alerte. j'ai choisi d'utiliser une **fenetre modale**.
+
+
+___________________________________________________________
+
+## 22eme Commit : Ameliorations et Tests navigateurs IE Firefox
+
+Ce commit contient :
+- **Remplacement de l'affichage de la date (DD/MM/AAAA) par une date relative (Il y a xxx)** à la date du jour. Pour cela, je suis intervenu sur les fichiers suivants :
+- [x] : Création d'un extension de Twig basée sur l'extension date.php se trouvant dans le répertoire **\vendor\twig\extensions\lib\Twig\Extensions\Extension**.
+- [x] : Modification de mon fichier **app.php** afin de rajouter cette extension au niveau du fournisseur de service Twig.
+- [x] : Modification de la vue admin.html.twig afin de conserver l'ordre de tri sur la date pour les épisodes et les commentaires (**td data-order=" nomVariable | date("d/m/Y") }}">**) tout en affichant la date relative en utilisant l'extension modifiée pour un affichage français (Nom de l'extension : **Twig_Extensions_Extension_DateFr**).
+- Tests de fonctionnalité sur les navigateurs IE 11 et Firefox 54
+- Mise en commentaire les tests console.log sur mon JS.

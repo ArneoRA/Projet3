@@ -82,7 +82,7 @@
     </script>
 
     <script type="text/javascript">
-        console.log('Je passe dans le block javascript dans valider()');
+        // console.log('Je passe dans le block javascript dans valider()');
         function valider(){
             // Déclaration des variables
             var titrEpi = document.getElementById('episode_titre');
@@ -91,15 +91,15 @@
 
             // Traitement
             if (!valTirEpi || !contEpi) {
-                console.log ('Contenu de la variable valTriEpi pendant test : ' + valTirEpi);
-                console.log ('Contenu de la variable contEpi pendant test : ' + contEpi);
+                // console.log ('Contenu de la variable valTriEpi pendant test : ' + valTirEpi);
+                // console.log ('Contenu de la variable contEpi pendant test : ' + contEpi);
                 // On affiche la fenetre modale contenant le message d'alerte //
                 $('#myAlert').modal('show');
                 return false;
 
             } else{
-                console.log ('Le titre est devenu : ' + valTirEpi);
-                console.log ('Le contenu est devenu : ' + contEpi);
+                // console.log ('Le titre est devenu : ' + valTirEpi);
+                // console.log ('Le contenu est devenu : ' + contEpi);
                 return true;
             }
         }

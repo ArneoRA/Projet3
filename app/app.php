@@ -19,6 +19,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 // Fournisseur de service pour l'extension Text de Twig et ainsi utiliser la fonction truncate
 $app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
     $twig->addExtension(new Twig_Extensions_Extension_Text());
+    // Extension personnelle basée sur l'extension de base Twig_Extensions_Extension_Date()
+    $twig->addExtension(new Twig_Extensions_Extension_DateFr());
     return $twig;
 });
 // Fournisseur de service pour faciliter la mise en forme Fichier CSS, BootStrap, JS

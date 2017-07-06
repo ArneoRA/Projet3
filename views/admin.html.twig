@@ -32,7 +32,7 @@
                 <table id="TabEpisode" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Date de Modification</th>
+                            <th>Derniere Modification</th>
                             <th>Titre</th>
                             <th>Contenu</th>
                             <th>Actions Possibles</th>
@@ -40,13 +40,17 @@
                     </thead>
                     {% for episode in episodes %}
                     <tr>
-                        <td>
-                            {% if episode.DateModif == null %}
-                                {{episode.dateCrea | date("d/m/Y")}}
-                            {% else %}
-                                {{episode.DateModif | date("d/m/Y")}}
-                            {% endif %}
-                        </td>
+                        {% if episode.DateModif == null %}
+                            <td data-order="{{episode.dateCrea | date("d/m/Y") }}">
+                                {# <span data-livestamp="{{ episode.dateCrea }}"></span> #}
+                                {{ episode.dateCrea | time_diff }}
+                            </td>
+                        {% else %}
+                            <td data-order="{{episode.DateModif  | date("d/m/Y") }}">
+                                {# <span data-livestamp="{{ episode.DateModif }}"></span> #}
+                                {{ episode.DateModif | time_diff }}
+                            </td>
+                        {% endif %}
                         <td><a class="episodeTitle" href="{{ path('episode', { 'id': episode.id }) }}">{{ episode.titre }}</a></td>
                         <td class="td_contenu">{{ episode.contenu | truncate(350) | raw }}</td>
                         <td>
@@ -89,7 +93,8 @@
                         <thead>
                             <tr>
                                 <th>Signaler</th>
-                                <th>Date Commentaire</th>
+                                <th>Date du commentaire</th>
+                                <th>Derniere modification</th>
                                 <th>Episode</th>
                                 <th>Auteur</th>
                                 <th>Message</th>
@@ -100,6 +105,7 @@
                         <tr>
                             <td><span class="badge btn-danger">{{ comment.spam }}</span></td>
                             <td>{{comment.dateCreat | date("d/m/Y")}}</td>
+                            <td>{{comment.dateModif | time_diff}}</td>
                             <td><a class="episodeTitle" href="{{ path('episode', { 'id': comment.episode.id }) }}">{{ comment.episode.titre }}</a></td>
                             <td>{{ comment.pseudo }}</td>
                             <td class="td_contenu">{{ comment.contenu | truncate(100,true,'...') }}</td>

@@ -33,11 +33,11 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
     $('.spamc').click(function(e){
         e.preventDefault();
 
-        console.log('je suis dans spamc');
+        // console.log('je suis dans spamc');
         // ====================== On stocke les élèments dans des variables ========================== //
         var Vthis = $(this); // on stocke l'élement que nous avons cliqué
         var idcom = Vthis.data('id'); // On stocke la valeur de l'identifiant du commentaire 'data-id)
-        console.log('Identifiant du commentaire : ' + idcom);
+        // console.log('Identifiant du commentaire : ' + idcom);
 
         // ====================== Traitement par requete AJAX =========================== //
         // En utilisant la fonction Ajax de JQUERY au lieu de la fonction du cours

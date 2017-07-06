@@ -109,12 +109,15 @@
 
     {# JavaScript pour tableau dynamique #}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    {# Pour affichage de la date relative #}
+    <script src="{{ asset('/lib/moment/livestamp.min.js') }}"></script>
+    {# Permettre le tri avec une date en Francais #}
+    <script src="{{ asset('/lib/moment/moment-with-locales.js') }}"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.15/sorting/datetime-moment.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            $.fn.dataTable.moment('DD/MM/YYYY');
+            $.fn.dataTable.moment('DD/MM/YYYY');  //DD/MM/YYYY
             // Gestion Datatable pour les episodes
             $('#TabEpisode').DataTable({
                 // On initialise l'ordre d'affichage : desc = décroissant
@@ -131,7 +134,7 @@
                 "sDom": '<"top">rt<"bottom"p><"clear">', // Permet d'afficher uniquement la pagination
                 "pageLength": 8, // Permet de définir le nombre de lignes par page
                 "aoColumnDefs": [
-                  { "bSortable": false, "aTargets": [ 5 ] } // Retire le tri sur la colonne des actions
+                  { "bSortable": false, "aTargets": [ 6 ] } // Retire le tri sur la colonne des actions
                 ]
             });
 
