@@ -52,7 +52,7 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
                 $('<p>', {
                     text: 'Le commentaire a bien été signalé'
                 }).appendTo("#info");
-                // On le supprime apres 4 secondes
+                // On le supprime apres 4000 milli-secondes
                 $("#info").fadeOut(4000, function(){
                     $("#info").empty();
                 });
