@@ -309,3 +309,11 @@ Ce commit contient :
 - [x] : Modification de la vue admin.html.twig afin de conserver l'ordre de tri sur la date pour les épisodes et les commentaires (**td data-order=" nomVariable | date("d/m/Y") }}">**) tout en affichant la date relative en utilisant l'extension modifiée pour un affichage français (Nom de l'extension : **Twig_Extensions_Extension_DateFr**).
 - Tests de fonctionnalité sur les navigateurs IE 11 et Firefox 54
 - Mise en commentaire les tests console.log sur mon JS.
+
+___________________________________________________________
+
+## 23eme Commit : Correction sur le fichier projet3.js
+
+Ce commit contient :
+- Correction effectuée sur le fichier **Projet3.js** (Chemin URL méthode **$.ajax()** ).
+- Mise à jour du **repository** sur gitHub.

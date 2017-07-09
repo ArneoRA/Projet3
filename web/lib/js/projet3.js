@@ -42,7 +42,7 @@ $(document).ready(function($){ // Des que le document est ready (chargé, on exe
         // ====================== Traitement par requete AJAX =========================== //
         // En utilisant la fonction Ajax de JQUERY au lieu de la fonction du cours
         $.ajax({
-            url : 'http://projet3/api/comment/' + idcom + '/spam',
+            url : 'http://www.projet3.arnege.fr/web/index.php/api/comment/' + idcom + '/spam',
             type : 'GET',
             dataType : 'html',
             success : function(code_html, statut){
