@@ -312,7 +312,7 @@ Ce commit contient :
 
 ___________________________________________________________
 
-## 23eme Commit : Correction sur le fichier projet3.js
+## 23eme Commit : Correction sur le fichier projet3.js v2
 
 Ce commit contient :
 - Correction effectuée sur le fichier **Projet3.js** (Chemin URL méthode **$.ajax()** ).
